@@ -6,11 +6,7 @@ import Button from '@/components/ui/Button';
 import { motion, useScroll, useTransform, useInView, stagger } from 'framer-motion';
 import { FaArrowRight, FaCheck, FaRegClock, FaShieldAlt, FaPercentage } from 'react-icons/fa';
 
-export const metadata = {
-  title: 'Leistungen & Preise | Rodriguez-Web',
-  description: 'Unsere Webdesign- und Entwicklungsleistungen für kleine und mittelständische Unternehmen. Transparente Pakete mit Festpreisen.',
-};
-
+// Metadata should be moved to a separate file or layout.tsx for this route
 export default function ServicesPage() {
   // Refs for scroll animations
   const heroRef = useRef(null);
