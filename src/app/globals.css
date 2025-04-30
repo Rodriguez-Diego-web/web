@@ -1,26 +1,176 @@
-@import "tailwindcss";
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+@layer base {
+  html {
+    @apply scroll-smooth;
+  }
+  
+  body {
+    @apply bg-dark text-light;
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-heading font-bold text-light;
+  }
+  
+  h1 {
+    @apply text-4xl md:text-5xl lg:text-6xl;
+  }
+  
+  h2 {
+    @apply text-3xl md:text-4xl;
+  }
+  
+  h3 {
+    @apply text-2xl md:text-3xl;
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+@layer components {
+  .container-narrow {
+    @apply container mx-auto max-w-4xl px-4;
+  }
+  
+  .section {
+    @apply py-16 md:py-24;
+  }
+  
+  .section-heading {
+    @apply mb-12 text-center;
+  }
+
+  .animated-gradient-bg {
+    background: linear-gradient(-45deg, #121212, #292929, #FF6B00, #FF8F40);
+    background-size: 400% 400%;
+    animation: gradient 15s ease infinite;
+  }
+
+  .parallax-container {
+    @apply relative overflow-hidden;
+    perspective: 8px;
+    perspective-origin: center;
+    transform-style: preserve-3d;
+    z-index: 10;
+  }
+
+  .parallax-layer {
+    position: absolute;
+    inset: 0;
+    height: 100%;
+    width: 100%;
+    transform-origin: center;
+    z-index: -1;
+  }
+
+  .parallax-base {
+    transform: translateZ(0px) scale(1);
+  }
+
+  .parallax-back {
+    transform: translateZ(-5px) scale(1.625);
+  }
+
+  .parallax-deep {
+    transform: translateZ(-10px) scale(2.25);
+  }
+
+  .glass-card {
+    @apply rounded-xl shadow-lg;
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  .glow {
+    @apply transition-all duration-300;
+    &:hover {
+      box-shadow: 0 0 15px rgba(255, 107, 0, 0.5);
+    }
+  }
+
+  .glow-intense {
+    @apply transition-all duration-300;
+    position: relative;
+    
+    &:before {
+      content: '';
+      position: absolute;
+      inset: -3px;
+      background: linear-gradient(90deg, rgba(255, 107, 0, 0.5), rgba(255, 107, 0, 0.2), rgba(255, 107, 0, 0.5));
+      border-radius: inherit;
+      z-index: -1;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+    
+    &:hover:before {
+      opacity: 1;
+      animation: rotateGradient 2s linear infinite;
+    }
+  }
+
+  .text-gradient {
+    @apply text-transparent bg-clip-text;
+    background-image: linear-gradient(135deg, #FF6B00 0%, #FFA563 100%);
+  }
+
+  .hover-lift {
+    @apply transition-transform duration-300;
+  }
+  .hover-lift:hover {
+    transform: translateY(-10px);
+  }
+
+  .card-bordered {
+    @apply rounded-xl overflow-hidden border-2 border-primary/20 hover:border-primary transition-colors duration-300;
+  }
+}
+
+/* Animation keyframes */
+@keyframes gradient {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-20px);
+  }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes rotateGradient {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.animate-float {
+  animation: float 6s ease-in-out infinite;
+}
+
+.animate-fadeIn {
+  animation: fadeIn 0.5s ease-in-out;
 }
