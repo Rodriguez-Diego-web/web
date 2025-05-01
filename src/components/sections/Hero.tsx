@@ -70,8 +70,8 @@ const Hero = () => {
         />
       </div>
 
-      <div className="container mx-auto px-4 z-10">
-        <div className="flex flex-col items-center lg:items-start lg:w-2/3">
+      <div className="container mx-auto px-4 z-10 pt-24 md:pt-10">
+        <div className="flex flex-col items-center lg:items-start lg:w-2/3 mt-24 md:mt-6">
           <motion.div
             initial="hidden"
             animate="visible"
