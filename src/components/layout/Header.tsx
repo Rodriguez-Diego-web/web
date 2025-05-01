@@ -36,13 +36,23 @@ const Header = () => {
     };
   }, [mobileMenuOpen]);
 
+  // Function to toggle mobile menu
+  const toggleMobileMenu = () => {
+    setMobileMenuOpen(!mobileMenuOpen);
+  };
+  
+  // Function to close mobile menu
+  const closeMobileMenu = () => {
+    setMobileMenuOpen(false);
+  };
+
   return (
     <>
       <motion.header
         initial={{ y: -100, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 0.5, ease: "easeOut" }}
-        className={`fixed w-full z-50 transition-all duration-300 ${
+        className={`fixed w-full z-40 transition-all duration-300 ${
           isScrolled
             ? 'bg-dark/90 backdrop-blur-md shadow-lg py-3'
             : 'bg-transparent py-5'
@@ -76,110 +86,90 @@ const Header = () => {
           {/* Desktop Navigation */}
           <Navigation className="hidden md:flex" />
 
-          {/* Moderner Burger-Button mit Animation */}
-          <motion.button 
-            className="md:hidden relative z-50 w-12 h-12 rounded-full bg-dark-700/80 flex items-center justify-center"
-            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            aria-label={mobileMenuOpen ? "Menü schließen" : "Menü öffnen"}
-            whileTap={{ scale: 0.9 }}
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-          >
-            <div className="w-6 h-5 flex flex-col justify-between overflow-hidden">
-              <motion.span 
-                className="h-0.5 w-6 bg-orange-500 transform-origin-center block"
-                animate={{
-                  rotate: mobileMenuOpen ? 45 : 0,
-                  y: mobileMenuOpen ? 9 : 0,
-                }}
-                transition={{ duration: 0.3, ease: "easeInOut" }}
-              />
-              <motion.span 
-                className="h-0.5 w-6 bg-orange-500 block"
-                animate={{
-                  opacity: mobileMenuOpen ? 0 : 1,
-                  x: mobileMenuOpen ? 20 : 0
-                }}
-                transition={{ duration: 0.3, ease: "easeInOut" }}
-              />
-              <motion.span 
-                className="h-0.5 w-6 bg-orange-500 transform-origin-center block"
-                animate={{
-                  rotate: mobileMenuOpen ? -45 : 0,
-                  y: mobileMenuOpen ? -9 : 0
-                }}
-                transition={{ duration: 0.3, ease: "easeInOut" }}
-              />
-            </div>
-          </motion.button>
+          {/* Burger-Button - IMMER SICHTBAR */}
+          <div className="md:hidden z-50 relative">
+            <button 
+              onClick={toggleMobileMenu}
+              className="w-12 h-12 rounded-full bg-dark-700/80 flex items-center justify-center"
+              aria-label={mobileMenuOpen ? "Menü schließen" : "Menü öffnen"}
+            >
+              <div className="w-6 h-5 flex flex-col justify-between overflow-hidden">
+                <span 
+                  className={`h-0.5 w-6 bg-orange-600 transform-origin-center block transition-all duration-300 ${
+                    mobileMenuOpen ? 'rotate-45 translate-y-2' : ''
+                  }`}
+                />
+                <span 
+                  className={`h-0.5 w-6 bg-orange-600 block transition-all duration-300 ${
+                    mobileMenuOpen ? 'opacity-0' : 'opacity-100'
+                  }`}
+                />
+                <span 
+                  className={`h-0.5 w-6 bg-orange-600 transform-origin-center block transition-all duration-300 ${
+                    mobileMenuOpen ? '-rotate-45 -translate-y-2' : ''
+                  }`}
+                />
+              </div>
+            </button>
+          </div>
         </div>
       </motion.header>
     
-      {/* Mobile Menü außerhalb des Headers, um es komplett zu fixieren */}
-      <AnimatePresence>
-        {mobileMenuOpen && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ 
-              type: "spring", 
-              damping: 25, 
-              stiffness: 300 
-            }}
-            className="fixed inset-0 z-[100] overflow-hidden"
-            style={{ position: 'fixed' }}
+      {/* Mobile Menü Modal */}
+      {mobileMenuOpen && (
+        <div 
+          className="fixed inset-0 z-40 md:hidden"
+          onClick={closeMobileMenu}
+        >
+          <div 
+            className="absolute inset-0 bg-black/80 backdrop-blur-md"
+            aria-hidden="true"
+          />
+          
+          <div 
+            className="fixed right-0 top-0 h-full w-[300px] bg-gradient-to-b from-dark-800 to-dark-900 shadow-xl p-6"
+            onClick={(e) => e.stopPropagation()}
           >
-            <motion.div 
-              className="absolute inset-0 bg-dark/90 backdrop-blur-lg"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              onClick={() => setMobileMenuOpen(false)}
-            />
-            
-            <motion.div 
-              className="absolute right-0 top-0 h-full w-full sm:w-80 bg-gradient-to-bl from-dark-700 to-dark-900 shadow-xl overflow-auto"
-              initial={{ x: "100%" }}
-              animate={{ x: "0%" }}
-              exit={{ x: "100%" }}
-              transition={{ type: "spring", damping: 25, stiffness: 300 }}
-            >
-              <div className="flex flex-col min-h-full">
-                <div className="flex justify-end p-4">
-                  <div className="h-16 w-32"></div> {/* Spacer to match logo height */}
-                </div>
+            <div className="flex flex-col h-full pt-12">
+              {/* Schließen-Button innerhalb des Menüs */}
+              <button
+                className="absolute top-4 right-4 p-2 text-orange-500 hover:text-orange-400"
+                onClick={closeMobileMenu}
+                aria-label="Menü schließen"
+              >
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <line x1="18" y1="6" x2="6" y2="18"></line>
+                  <line x1="6" y1="6" x2="18" y2="18"></line>
+                </svg>
+              </button>
+              
+              <div className="flex-grow flex flex-col items-center justify-center py-8">
+                <div className="w-16 h-0.5 bg-orange-600 mb-8" />
                 
-                <div className="flex-grow flex flex-col justify-center items-center p-8">
-                  <motion.div 
-                    className="w-20 h-1 bg-orange-500 rounded-full mb-10"
-                    initial={{ width: 0 }}
-                    animate={{ width: 80 }}
-                    transition={{ delay: 0.3, duration: 0.5 }}
-                  />
-                  
-                  <Navigation
-                    className="flex flex-col items-center space-y-8 text-xl w-full"
-                    onClick={() => setMobileMenuOpen(false)}
-                  />
-                  
-                  <motion.div 
-                    className="mt-12 w-20 h-1 bg-orange-500 rounded-full"
-                    initial={{ width: 0 }}
-                    animate={{ width: 80 }}
-                    transition={{ delay: 0.3, duration: 0.5 }}
-                  />
-                </div>
+                <Navigation
+                  className="flex flex-col items-center space-y-8 text-xl"
+                  onClick={closeMobileMenu}
+                />
                 
-                <div className="p-6 text-center text-sm text-gray-400">
-                  <p>&copy; 2025 Rodriguez-Web</p>
-                  <p>Webdesign aus Cuxhaven</p>
-                </div>
+                <div className="w-16 h-0.5 bg-orange-600 mt-8" />
+                
+                <Link 
+                  href="/contact"
+                  className="mt-10 px-6 py-3 bg-gradient-to-r from-orange-600 to-orange-500 text-white rounded-md font-medium hover:from-orange-500 hover:to-orange-400 transition-all"
+                  onClick={closeMobileMenu}
+                >
+                  Jetzt anfragen
+                </Link>
               </div>
-            </motion.div>
-          </motion.div>
-        )}
-      </AnimatePresence>
+              
+              <div className="mt-auto text-center text-sm text-gray-400 pb-4">
+                <p>&copy; 2025 Rodriguez-Web</p>
+                <p>Webdesign aus Cuxhaven</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
     </>
   );
 };
