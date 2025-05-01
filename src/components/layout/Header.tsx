@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import Navigation from '@/components/layout/Navigation';
 import { motion } from 'framer-motion';
 
@@ -44,20 +45,13 @@ const Header = () => {
             transition={{ type: "spring", stiffness: 300, damping: 15 }}
             whileHover={{ scale: 1.05 }}
           >
-            {/* Temporäres Text-Logo während DNS-Propagation */}
-            <div className="flex items-center justify-center h-full w-full">
-              <span className="text-2xl font-bold text-orange-500">Rodriguez-Web</span>
-            </div>
-            
-            {/* Logo-Bild wird wieder aktiviert, sobald DNS-Propagation abgeschlossen ist 
             <Image
-              src="/images/logo-new.png"
+              src="/images/Rodriguez_web_logo.png"
               alt="Rodriguez-Web Logo"
               fill
               className="object-contain"
               priority
             />
-            */}
           </motion.div>
         </Link>
 
