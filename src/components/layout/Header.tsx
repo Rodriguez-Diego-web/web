@@ -2,7 +2,6 @@
 
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
-import Image from 'next/image';
 import Navigation from '@/components/layout/Navigation';
 import { motion } from 'framer-motion';
 
@@ -45,12 +44,18 @@ const Header = () => {
             transition={{ type: "spring", stiffness: 300, damping: 15 }}
             whileHover={{ scale: 1.05 }}
           >
-            <Image
+            {/* Reguläres img-Tag statt Next.js Image-Komponente */}
+            <img
               src="/images/Rodriguez_web_logo.png"
               alt="Rodriguez-Web Logo"
-              fill
-              className="object-contain"
-              priority
+              style={{
+                position: 'absolute',
+                height: '100%',
+                width: '100%',
+                objectFit: 'contain',
+                top: 0,
+                left: 0
+              }}
             />
           </motion.div>
         </Link>

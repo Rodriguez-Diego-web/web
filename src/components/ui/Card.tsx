@@ -1,5 +1,4 @@
 import React from 'react';
-import Image from 'next/image';
 import Link from 'next/link';
 
 type CardProps = {
@@ -22,12 +21,20 @@ const Card = ({
   const card = (
     <div className={`glass-card bg-dark/50 overflow-hidden transition-all duration-300 hover:shadow-xl ${className} border border-gray-800 hover:border-primary/50`}>
       <div className="relative h-56 w-full overflow-hidden">
-        <Image
+        {/* Reguläres img-Tag statt Next.js Image-Komponente */}
+        <img
           src={imageSrc}
           alt={title}
-          fill
-          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-          className="object-cover transition-all duration-500 hover:scale-110"
+          style={{
+            position: 'absolute',
+            height: '100%',
+            width: '100%',
+            objectFit: 'cover',
+            top: 0,
+            left: 0,
+            transition: 'transform 500ms',
+          }}
+          className="hover:scale-110"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-dark to-transparent opacity-60"></div>
       </div>
@@ -53,11 +60,7 @@ const Card = ({
   );
 
   if (href) {
-    return (
-      <Link href={href} className="block h-full">
-        {card}
-      </Link>
-    );
+    return <Link href={href} className="block h-full">{card}</Link>;
   }
 
   return card;
