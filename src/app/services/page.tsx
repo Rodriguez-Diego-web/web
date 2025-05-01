@@ -480,135 +480,233 @@ export default function ServicesPage() {
             Ergänzen Sie Ihre Website mit diesen zusätzlichen Leistungen, um das Maximum aus Ihrer Online-Präsenz herauszuholen.
           </motion.p>
           
-          <motion.div 
-            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
-            variants={staggerContainer}
-            initial="hidden"
-            animate={isAdditionalInView ? "visible" : "hidden"}
-          >
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {additionalServices.map((service, index) => (
               <motion.div 
                 key={service.id}
-                className="bg-dark/90 p-6 rounded-lg shadow-md border border-gray-100 relative overflow-hidden"
+                className="bg-dark/80 border border-primary/20 p-6 rounded-lg shadow-lg relative overflow-hidden group"
                 variants={cardVariants}
                 whileHover="hover"
                 custom={index}
               >
-                {/* Background gradient */}
-                <div className="absolute inset-0 bg-gradient-to-br from-gray-50 to-transparent opacity-80"></div>
+                {/* Glowing background effect */}
+                <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent opacity-30 group-hover:opacity-50 transition-opacity duration-300"></div>
+                
+                {/* Orange accent line */}
+                <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-primary to-primary/50"></div>
                 
                 <h3 className="text-xl font-bold mb-2 relative z-10 text-light">{service.name}</h3>
-                <p className="text-primary font-bold mb-4 relative z-10">{service.price}</p>
-                <p className="text-gray-300 relative z-10">{service.description}</p>
+                <p className="text-primary font-bold mb-4 relative z-10 flex items-center">
+                  <span className="text-sm mr-1">ab</span> {service.price}
+                  {/* Add a subtle glow effect to the price */}
+                  <span className="absolute -inset-1 bg-primary/10 rounded-full blur-sm -z-10"></span>
+                </p>
+                <p className="text-gray-300 relative z-10 mb-4">{service.description}</p>
                 
+                {/* Animated arrow for better UX */}
                 <motion.div 
-                  className="absolute bottom-0 right-0 w-16 h-16 bg-primary/5 rounded-tl-full"
-                  whileHover={{
-                    width: 80,
-                    height: 80,
-                    transition: { duration: 0.3 }
-                  }}
+                  className="flex items-center text-primary font-medium relative z-10 mt-4"
+                  whileHover={{ x: 5 }}
+                  transition={{ duration: 0.2 }}
                 >
-                  <motion.div 
-                    className="absolute bottom-3 right-3 text-primary"
-                    whileHover={{ x: -2, y: -2 }}
-                  >
-                    <FaArrowRight />
-                  </motion.div>
+                  <span className="mr-2">Mehr erfahren</span>
+                  <FaArrowRight className="text-sm" />
                 </motion.div>
+                
+                {/* Decorative corner accent */}
+                <motion.div 
+                  className="absolute bottom-0 right-0 w-24 h-24 bg-primary/10 rounded-tl-full"
+                  whileHover={{ scale: 1.2, opacity: 0.8 }}
+                  transition={{ duration: 0.3 }}
+                ></motion.div>
               </motion.div>
             ))}
+          </div>
+          
+          {/* Add a decorative element */}
+          <motion.div
+            className="w-full flex justify-center mt-16"
+            initial={{ opacity: 0 }}
+            animate={isAdditionalInView ? { opacity: 1 } : { opacity: 0 }}
+            transition={{ delay: 0.8 }}
+          >
+            <div className="w-24 h-1 bg-gradient-to-r from-transparent via-primary/70 to-transparent rounded-full"></div>
           </motion.div>
         </div>
       </section>
 
       {/* CTA Section */}
-      <section ref={ctaRef} className="py-24 bg-gradient-to-b from-dark/95 to-dark relative overflow-hidden">
-        <div className="absolute inset-0 overflow-hidden">
-          <div className="absolute top-10 right-10 w-80 h-80 bg-primary/5 rounded-full blur-3xl"></div>
-          <div className="absolute bottom-10 left-10 w-80 h-80 bg-primary/10 rounded-full blur-3xl"></div>
+      <section ref={ctaRef} className="py-24 bg-dark relative overflow-hidden">
+        {/* Animated background elements */}
+        <div className="absolute inset-0 overflow-hidden opacity-20 pointer-events-none">
+          <motion.div 
+            className="absolute top-10 right-10 w-80 h-80 bg-primary/10 rounded-full blur-3xl"
+            animate={{ 
+              scale: [1, 1.2, 1],
+              opacity: [0.1, 0.3, 0.1],
+            }}
+            transition={{ duration: 8, repeat: Infinity }}
+          />
+          <motion.div 
+            className="absolute bottom-10 left-10 w-80 h-80 bg-primary/15 rounded-full blur-3xl"
+            animate={{ 
+              scale: [1, 1.3, 1],
+              opacity: [0.1, 0.25, 0.1],
+            }}
+            transition={{ duration: 10, repeat: Infinity, delay: 1 }}
+          />
+          
+          {/* Floating particles */}
+          {Array.from({ length: 8 }).map((_, i) => (
+            <motion.div
+              key={`cta-particle-${i}`}
+              className="absolute w-1.5 h-1.5 bg-primary/40 rounded-full"
+              style={{
+                top: `${Math.random() * 100}%`,
+                left: `${Math.random() * 100}%`,
+              }}
+              animate={{
+                y: [0, -30, 0],
+                x: [0, Math.random() * 30 - 15, 0],
+                opacity: [0, 0.6, 0],
+              }}
+              transition={{
+                duration: 5 + Math.random() * 5,
+                repeat: Infinity,
+                delay: Math.random() * 5,
+              }}
+            />
+          ))}
         </div>
+        
         <div className="container mx-auto px-4 relative">
           <motion.div 
-            initial={{ opacity: 0, scale: 0.9 }}
-            animate={{ opacity: isCtaInView ? 1 : 0, scale: isCtaInView ? 1 : 0.9 }}
-            transition={{ duration: 0.7 }}
+            initial={{ opacity: 0, y: 30 }}
+            animate={isCtaInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
+            transition={{ duration: 0.8 }}
             className="text-center max-w-3xl mx-auto"
           >
-            <h2 className="text-4xl font-bold mb-6 text-light">Bereit, Ihr <span className="text-primary">Projekt</span> zu starten?</h2>
-            <p className="text-xl mb-8 text-gray-300">
-              Lassen Sie uns gemeinsam Ihre Vision verwirklichen. Kontaktieren Sie uns noch heute für ein unverbindliches Beratungsgespräch.
-            </p>
-            <motion.div
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              className="inline-block"
+            <motion.h2 
+              className="text-4xl font-bold mb-6 text-light"
+              animate={{ scale: [1, 1.01, 1] }}
+              transition={{ duration: 4, repeat: Infinity, repeatType: "reverse" }}
             >
-              <Button href="/kontakt" className="bg-primary hover:bg-primary/90 text-white px-8 py-3 text-lg">
-                Kontakt aufnehmen
-                <FaArrowRight className="ml-2" />
-              </Button>
+              Bereit, Ihr <motion.span 
+                className="text-primary"
+                animate={{ 
+                  color: ["#ff9c28", "#ff8a00", "#ff9c28"],
+                  textShadow: ["0 0 0px rgba(255,156,40,0)", "0 0 10px rgba(255,156,40,0.5)", "0 0 0px rgba(255,156,40,0)"]
+                }}
+                transition={{ duration: 3, repeat: Infinity }}
+              >Projekt</motion.span> zu starten?
+            </motion.h2>
+            
+            <motion.p 
+              className="text-xl mb-10 text-gray-300"
+              initial={{ opacity: 0 }}
+              animate={isCtaInView ? { opacity: 1 } : { opacity: 0 }}
+              transition={{ duration: 0.8, delay: 0.3 }}
+            >
+              Lassen Sie uns gemeinsam Ihre Vision verwirklichen. Kontaktieren Sie uns noch heute für ein unverbindliches Beratungsgespräch.
+            </motion.p>
+            
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={isCtaInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+              transition={{ duration: 0.8, delay: 0.5 }}
+              className="mb-16 inline-block"
+            >
+              <motion.a 
+                href="/kontakt" 
+                className="bg-primary hover:bg-primary/90 text-white px-10 py-4 text-lg rounded-md flex items-center justify-center transition-all duration-300 relative overflow-hidden group"
+                whileHover={{ 
+                  scale: 1.05,
+                  boxShadow: "0 0 20px rgba(255, 156, 40, 0.5)"
+                }}
+                whileTap={{ scale: 0.98 }}
+              >
+                {/* Animated background effect */}
+                <motion.div 
+                  className="absolute inset-0 bg-gradient-to-r from-primary/0 via-primary/40 to-primary/0 skew-x-12"
+                  animate={{
+                    x: ['-100%', '100%'],
+                  }}
+                  transition={{
+                    duration: 3,
+                    repeat: Infinity,
+                    repeatType: "loop",
+                    ease: "easeInOut",
+                  }}
+                />
+                
+                {/* Button content */}
+                <span className="relative z-10">Kontakt aufnehmen</span>
+                <motion.svg 
+                  xmlns="http://www.w3.org/2000/svg" 
+                  className="h-5 w-5 ml-2 relative z-10" 
+                  viewBox="0 0 20 20" 
+                  fill="currentColor"
+                  animate={{ x: [0, 5, 0] }}
+                  transition={{ duration: 1.5, repeat: Infinity }}
+                >
+                  <path fillRule="evenodd" d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z" clipRule="evenodd" />
+                </motion.svg>
+              </motion.a>
             </motion.div>
 
-            {/* Trust badges */}
-            <div className="py-10 bg-gradient-to-b from-dark/95 to-dark relative">
-              <div className="container mx-auto px-4">
-                <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+            {/* Trust badges with staggered animation */}
+            <motion.div 
+              className="grid grid-cols-4 gap-6 mt-10"
+              initial="hidden"
+              animate={isCtaInView ? "visible" : "hidden"}
+              variants={{
+                hidden: { opacity: 0 },
+                visible: { opacity: 1, transition: { staggerChildren: 0.1 } }
+              }}
+            >
+              {[
+                { icon: FaShieldAlt, label: "Sichere Zahlung" },
+                { icon: FaRegClock, label: "Schnelle Umsetzung" },
+                { icon: FaCheck, label: "Kundenzufriedenheit" },
+                { icon: FaPercentage, label: "MwSt. inkl." }
+              ].map((badge, index) => (
+                <motion.div 
+                  key={index}
+                  className="flex flex-col items-center"
+                  variants={{
+                    hidden: { opacity: 0, y: 20 },
+                    visible: { opacity: 1, y: 0, transition: { duration: 0.5 } }
+                  }}
+                >
                   <motion.div 
-                    initial={{ opacity: 0, y: 10 }} 
-                    animate={{ opacity: 1, y: 0 }} 
-                    transition={{ delay: 0.2 }}
-                    className="flex justify-center"
+                    className="w-16 h-16 rounded-full border border-primary/30 bg-dark flex items-center justify-center mb-3"
+                    whileHover={{ 
+                      scale: 1.1, 
+                      borderColor: "rgba(255, 156, 40, 0.8)",
+                      boxShadow: "0 0 15px rgba(255, 156, 40, 0.3)" 
+                    }}
+                    animate={{ borderColor: ["rgba(255, 156, 40, 0.3)", "rgba(255, 156, 40, 0.6)", "rgba(255, 156, 40, 0.3)"] }}
+                    transition={{ duration: 3, repeat: Infinity, delay: index * 0.5 }}
                   >
-                    <div className="flex flex-col items-center">
-                      <div className="w-16 h-16 rounded-full bg-dark shadow-lg border border-primary/20 flex items-center justify-center mb-2">
-                        <FaShieldAlt className="text-2xl text-primary" />
-                      </div>
-                      <p className="text-sm font-medium text-gray-300">Sichere Zahlung</p>
-                    </div>
+                    <motion.div
+                      animate={{ 
+                        scale: [1, 1.1, 1],
+                        color: ["#ff9c28", "#ff8a00", "#ff9c28"] 
+                      }}
+                      transition={{ duration: 3, repeat: Infinity, delay: index * 0.5 }}
+                    >
+                      <badge.icon className="text-xl text-primary" />
+                    </motion.div>
                   </motion.div>
-                  <motion.div 
-                    initial={{ opacity: 0, y: 10 }} 
-                    animate={{ opacity: 1, y: 0 }} 
-                    transition={{ delay: 0.4 }}
-                    className="flex justify-center"
+                  <motion.p 
+                    className="text-sm font-medium text-gray-300"
+                    whileHover={{ color: "#ff9c28" }}
                   >
-                    <div className="flex flex-col items-center">
-                      <div className="w-16 h-16 rounded-full bg-dark shadow-lg border border-primary/20 flex items-center justify-center mb-2">
-                        <FaRegClock className="text-2xl text-primary" />
-                      </div>
-                      <p className="text-sm font-medium text-gray-300">Schnelle Umsetzung</p>
-                    </div>
-                  </motion.div>
-                  <motion.div 
-                    initial={{ opacity: 0, y: 10 }} 
-                    animate={{ opacity: 1, y: 0 }} 
-                    transition={{ delay: 0.6 }}
-                    className="flex justify-center"
-                  >
-                    <div className="flex flex-col items-center">
-                      <div className="w-16 h-16 rounded-full bg-dark shadow-lg border border-primary/20 flex items-center justify-center mb-2">
-                        <FaCheck className="text-2xl text-primary" />
-                      </div>
-                      <p className="text-sm font-medium text-gray-300">Kundenzufriedenheit</p>
-                    </div>
-                  </motion.div>
-                  <motion.div 
-                    initial={{ opacity: 0, y: 10 }} 
-                    animate={{ opacity: 1, y: 0 }} 
-                    transition={{ delay: 0.8 }}
-                    className="flex justify-center"
-                  >
-                    <div className="flex flex-col items-center">
-                      <div className="w-16 h-16 rounded-full bg-dark shadow-lg border border-primary/20 flex items-center justify-center mb-2">
-                        <FaPercentage className="text-2xl text-primary" />
-                      </div>
-                      <p className="text-sm font-medium text-gray-300">MwSt. inkl.</p>
-                    </div>
-                  </motion.div>
-                </div>
-              </div>
-            </div>
+                    {badge.label}
+                  </motion.p>
+                </motion.div>
+              ))}
+            </motion.div>
           </motion.div>
         </div>
       </section>

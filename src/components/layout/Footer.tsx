@@ -121,7 +121,7 @@ const Footer = () => {
                 className="flex items-center"
                 whileHover={{ x: 5, color: '#FF6B00' }}
               >
-                <FaEnvelope className="mr-3 text-primary" /> info@rodriguez-web.de
+                <FaEnvelope className="mr-3 text-primary" /> diego@rodriguez-web.de
               </motion.p>
               <motion.p 
                 className="flex items-start"

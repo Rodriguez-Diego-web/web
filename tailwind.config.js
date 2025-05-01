@@ -8,7 +8,7 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        primary: "#FF6B00", // Orange accent color
+        primary: "#ff9c28", // Orange accent color
         secondary: "#A3A3A3", // Light grey secondary color
         dark: "#121212", // Near black for dark backgrounds
         light: "#F7F7F7", // Very light grey for light elements

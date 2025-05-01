@@ -1,0 +1,13 @@
+User-agent: *
+Allow: /
+
+# Allow all search engines to crawl all content
+Sitemap: https://rodriguez-web.de/sitemap.xml
+
+# Make sure these key pages are crawled with priority
+Allow: /about
+Allow: /services
+Allow: /portfolio
+Allow: /contact
+Allow: /webdesign-cuxhaven
+Allow: /diego-rodriguez-webdesigner
