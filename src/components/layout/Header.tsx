@@ -46,10 +46,17 @@ const Header = () => {
             whileHover={{ scale: 1.05 }}
           >
             <Image
-              src="/images/Rodriguez_web_logo.png"
+              src="/images/logo-new.png"
               alt="Rodriguez-Web Logo"
               fill
               className="object-contain"
+              onError={(e) => {
+                // Fallback wenn das Bild nicht geladen werden kann
+                const target = e.target as HTMLElement;
+                if (target.parentElement) {
+                  target.parentElement.innerHTML = '<div class="text-2xl font-bold text-orange-500">Rodriguez-Web</div>';
+                }
+              }}
               priority
             />
           </motion.div>
