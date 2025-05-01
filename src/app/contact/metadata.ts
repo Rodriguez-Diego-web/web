@@ -7,7 +7,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'Kontakt zu Diego Rodriguez | Webdesign in Cuxhaven',
     description: 'Nehmen Sie direkt Kontakt mit Diego Rodriguez auf. Professionelle Webentwicklung und persönliche Beratung für Ihr Projekt in Cuxhaven und Umgebung.',
-    url: 'https://rodriguez-web.de/contact',
+    url: 'https://www.rodriguez-web.de/contact',
     type: 'website',
   },
 };

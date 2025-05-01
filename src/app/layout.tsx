@@ -33,7 +33,7 @@ export const metadata: Metadata = {
     address: false,
     telephone: false,
   },
-  metadataBase: new URL('https://rodriguez-web.de'),
+  metadataBase: new URL('https://www.rodriguez-web.de'),
   alternates: {
     canonical: '/',
     languages: {
@@ -43,7 +43,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'Rodriguez-Web | Professionelle Webseiten von Diego Rodriguez aus Cuxhaven',
     description: 'Diego Rodriguez aus Cuxhaven bietet professionelle Webseiten für kleine Unternehmen in nur 7 Tagen. Steigern Sie Ihre Online-Sichtbarkeit mit maßgeschneiderten Lösungen aus Norddeutschland.',
-    url: 'https://rodriguez-web.de',
+    url: 'https://www.rodriguez-web.de',
     siteName: 'Rodriguez-Web',
     locale: 'de_DE',
     type: 'website',
@@ -101,8 +101,8 @@ export default function RootLayout({
               "@context": "https://schema.org",
               "@type": "ProfessionalService",
               "name": "Rodriguez-Web",
-              "image": "https://rodriguez-web.de/images/logo.png",
-              "url": "https://rodriguez-web.de",
+              "image": "https://www.rodriguez-web.de/images/logo.png",
+              "url": "https://www.rodriguez-web.de",
               "telephone": "+49 123 456789",
               "address": {
                 "@type": "PostalAddress",

@@ -2,7 +2,7 @@ User-agent: *
 Allow: /
 
 # Allow all search engines to crawl all content
-Sitemap: https://rodriguez-web.de/sitemap.xml
+Sitemap: https://www.rodriguez-web.de/sitemap.xml
 
 # Make sure these key pages are crawled with priority
 Allow: /about

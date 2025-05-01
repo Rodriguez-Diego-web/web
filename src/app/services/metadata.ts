@@ -7,7 +7,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'Webdesign Leistungen | Diego Rodriguez aus Cuxhaven',
     description: 'Professionelle Webseiten und SEO-Optimierung von Diego Rodriguez für Unternehmen in Cuxhaven und Umgebung. Transparente Preise und persönliche Betreuung.',
-    url: 'https://rodriguez-web.de/services',
+    url: 'https://www.rodriguez-web.de/services',
     type: 'website',
   },
 };

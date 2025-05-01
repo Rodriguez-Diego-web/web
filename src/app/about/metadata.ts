@@ -7,7 +7,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'Über Diego Rodriguez | Webdesigner aus Cuxhaven',
     description: 'Erfahren Sie mehr über Diego Rodriguez, Ihren lokalen Webdesign-Experten aus Cuxhaven. Professionelle Webseiten mit persönlichem Service für Unternehmen in Norddeutschland.',
-    url: 'https://rodriguez-web.de/about',
+    url: 'https://www.rodriguez-web.de/about',
     type: 'website',
   },
 };
