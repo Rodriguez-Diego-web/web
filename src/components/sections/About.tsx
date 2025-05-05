@@ -120,7 +120,7 @@ const About = () => {
               transition={{ duration: 0.3 }}
             >
               <Image
-                src="/images/diego/396578739_818558143300968_920426191022673660_n-2.jpg"
+                src="/images/diego/diego.jpg"
                 alt="Diego Rodriguez - Web Design & Development"
                 fill
                 sizes="(max-width: 768px) 100vw, 50vw"

@@ -271,7 +271,7 @@ export default function ContactPage() {
               >
                 <div className="relative w-48 h-48 mx-auto overflow-hidden rounded-full border-4 border-primary/30 shadow-lg">
                   <img
-                    src="/images/diego/396578739_818558143300968_920426191022673660_n-2.jpg"
+                    src="/images/diego/diego.jpg"
                     alt="Diego Rodriguez - Web Design & Development"
                     style={{
                       width: '100%',
