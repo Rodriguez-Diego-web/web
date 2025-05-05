@@ -1,15 +1,34 @@
 'use client';
 
-import React, { useRef } from 'react';
+import React, { useRef, useState } from 'react';
 import ContactForm from '@/components/ui/ContactForm';
 import { FaEnvelope, FaPhone, FaMapMarkerAlt, FaCalendarAlt, 
          FaLinkedin, FaInstagram, FaFacebook, FaArrowRight } from 'react-icons/fa';
 import { motion, useInView, useScroll, useTransform } from 'framer-motion';
 import Image from 'next/image';
+import emailjs from '@emailjs/browser';
+import { trackFormSubmission } from '@/lib/analytics';
+
+// EmailJS Konfiguration
+const SERVICE_ID = 'service_scn2e0i';
+const TEMPLATE_ID = 'template_kzdp3yx';
+const PUBLIC_KEY = 'CmONZH4pJJtAeVn3H';
 
 // Metadata is now in a separate file: metadata.ts
 
 export default function ContactPage() {
+  // Form state
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    phone: '',
+    subject: '',
+    message: ''
+  });
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isSubmitted, setIsSubmitted] = useState(false);
+  const [error, setError] = useState('');
+  
   // Refs for scroll animations
   const heroRef = useRef(null);
   const formRef = useRef(null);
@@ -43,6 +62,72 @@ export default function ContactPage() {
       opacity: 1, 
       y: 0,
       transition: { duration: 0.5 }
+    }
+  };
+
+  // Handle form input changes
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    const { name, value } = e.target;
+    setFormData(prev => ({
+      ...prev,
+      [name]: value
+    }));
+  };
+
+  // Handle form submission
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+    setError('');
+    
+    try {
+      console.log('Sende E-Mail über EmailJS:', formData);
+      
+      // EmailJS Anfrage vorbereiten
+      const templateParams = {
+        name: formData.name,
+        email: formData.email,
+        phone: formData.phone || "Nicht angegeben",
+        subject: formData.subject || "Kontaktformular Anfrage",
+        message: formData.message,
+        site: "rodriguez-web.de (Kontaktseite)"
+      };
+      
+      // EmailJS initialisieren
+      emailjs.init(PUBLIC_KEY);
+      
+      // EmailJS API aufrufen
+      const response = await emailjs.send(
+        SERVICE_ID,
+        TEMPLATE_ID, 
+        templateParams
+      );
+      
+      console.log('E-Mail erfolgreich gesendet!', response.status, response.text);
+      
+      // Analytics-Event für Formular-Submission
+      trackFormSubmission('contact_page');
+      
+      // Formular zurücksetzen und Erfolgsmeldung anzeigen
+      setFormData({
+        name: '',
+        email: '',
+        phone: '',
+        subject: '',
+        message: ''
+      });
+      
+      setIsSubmitted(true);
+      
+      // Erfolgsmeldung nach 5 Sekunden ausblenden
+      setTimeout(() => {
+        setIsSubmitted(false);
+      }, 5000);
+    } catch (err) {
+      console.error('Fehler beim Senden der E-Mail:', err);
+      setError(`Ein Fehler ist aufgetreten: ${err instanceof Error ? err.message : 'Unbekannter Fehler'}`);
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
@@ -93,43 +178,91 @@ export default function ContactPage() {
                 transition={{ duration: 0.5, delay: 0.4 }}
                 className="p-8 rounded-lg relative overflow-hidden shadow-lg"
               >
-                {/* Form implementation - basic styles to match screenshot */}
-                <div className="space-y-4">
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                {isSubmitted ? (
+                  <div className="text-center py-8">
+                    <svg
+                      className="w-16 h-16 text-primary mx-auto mb-4"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M5 13l4 4L19 7"
+                      />
+                    </svg>
+                    <h3 className="text-2xl font-bold mb-2 text-light">Vielen Dank!</h3>
+                    <p className="text-gray-300">
+                      Ihre Anfrage wurde erfolgreich übermittelt. Wir werden uns in Kürze bei Ihnen melden.
+                    </p>
+                  </div>
+                ) : (
+                  <form onSubmit={handleSubmit} className="space-y-4">
+                    {error && (
+                      <div className="bg-red-900/30 text-red-400 p-4 rounded-lg mb-6 border border-red-800">
+                        {error}
+                      </div>
+                    )}
+                  
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                      <input 
+                        type="text" 
+                        name="name"
+                        value={formData.name}
+                        onChange={handleInputChange}
+                        placeholder="Ihr Name" 
+                        required
+                        className="w-full px-4 py-3 rounded bg-dark/80 border border-gray-700 text-light focus:outline-none focus:border-primary"
+                      />
+                      <input 
+                        type="email" 
+                        name="email"
+                        value={formData.email}
+                        onChange={handleInputChange}
+                        placeholder="Ihre E-Mail-Adresse" 
+                        required
+                        className="w-full px-4 py-3 rounded bg-dark/80 border border-gray-700 text-light focus:outline-none focus:border-primary"
+                      />
+                    </div>
+                    <input 
+                      type="tel" 
+                      name="phone"
+                      value={formData.phone}
+                      onChange={handleInputChange}
+                      placeholder="Ihre Telefonnummer" 
+                      className="w-full px-4 py-3 rounded bg-dark/80 border border-gray-700 text-light focus:outline-none focus:border-primary"
+                    />
                     <input 
                       type="text" 
-                      placeholder="Ihr Name" 
+                      name="subject"
+                      value={formData.subject}
+                      onChange={handleInputChange}
+                      placeholder="Betreff" 
                       className="w-full px-4 py-3 rounded bg-dark/80 border border-gray-700 text-light focus:outline-none focus:border-primary"
                     />
-                    <input 
-                      type="email" 
-                      placeholder="Ihre E-Mail-Adresse" 
-                      className="w-full px-4 py-3 rounded bg-dark/80 border border-gray-700 text-light focus:outline-none focus:border-primary"
-                    />
-                  </div>
-                  <input 
-                    type="tel" 
-                    placeholder="Ihre Telefonnummer" 
-                    className="w-full px-4 py-3 rounded bg-dark/80 border border-gray-700 text-light focus:outline-none focus:border-primary"
-                  />
-                  <input 
-                    type="text" 
-                    placeholder="Betreff" 
-                    className="w-full px-4 py-3 rounded bg-dark/80 border border-gray-700 text-light focus:outline-none focus:border-primary"
-                  />
-                  <textarea 
-                    placeholder="Beschreiben Sie Ihr Projekt oder Ihre Anfrage" 
-                    rows={6} 
-                    className="w-full px-4 py-3 rounded bg-dark/80 border border-gray-700 text-light focus:outline-none focus:border-primary resize-none"
-                  ></textarea>
-                  <motion.button
-                    whileHover={{ scale: 1.03 }}
-                    whileTap={{ scale: 0.98 }}
-                    className="w-full bg-primary hover:bg-primary/90 text-dark font-medium py-3 px-6 rounded transition-colors duration-300 flex justify-center items-center"
-                  >
-                    Anfrage senden
-                  </motion.button>
-                </div>
+                    <textarea 
+                      name="message"
+                      value={formData.message}
+                      onChange={handleInputChange}
+                      placeholder="Beschreiben Sie Ihr Projekt oder Ihre Anfrage" 
+                      rows={6} 
+                      required
+                      className="w-full px-4 py-3 rounded bg-dark/80 border border-gray-700 text-light focus:outline-none focus:border-primary resize-none"
+                    ></textarea>
+                    <motion.button
+                      type="submit"
+                      disabled={isSubmitting}
+                      whileHover={{ scale: 1.03 }}
+                      whileTap={{ scale: 0.98 }}
+                      className="w-full bg-primary hover:bg-primary/90 text-dark font-medium py-3 px-6 rounded transition-colors duration-300 flex justify-center items-center"
+                    >
+                      {isSubmitting ? 'Wird gesendet...' : 'Anfrage senden'}
+                    </motion.button>
+                  </form>
+                )}
               </motion.div>
             </motion.div>
             
@@ -200,15 +333,15 @@ export default function ContactPage() {
                   </div>
                   <div>
                     <h3 className="font-bold text-lg mb-2 text-light">Adresse</h3>
-                    <p className="text-gray-300">
-                      Delftstraße 8<br />
-                      27474 Cuxhaven<br />
-                      Deutschland
-                    </p>
+                    <p className="text-gray-400">Büro in Cuxhaven</p>
+                    <a href="https://maps.google.com/?q=Delftstraße+8,+27474+Cuxhaven" target="_blank" rel="noopener noreferrer" className="text-primary hover:text-primary/80 transition-colors duration-300 inline-flex items-center mt-1">
+                      Delftstraße 8, 27474 Cuxhaven
+                      <FaArrowRight className="ml-2 w-3 h-3" />
+                    </a>
                   </div>
                 </motion.div>
                 
-                {/* Beratungstermin */}
+                {/* Terminvereinbarung */}
                 <motion.div 
                   className="flex items-start"
                   variants={itemVariants}
@@ -217,118 +350,75 @@ export default function ContactPage() {
                     <FaCalendarAlt className="text-primary w-6 h-6" />
                   </div>
                   <div>
-                    <h3 className="font-bold text-lg mb-2 text-light">Beratungstermin</h3>
-                    <p className="text-gray-300 mb-4">
-                      Buchen Sie einen kostenlosen 30-minütigen Beratungstermin für Ihr Webprojekt.
-                    </p>
+                    <h3 className="font-bold text-lg mb-2 text-light">Terminanfrage</h3>
+                    <p className="text-gray-400">Einfach anrufen oder E-Mail senden</p>
+                    <p className="text-primary mt-1">Persönliches Beratungsgespräch</p>
+                  </div>
+                </motion.div>
+                
+                {/* Social Media Section */}
+                <motion.div variants={itemVariants} className="mt-12">
+                  <h3 className="font-semibold text-lg mb-4 text-light">Folgen Sie mir</h3>
+                  <div className="flex space-x-4">
                     <a 
-                      href="https://calendly.com/rodriguez-web/beratung" 
+                      href="https://www.linkedin.com/in/diego-rodriguez-padinro" 
                       target="_blank" 
                       rel="noopener noreferrer"
-                      className="bg-primary hover:bg-primary/90 text-dark font-medium py-2 px-4 rounded inline-flex items-center transition-colors duration-300"
+                      className="bg-primary/10 hover:bg-primary/20 p-3 rounded-full transition-colors duration-300"
                     >
-                      <span className="mr-2">Termin vereinbaren</span>
-                      <FaArrowRight />
+                      <FaLinkedin className="text-primary w-5 h-5" />
+                    </a>
+                    <a 
+                      href="https://www.instagram.com/diego_rodriguez_webdesign/" 
+                      target="_blank" 
+                      rel="noopener noreferrer"
+                      className="bg-primary/10 hover:bg-primary/20 p-3 rounded-full transition-colors duration-300"
+                    >
+                      <FaInstagram className="text-primary w-5 h-5" />
+                    </a>
+                    <a 
+                      href="https://www.facebook.com/profile.php?id=61556959635307" 
+                      target="_blank" 
+                      rel="noopener noreferrer"
+                      className="bg-primary/10 hover:bg-primary/20 p-3 rounded-full transition-colors duration-300"
+                    >
+                      <FaFacebook className="text-primary w-5 h-5" />
                     </a>
                   </div>
                 </motion.div>
-              </motion.div>
-              
-              {/* Social Media - Similar spacing to Image 1 */}
-              <motion.div 
-                className="mt-12"
-                initial={{ opacity: 0, y: 20 }}
-                animate={isInfoInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-                transition={{ duration: 0.5, delay: 0.8 }}
-              >
-                <h3 className="font-bold text-lg mb-4 text-light">Folgen Sie mir</h3>
-                <div className="flex space-x-4">
-                  {[
-                    { icon: FaLinkedin, link: "https://www.linkedin.com/in/diego-rodriguez-padinro" },
-                    { icon: FaInstagram, link: "https://www.instagram.com/diego_rodriguez_webdesign/" },
-                    { icon: FaFacebook, link: "https://www.facebook.com/profile.php?id=61556959635307" }
-                  ].map((social, index) => (
-                    <a
-                      key={index}
-                      href={social.link}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="bg-dark/80 border border-primary/30 w-10 h-10 rounded-full flex items-center justify-center text-primary hover:bg-primary hover:text-dark transition-all duration-300"
-                      aria-label={`Visit my ${social.icon.name} page`}
-                    >
-                      <social.icon />
-                    </a>
-                  ))}
-                </div>
-              </motion.div>
-              
-              {/* Profile Image */}
-              <motion.div 
-                className="mt-12"
-                initial={{ opacity: 0, y: 20 }}
-                animate={isInfoInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-                transition={{ duration: 0.5, delay: 1 }}
-              >
-                <div className="relative w-48 h-48 mx-auto overflow-hidden rounded-full border-4 border-primary/30 shadow-lg">
-                  <img
-                    src="/images/diego/diego.jpg"
-                    alt="Diego Rodriguez - Web Design & Development"
-                    style={{
-                      width: '100%',
-                      height: '100%',
-                      objectFit: 'cover',
-                    }}
-                  />
-                </div>
               </motion.div>
             </motion.div>
           </div>
         </div>
       </section>
       
-      {/* Map Section - Styling closer to Image 2 */}
-      <section 
+      {/* Google Maps Section */}
+      <motion.section 
         ref={mapRef}
-        className="py-16 bg-dark relative"
+        initial={{ opacity: 0 }}
+        animate={isMapInView ? { opacity: 1 } : { opacity: 0 }}
+        transition={{ duration: 0.8 }}
+        className="py-20 bg-dark/50"
       >
         <div className="container mx-auto px-4">
-          <div className="rounded-lg overflow-hidden border border-primary/20 shadow-lg">
+          <h2 className="text-3xl font-bold mb-12 text-center text-light">
+            Besuchen Sie <span className="text-primary">mich</span>
+          </h2>
+          <div className="rounded-xl overflow-hidden shadow-lg h-[450px] relative">
             <iframe 
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2384.873240505842!2d8.743138377154638!3d53.850466141977624!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47b40eb232dd4e25%3A0x8d0b254b24222d66!2sWesterwischweg%2022A%2C%2027476%20Cuxhaven!5e0!3m2!1sde!2sde!4v1714926646203!5m2!1sde!2sde" 
-              className="w-full h-[400px]" 
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2366.096532620622!2d8.686876576934142!3d53.8603180725675!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47b40f3ed85c9e71%3A0x1d6df4dd97bdb8e!2sDelftstra%C3%9Fe%208%2C%2027474%20Cuxhaven!5e0!3m2!1sde!2sde!4v1699990594755!5m2!1sde!2sde" 
+              width="100%" 
+              height="450" 
               style={{ border: 0 }} 
-              allowFullScreen={true} 
+              allowFullScreen 
               loading="lazy" 
               referrerPolicy="no-referrer-when-downgrade"
-              title="My office location"
+              title="Google Maps Standort"
             ></iframe>
+            <div className="absolute inset-0 pointer-events-none border-4 border-primary/20 rounded-xl"></div>
           </div>
         </div>
-      </section>
-      
-      {/* Simple CTA Section */}
-      <section className="py-16 bg-dark relative">
-        <div className="container mx-auto px-4 text-center">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            viewport={{ once: true, amount: 0.3 }}
-            className="max-w-3xl mx-auto"
-          >
-            <p className="text-xl text-gray-300 mb-6">
-              Ich bin jederzeit für Sie da. Kontaktieren Sie mich für eine unverbindliche Beratung.
-            </p>
-            <a 
-              href="mailto:info@rodriguez-web.de" 
-              className="bg-primary hover:bg-primary/90 text-dark font-medium py-3 px-8 rounded inline-flex items-center transition-colors duration-300 text-lg"
-            >
-              Jetzt anfragen
-              <FaArrowRight className="ml-2" />
-            </a>
-          </motion.div>
-        </div>
-      </section>
+      </motion.section>
     </div>
   );
 }
