@@ -6,16 +6,6 @@ import Link from 'next/link';
 import { motion, useInView } from 'framer-motion';
 import { trackCuxhavenContent, trackLocationSearch } from '@/lib/analytics';
 
-// Metadata für SEO
-export const metadata = {
-  title: 'Webdesign Cuxhaven | Lokale Webseiten von Diego Rodriguez',
-  description: 'Professionelles Webdesign in Cuxhaven von Diego Rodriguez. Maßgeschneiderte Websites für lokale Unternehmen aus Cuxhaven, Otterndorf, Dorum und der gesamten Region Norddeutschland.',
-  keywords: 'Webdesign Cuxhaven, Webentwicklung Cuxhaven, Websites Norddeutschland, SEO Cuxhaven, Diego Rodriguez Webdesigner',
-  alternates: {
-    canonical: '/webdesign-cuxhaven',
-  },
-};
-
 // SEO-optimierte Seite für Webdesign in Cuxhaven
 const WebdesignCuxhaven = () => {
   const servicesRef = useRef(null);
