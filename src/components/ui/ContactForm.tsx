@@ -1,9 +1,10 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import { useForm } from 'react-hook-form';
 import Button from './Button';
 import { trackFormSubmission } from '@/lib/analytics';
+import emailjs from '@emailjs/browser';
 
 type FormData = {
   name: string;
@@ -13,10 +14,16 @@ type FormData = {
   description: string;
 };
 
+// EmailJS Konfiguration
+const SERVICE_ID = 'service_16rc5b6';
+const TEMPLATE_ID = 'template_contact';
+const PUBLIC_KEY = 'pP3zdZNCq5Q7RU4ZO'; // Öffentlicher Schlüssel, sicher im Frontend verwendbar
+
 const ContactForm = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [error, setError] = useState('');
+  const formRef = useRef<HTMLFormElement>(null);
 
   const {
     register,
@@ -30,49 +37,40 @@ const ContactForm = () => {
     setError('');
     
     try {
-      console.log('Formular wird abgesendet mit Daten:', data);
-      // Vorbereiten der Formulardaten
-      const formData = new FormData();
+      console.log('Sende E-Mail über EmailJS:', data);
       
-      // Besonders wichtig: form-name muss gesetzt sein
-      formData.append('form-name', 'kontakt');
+      // EmailJS Anfrage vorbereiten
+      const templateParams = {
+        name: data.name,
+        email: data.email,
+        phone: data.phone || "Nicht angegeben",
+        projectType: data.projectType,
+        description: data.description,
+        site: "rodriguez-web.de"
+      };
       
-      // Hinzufügen aller Formularfelder
-      Object.entries(data).forEach(([key, value]) => {
-        formData.append(key, value as string);
-        console.log(`Feld: ${key}, Wert: ${value}`);
-      });
+      // EmailJS API aufrufen
+      const response = await emailjs.send(
+        SERVICE_ID,
+        TEMPLATE_ID, 
+        templateParams,
+        PUBLIC_KEY
+      );
       
-      // Sendet die Daten über fetch
-      console.log('Sende Anfrage an Netlify...');
-      const response = await fetch('/', {
-        method: 'POST',
-        // Diese Header sind wichtig für Netlify
-        headers: { 
-          'Content-Type': 'application/x-www-form-urlencoded' 
-        },
-        body: new URLSearchParams(formData as any).toString(),
-      });
+      console.log('E-Mail erfolgreich gesendet!', response.status, response.text);
       
-      console.log('Antwort erhalten:', response.status, response.statusText);
-      
-      if (!response.ok) {
-        throw new Error(`Formular konnte nicht gesendet werden. Status: ${response.status}`);
-      }
-      
-      console.log('Formular erfolgreich abgesendet!');
       trackFormSubmission('contact');
       
-      // Reset the form and show success state
+      // Formular zurücksetzen und Erfolgsmeldung anzeigen
       reset();
       setIsSubmitted(true);
       
-      // Hide the success message after 5 seconds
+      // Erfolgsmeldung nach 5 Sekunden ausblenden
       setTimeout(() => {
         setIsSubmitted(false);
       }, 5000);
     } catch (err) {
-      console.error('Fehler beim Senden des Formulars:', err);
+      console.error('Fehler beim Senden der E-Mail:', err);
       setError('Ein Fehler ist aufgetreten. Bitte versuchen Sie es später erneut.');
     } finally {
       setIsSubmitting(false);
@@ -104,21 +102,10 @@ const ContactForm = () => {
         </div>
       ) : (
         <form 
+          ref={formRef}
           onSubmit={handleSubmit(onSubmit)} 
           className="space-y-6" 
-          name="kontakt"
-          method="POST"
-          data-netlify="true"
-          netlify-honeypot="bot-field"
-          action="/"
         >
-          <input type="hidden" name="form-name" value="kontakt" />
-          <div className="hidden">
-            <label>
-              Nicht ausfüllen, wenn Sie ein Mensch sind: <input name="bot-field" />
-            </label>
-          </div>
-          
           <h3 className="text-2xl font-bold mb-6 text-light">Kontaktieren Sie uns</h3>
           
           {error && (
