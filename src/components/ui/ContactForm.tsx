@@ -30,11 +30,22 @@ const ContactForm = () => {
     setError('');
     
     try {
-      // In a real application, you would send the form data to your backend
-      // For demo purposes, we'll simulate a successful submission
-      await new Promise((resolve) => setTimeout(resolve, 1000));
+      const formData = new FormData();
+      formData.append('form-name', 'kontakt');
+      Object.entries(data).forEach(([key, value]) => {
+        formData.append(key, value);
+      });
       
-      console.log('Form submitted:', data);
+      const response = await fetch('/', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: new URLSearchParams(formData as any).toString(),
+      });
+      
+      if (!response.ok) {
+        throw new Error(`Formular konnte nicht gesendet werden. Status: ${response.status}`);
+      }
+      
       trackFormSubmission('contact');
       
       // Reset the form and show success state
@@ -46,19 +57,19 @@ const ContactForm = () => {
         setIsSubmitted(false);
       }, 5000);
     } catch (err) {
+      console.error('Fehler beim Senden des Formulars:', err);
       setError('Ein Fehler ist aufgetreten. Bitte versuchen Sie es später erneut.');
-      console.error('Form submission error:', err);
     } finally {
       setIsSubmitting(false);
     }
   };
 
   return (
-    <div className="bg-white rounded-xl shadow-lg p-6 md:p-8">
+    <div className="bg-dark/50 border border-primary/20 rounded-xl shadow-lg p-6 md:p-8">
       {isSubmitted ? (
         <div className="text-center py-8">
           <svg
-            className="w-16 h-16 text-green-500 mx-auto mb-4"
+            className="w-16 h-16 text-primary mx-auto mb-4"
             fill="none"
             stroke="currentColor"
             viewBox="0 0 24 24"
@@ -71,49 +82,63 @@ const ContactForm = () => {
               d="M5 13l4 4L19 7"
             />
           </svg>
-          <h3 className="text-2xl font-bold mb-2">Vielen Dank!</h3>
-          <p className="text-gray-600">
+          <h3 className="text-2xl font-bold mb-2 text-light">Vielen Dank!</h3>
+          <p className="text-gray-300">
             Ihre Anfrage wurde erfolgreich übermittelt. Wir werden uns in Kürze bei Ihnen melden.
           </p>
         </div>
       ) : (
-        <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
-          <h3 className="text-2xl font-bold mb-6">Kontaktieren Sie uns</h3>
+        <form 
+          onSubmit={handleSubmit(onSubmit)} 
+          className="space-y-6" 
+          name="kontakt"
+          method="POST"
+          data-netlify="true"
+          netlify-honeypot="bot-field"
+        >
+          <input type="hidden" name="form-name" value="kontakt" />
+          <div className="hidden">
+            <label>
+              Nicht ausfüllen, wenn Sie ein Mensch sind: <input name="bot-field" />
+            </label>
+          </div>
+          
+          <h3 className="text-2xl font-bold mb-6 text-light">Kontaktieren Sie uns</h3>
           
           {error && (
-            <div className="bg-red-50 text-red-600 p-4 rounded-lg mb-6">
+            <div className="bg-red-900/30 text-red-400 p-4 rounded-lg mb-6 border border-red-800">
               {error}
             </div>
           )}
           
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div>
-              <label htmlFor="name" className="block mb-2 font-medium">
+              <label htmlFor="name" className="block mb-2 font-medium text-gray-300">
                 Name *
               </label>
               <input
                 id="name"
                 type="text"
-                className={`w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-primary/50 focus:border-primary outline-none transition ${
-                  errors.name ? 'border-red-500' : 'border-gray-300'
+                className={`w-full px-4 py-2 bg-dark/80 border rounded-lg focus:ring-2 focus:ring-primary/50 focus:border-primary outline-none transition text-gray-100 ${
+                  errors.name ? 'border-red-500' : 'border-gray-700'
                 }`}
                 placeholder="Ihr Name"
                 {...register('name', { required: 'Name ist erforderlich' })}
               />
               {errors.name && (
-                <p className="mt-1 text-red-500 text-sm">{errors.name.message}</p>
+                <p className="mt-1 text-red-400 text-sm">{errors.name.message}</p>
               )}
             </div>
             
             <div>
-              <label htmlFor="email" className="block mb-2 font-medium">
+              <label htmlFor="email" className="block mb-2 font-medium text-gray-300">
                 E-Mail *
               </label>
               <input
                 id="email"
                 type="email"
-                className={`w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-primary/50 focus:border-primary outline-none transition ${
-                  errors.email ? 'border-red-500' : 'border-gray-300'
+                className={`w-full px-4 py-2 bg-dark/80 border rounded-lg focus:ring-2 focus:ring-primary/50 focus:border-primary outline-none transition text-gray-100 ${
+                  errors.email ? 'border-red-500' : 'border-gray-700'
                 }`}
                 placeholder="Ihre E-Mail-Adresse"
                 {...register('email', {
@@ -125,79 +150,74 @@ const ContactForm = () => {
                 })}
               />
               {errors.email && (
-                <p className="mt-1 text-red-500 text-sm">{errors.email.message}</p>
+                <p className="mt-1 text-red-400 text-sm">{errors.email.message}</p>
               )}
             </div>
           </div>
           
           <div>
-            <label htmlFor="phone" className="block mb-2 font-medium">
+            <label htmlFor="phone" className="block mb-2 font-medium text-gray-300">
               Telefon (optional)
             </label>
             <input
               id="phone"
               type="tel"
-              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary/50 focus:border-primary outline-none transition"
+              className="w-full px-4 py-2 bg-dark/80 border border-gray-700 rounded-lg focus:ring-2 focus:ring-primary/50 focus:border-primary outline-none transition text-gray-100"
               placeholder="Ihre Telefonnummer"
               {...register('phone')}
             />
           </div>
           
           <div>
-            <label htmlFor="projectType" className="block mb-2 font-medium">
+            <label htmlFor="projectType" className="block mb-2 font-medium text-gray-300">
               Projekttyp *
             </label>
             <select
               id="projectType"
-              className={`w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-primary/50 focus:border-primary outline-none transition ${
-                errors.projectType ? 'border-red-500' : 'border-gray-300'
+              className={`w-full px-4 py-2 bg-dark/80 border rounded-lg focus:ring-2 focus:ring-primary/50 focus:border-primary outline-none transition text-gray-100 ${
+                errors.projectType ? 'border-red-500' : 'border-gray-700'
               }`}
               {...register('projectType', { required: 'Bitte wählen Sie einen Projekttyp' })}
             >
-              <option value="">Bitte wählen</option>
-              <option value="new-website">Neue Website</option>
-              <option value="website-redesign">Website-Redesign</option>
-              <option value="e-commerce">E-Commerce / Online-Shop</option>
+              <option value="">-- Bitte wählen --</option>
+              <option value="website">Neue Website</option>
+              <option value="redesign">Redesign bestehender Website</option>
+              <option value="webshop">Webshop / E-Commerce</option>
+              <option value="seo">SEO-Optimierung</option>
               <option value="other">Sonstiges</option>
             </select>
             {errors.projectType && (
-              <p className="mt-1 text-red-500 text-sm">{errors.projectType.message}</p>
+              <p className="mt-1 text-red-400 text-sm">{errors.projectType.message}</p>
             )}
           </div>
           
           <div>
-            <label htmlFor="description" className="block mb-2 font-medium">
+            <label htmlFor="description" className="block mb-2 font-medium text-gray-300">
               Projektbeschreibung *
             </label>
             <textarea
               id="description"
               rows={5}
-              className={`w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-primary/50 focus:border-primary outline-none transition ${
-                errors.description ? 'border-red-500' : 'border-gray-300'
+              className={`w-full px-4 py-2 bg-dark/80 border rounded-lg focus:ring-2 focus:ring-primary/50 focus:border-primary outline-none transition text-gray-100 ${
+                errors.description ? 'border-red-500' : 'border-gray-700'
               }`}
               placeholder="Beschreiben Sie Ihr Projekt oder Ihre Anfrage"
-              {...register('description', {
-                required: 'Projektbeschreibung ist erforderlich',
-                minLength: {
-                  value: 10,
-                  message: 'Bitte geben Sie mindestens 10 Zeichen ein',
-                },
-              })}
+              {...register('description', { required: 'Projektbeschreibung ist erforderlich' })}
             ></textarea>
             {errors.description && (
-              <p className="mt-1 text-red-500 text-sm">{errors.description.message}</p>
+              <p className="mt-1 text-red-400 text-sm">{errors.description.message}</p>
             )}
           </div>
           
-          <Button
-            type="submit"
-            variant="primary"
-            size="lg"
-            fullWidth
-            disabled={isSubmitting}
-          >
-            {isSubmitting ? 'Wird gesendet...' : 'Anfrage senden'}
-          </Button>
+          <div className="flex justify-center pt-4">
+            <Button
+              type="submit"
+              className="px-8 py-3 bg-primary text-dark hover:bg-primary/90 focus:ring-4 focus:ring-primary/50 font-medium rounded-lg text-lg transition-all"
+              disabled={isSubmitting}
+            >
+              {isSubmitting ? 'Wird gesendet...' : 'Anfrage senden'}
+            </Button>
+          </div>
         </form>
       )}
     </div>

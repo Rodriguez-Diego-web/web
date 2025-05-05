@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <title>Netlify Form Fallback</title>
+</head>
+<body>
+  <!-- Verstecktes Formular für Netlify-Form-Detection -->
+  <form name="kontakt" netlify netlify-honeypot="bot-field" hidden>
+    <input type="text" name="name" />
+    <input type="email" name="email" />
+    <input type="tel" name="phone" />
+    <select name="projectType">
+      <option value="website">Neue Website</option>
+      <option value="redesign">Redesign bestehender Website</option>
+      <option value="webshop">Webshop / E-Commerce</option>
+      <option value="seo">SEO-Optimierung</option>
+      <option value="other">Sonstiges</option>
+    </select>
+    <textarea name="description"></textarea>
+  </form>
+</body>
+</html>

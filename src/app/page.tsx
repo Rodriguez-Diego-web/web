@@ -36,11 +36,13 @@ export default function Home() {
         </div>
       </section>
       
-      <section className="py-20 bg-white" id="contact">
+      <section className="py-20 bg-dark relative" id="contact">
         <div className="container mx-auto px-4">
           <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold mb-4">Kontaktieren Sie uns</h2>
-            <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+            <h2 className="text-3xl md:text-4xl font-bold mb-6 text-light">
+              Kontaktieren Sie <span className="text-primary">uns</span>
+            </h2>
+            <p className="text-lg text-gray-300 max-w-2xl mx-auto">
               Bereit für Ihre neue Website? Nehmen Sie jetzt Kontakt mit uns auf und lassen Sie uns gemeinsam Ihr Projekt besprechen.
             </p>
           </div>
