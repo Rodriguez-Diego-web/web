@@ -11,47 +11,47 @@ export interface Testimonial {
 export const testimonials: Testimonial[] = [
   {
     id: '1',
-    name: 'Max Mustermann',
-    position: 'Inhaber',
-    company: 'Mustermann GmbH',
-    content: 'Rodriguez-Web hat unsere Erwartungen übertroffen. Die neue Website führte zu einer 40% höheren Conversion-Rate und einer verbesserten Kundenbindung. Das Team war äußerst professionell und das Projekt wurde in nur 6 Tagen fertiggestellt!',
+    name: 'Katharina Meyer',
+    position: 'Inhaberin',
+    company: 'Nordlicht Café',
+    content: 'Die Zusammenarbeit mit Diego war großartig! Er hat unseren Online-Auftritt komplett modernisiert und dabei genau verstanden, wie wir unser Café präsentieren wollten. Die neue Website hat bereits in den ersten Wochen zu mehr Tischreservierungen geführt.',
     rating: 5,
     imageSrc: '/images/testimonials/client1.jpg'
   },
   {
     id: '2',
-    name: 'Laura Schmidt',
-    position: 'Marketing Leiterin',
-    company: 'Schmidt & Partner',
-    content: 'Die Zusammenarbeit mit Rodriguez-Web war ein voller Erfolg. Vom ersten Konzept bis zur fertigen Website war der Prozess reibungslos und transparent. Wir sind mit dem Ergebnis sehr zufrieden und können das Team uneingeschränkt weiterempfehlen.',
+    name: 'Markus Brandt',
+    position: 'Geschäftsführer',
+    company: 'Brandt & Söhne Bootsbau',
+    content: 'Unsere alte Website war veraltet und nicht mobilfähig. Rodriguez-Web hat uns eine moderne, responsive Website erstellt, die perfekt zu unserem traditionellen Bootsbau-Handwerk passt. Besonders beeindruckt hat uns die lokale SEO-Optimierung für Cuxhaven.',
     rating: 5,
     imageSrc: '/images/testimonials/client2.jpg'
   },
   {
     id: '3',
-    name: 'Thomas Weber',
-    position: 'Geschäftsführer',
-    company: 'Weber Consulting',
-    content: 'Unsere neue Website von Rodriguez-Web sieht nicht nur fantastisch aus, sondern generiert auch deutlich mehr Anfragen. Das Team hat unsere Vision perfekt umgesetzt und uns während des gesamten Prozesses hervorragend beraten.',
+    name: 'Julia Schröder',
+    position: 'Marketing Leiterin',
+    company: 'Nordsee-Apartments',
+    content: 'Die neue Buchungsplattform, die Diego für uns entwickelt hat, ist ein Gamechanger für unser Vermietungsgeschäft. Benutzerfreundlich, schnell und mit integriertem Zahlungssystem. Die Conversion-Rate ist um 35% gestiegen und die Buchungen laufen nun vollautomatisch.',
     rating: 5,
     imageSrc: '/images/testimonials/client3.jpg'
   },
   {
     id: '4',
-    name: 'Sophie Becker',
-    position: 'Inhaberin',
-    company: 'Becker Fotografie',
-    content: 'Als Fotografin war mir ein visuell ansprechendes Portfolio besonders wichtig. Rodriguez-Web hat meine Vorstellungen perfekt umgesetzt und eine Website geschaffen, die meine Arbeit optimal präsentiert. Der schnelle Service und die persönliche Beratung haben mich begeistert.',
+    name: 'Thorsten Kruse',
+    position: 'Inhaber',
+    company: 'Kruse Haustechnik',
+    content: 'Als Handwerksbetrieb in Cuxhaven war uns eine professionelle Webpräsenz wichtig. Diego hat uns nicht nur eine tolle Website erstellt, sondern auch die Google-Optimierung perfekt umgesetzt. Dadurch bekommen wir jetzt wesentlich mehr qualifizierte Anfragen aus der Region.',
     rating: 5,
     imageSrc: '/images/testimonials/client4.jpg'
   },
   {
     id: '5',
-    name: 'Martin Krause',
-    position: 'Geschäftsführer',
-    company: 'Krause Immobilien',
-    content: 'Seit dem Launch unserer neuen Website durch Rodriguez-Web erhalten wir qualifiziertere Anfragen und können Objekte schneller vermitteln. Die intuitive Immobiliensuchfunktion und das moderne Design überzeugen sowohl uns als auch unsere Kunden.',
-    rating: 4,
+    name: 'Marie Theissen',
+    position: 'Geschäftsführerin',
+    company: 'Strandhotel Duhnen',
+    content: 'Die Zusammenarbeit mit Rodriguez-Web war von Anfang an unkompliziert und professionell. Trotz unserer speziellen Anforderungen im Hotelbereich hat Diego eine Website geschaffen, die sowohl unsere Gäste als auch uns begeistert. Auch nach dem Launch ist er immer ansprechbar.',
+    rating: 5,
     imageSrc: '/images/testimonials/client5.jpg'
   }
 ];
