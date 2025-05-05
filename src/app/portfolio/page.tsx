@@ -1,7 +1,6 @@
 'use client';
 
 import React, { useState, useRef } from 'react';
-import Image from 'next/image';
 import Link from 'next/link';
 import { motion, useScroll, useTransform, AnimatePresence } from 'framer-motion';
 import { portfolioItems } from '@/data/portfolio';
@@ -304,11 +303,18 @@ export default function PortfolioPage() {
                           whileHover={{ scale: 1.05 }}
                           transition={{ duration: 0.6 }}
                         >
-                          <Image
+                          {/* Ersetze Next.js Image mit normalen img-Tag für Kompatibilität mit Netlify */}
+                          <img
                             src={item.imageSrc}
                             alt={item.title}
-                            fill
-                            className="object-cover"
+                            style={{
+                              position: 'absolute',
+                              height: '100%',
+                              width: '100%',
+                              objectFit: 'cover',
+                              top: 0,
+                              left: 0,
+                            }}
                           />
                           <div className="absolute inset-0 bg-gradient-to-t from-dark to-transparent opacity-60"></div>
                         </motion.div>
