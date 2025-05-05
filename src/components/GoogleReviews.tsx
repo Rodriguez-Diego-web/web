@@ -10,6 +10,9 @@ interface GoogleReview {
   rating: number;
   text: string;
   time: number;
+  relative_time_description?: string;
+  author_url?: string;
+  translated?: boolean;
 }
 
 interface GoogleReviewsData {
@@ -49,8 +52,16 @@ const GoogleReviews: React.FC<GoogleReviewsProps> = ({ limit = 3, className = ''
   const [rating, setRating] = useState<number>(0);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
+  const [mounted, setMounted] = useState(false);
+
+  // Verhindert Hydration-Probleme
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   useEffect(() => {
+    if (!mounted) return;
+
     const fetchReviews = async () => {
       try {
         setLoading(true);
@@ -77,7 +88,7 @@ const GoogleReviews: React.FC<GoogleReviewsProps> = ({ limit = 3, className = ''
     };
 
     fetchReviews();
-  }, [limit]);
+  }, [limit, mounted]);
 
   // Formatiert den Zeitstempel in ein lesbares Datum
   const formatDate = (timestamp: number) => {
@@ -88,6 +99,11 @@ const GoogleReviews: React.FC<GoogleReviewsProps> = ({ limit = 3, className = ''
       day: 'numeric'
     });
   };
+
+  // Verhindert Hydration-Probleme
+  if (!mounted) {
+    return null;
+  }
 
   if (loading) {
     return (
@@ -102,6 +118,14 @@ const GoogleReviews: React.FC<GoogleReviewsProps> = ({ limit = 3, className = ''
     return (
       <div className={`text-center py-10 ${className}`}>
         <p className="text-gray-400">{error}</p>
+      </div>
+    );
+  }
+
+  if (reviews.length === 0) {
+    return (
+      <div className={`text-center py-10 ${className}`}>
+        <p className="text-gray-400">Keine Bewertungen gefunden</p>
       </div>
     );
   }
@@ -150,21 +174,25 @@ const GoogleReviews: React.FC<GoogleReviewsProps> = ({ limit = 3, className = ''
             ))}
           </div>
           
-          <p className="text-gray-300 mb-6 relative z-10">"{review.text}"</p>
+          <p className="text-gray-300 mb-6 relative z-10">{review.text ? `"${review.text}"` : "★★★★★"}</p>
           
           <div className="flex items-center">
             <div className="w-10 h-10 rounded-full overflow-hidden bg-gray-700 mr-3 relative">
-              <Image
-                src={review.profile_photo_url}
-                alt={review.author_name}
-                fill
-                sizes="40px"
-                className="object-cover"
-              />
+              {review.profile_photo_url && (
+                <Image
+                  src={review.profile_photo_url}
+                  alt={review.author_name}
+                  fill
+                  sizes="40px"
+                  className="object-cover"
+                />
+              )}
             </div>
             <div>
               <h4 className="font-medium text-light">{review.author_name}</h4>
-              <p className="text-gray-400 text-sm">{formatDate(review.time)}</p>
+              <p className="text-gray-400 text-sm">
+                {review.relative_time_description || formatDate(review.time)}
+              </p>
             </div>
           </div>
           
