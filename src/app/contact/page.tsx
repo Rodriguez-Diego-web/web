@@ -3,7 +3,7 @@
 import React, { useRef } from 'react';
 import ContactForm from '@/components/ui/ContactForm';
 import { FaEnvelope, FaPhone, FaMapMarkerAlt, FaCalendarAlt, 
-         FaLinkedin, FaTwitter, FaInstagram, FaFacebook, FaArrowRight } from 'react-icons/fa';
+         FaLinkedin, FaInstagram, FaFacebook, FaArrowRight } from 'react-icons/fa';
 import { motion, useInView, useScroll, useTransform } from 'framer-motion';
 import Image from 'next/image';
 
@@ -62,8 +62,8 @@ export default function ContactPage() {
             Kontakt <span className="text-primary">aufnehmen</span>
           </h1>
           <p className="text-xl text-gray-300 max-w-2xl mx-auto mb-16">
-            Haben Sie Fragen oder möchten Sie ein Projekt mit uns starten? 
-            Kontaktieren Sie uns! Wir freuen uns auf Ihre Anfrage.
+            Haben Sie Fragen oder möchten Sie ein Projekt mit mir starten? 
+            Kontaktieren Sie mich! Ich freue mich auf Ihre Anfrage.
           </p>
         </div>
       </section>
@@ -83,7 +83,7 @@ export default function ContactPage() {
               {/* Orange line accent above heading as in screenshot */}
               <div className="h-1 bg-primary w-16 mb-6"></div>
               <h2 className="text-3xl font-bold mb-8 text-light">
-                Schreiben Sie <span className="text-primary">uns</span>
+                Schreiben Sie <span className="text-primary">mir</span>
               </h2>
               
               {/* Contact Form - Matching the simple white input style in Image 1 & 3 */}
@@ -165,8 +165,8 @@ export default function ContactPage() {
                   <div>
                     <h3 className="font-bold text-lg mb-2 text-light">E-Mail</h3>
                     <p className="text-gray-400">Antwort innerhalb von 24 Stunden</p>
-                    <a href="mailto:info@rodriguez-web.de" className="text-primary hover:text-primary/80 transition-colors duration-300 inline-flex items-center mt-1">
-                      info@rodriguez-web.de
+                    <a href="mailto:diego@rodriguez-web.de" className="text-primary hover:text-primary/80 transition-colors duration-300 inline-flex items-center mt-1">
+                      diego@rodriguez-web.de
                       <FaArrowRight className="ml-2 w-3 h-3" />
                     </a>
                   </div>
@@ -182,9 +182,9 @@ export default function ContactPage() {
                   </div>
                   <div>
                     <h3 className="font-bold text-lg mb-2 text-light">Telefon</h3>
-                    <p className="text-gray-400">Mo-Fr: 9:00 - 17:00 Uhr</p>
-                    <a href="tel:+491234567890" className="text-primary hover:text-primary/80 transition-colors duration-300 inline-flex items-center mt-1">
-                      +49 123 456 7890
+                    <p className="text-gray-400">Mo-Fr: 9:00 - 18:00 Uhr</p>
+                    <a href="tel:+4917657606956" className="text-primary hover:text-primary/80 transition-colors duration-300 inline-flex items-center mt-1">
+                      +49 176 57606956
                       <FaArrowRight className="ml-2 w-3 h-3" />
                     </a>
                   </div>
@@ -201,8 +201,8 @@ export default function ContactPage() {
                   <div>
                     <h3 className="font-bold text-lg mb-2 text-light">Adresse</h3>
                     <p className="text-gray-300">
-                      Musterstraße 123<br />
-                      12345 Musterstadt<br />
+                      Delftstraße 8<br />
+                      27474 Cuxhaven<br />
                       Deutschland
                     </p>
                   </div>
@@ -219,7 +219,7 @@ export default function ContactPage() {
                   <div>
                     <h3 className="font-bold text-lg mb-2 text-light">Beratungstermin</h3>
                     <p className="text-gray-300 mb-4">
-                      Buchen Sie einen kostenlosen 30-minütigen Beratungstermin mit unseren Experten.
+                      Buchen Sie einen kostenlosen 30-minütigen Beratungstermin für Ihr Webprojekt.
                     </p>
                     <a 
                       href="https://calendly.com/rodriguez-web/beratung" 
@@ -241,13 +241,12 @@ export default function ContactPage() {
                 animate={isInfoInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
                 transition={{ duration: 0.5, delay: 0.8 }}
               >
-                <h3 className="font-bold text-lg mb-4 text-light">Folgen Sie uns</h3>
+                <h3 className="font-bold text-lg mb-4 text-light">Folgen Sie mir</h3>
                 <div className="flex space-x-4">
                   {[
-                    { icon: FaLinkedin, link: "https://linkedin.com/" },
-                    { icon: FaTwitter, link: "https://twitter.com/" },
-                    { icon: FaInstagram, link: "https://instagram.com/" },
-                    { icon: FaFacebook, link: "https://facebook.com/" }
+                    { icon: FaLinkedin, link: "https://www.linkedin.com/in/diego-rodriguez-padinro" },
+                    { icon: FaInstagram, link: "https://www.instagram.com/diego_rodriguez_webdesign/" },
+                    { icon: FaFacebook, link: "https://www.facebook.com/profile.php?id=61556959635307" }
                   ].map((social, index) => (
                     <a
                       key={index}
@@ -255,11 +254,31 @@ export default function ContactPage() {
                       target="_blank"
                       rel="noopener noreferrer"
                       className="bg-dark/80 border border-primary/30 w-10 h-10 rounded-full flex items-center justify-center text-primary hover:bg-primary hover:text-dark transition-all duration-300"
-                      aria-label={`Visit our ${social.icon.name} page`}
+                      aria-label={`Visit my ${social.icon.name} page`}
                     >
                       <social.icon />
                     </a>
                   ))}
+                </div>
+              </motion.div>
+              
+              {/* Profile Image */}
+              <motion.div 
+                className="mt-12"
+                initial={{ opacity: 0, y: 20 }}
+                animate={isInfoInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+                transition={{ duration: 0.5, delay: 1 }}
+              >
+                <div className="relative w-48 h-48 mx-auto overflow-hidden rounded-full border-4 border-primary/30 shadow-lg">
+                  <img
+                    src="/images/diego/396578739_818558143300968_920426191022673660_n-2.jpg"
+                    alt="Diego Rodriguez - Web Design & Development"
+                    style={{
+                      width: '100%',
+                      height: '100%',
+                      objectFit: 'cover',
+                    }}
+                  />
                 </div>
               </motion.div>
             </motion.div>
@@ -275,13 +294,13 @@ export default function ContactPage() {
         <div className="container mx-auto px-4">
           <div className="rounded-lg overflow-hidden border border-primary/20 shadow-lg">
             <iframe 
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2428.4090427328424!2d13.401542276536383!3d52.51761463743264!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47a851c655f20989%3A0x26bbfb4e84674c63!2sBrandenburg%20Gate!5e0!3m2!1sen!2sde!4v1687871284785!5m2!1sen!2sde" 
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2384.873240505842!2d8.743138377154638!3d53.850466141977624!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47b40eb232dd4e25%3A0x8d0b254b24222d66!2sWesterwischweg%2022A%2C%2027476%20Cuxhaven!5e0!3m2!1sde!2sde!4v1714926646203!5m2!1sde!2sde" 
               className="w-full h-[400px]" 
               style={{ border: 0 }} 
               allowFullScreen={true} 
               loading="lazy" 
               referrerPolicy="no-referrer-when-downgrade"
-              title="Our office location"
+              title="My office location"
             ></iframe>
           </div>
         </div>
@@ -298,7 +317,7 @@ export default function ContactPage() {
             className="max-w-3xl mx-auto"
           >
             <p className="text-xl text-gray-300 mb-6">
-              Wir sind jederzeit für Sie da. Kontaktieren Sie uns für eine unverbindliche Beratung.
+              Ich bin jederzeit für Sie da. Kontaktieren Sie mich für eine unverbindliche Beratung.
             </p>
             <a 
               href="mailto:info@rodriguez-web.de" 
