@@ -16,8 +16,8 @@ export interface PortfolioItem {
 export const portfolioItems: PortfolioItem[] = [
   {
     id: 'berlin-bakery',
-    title: 'Berlin Bakery',
-    description: 'Website für eine traditionelle Bäckerei mit Online-Bestellmöglichkeit',
+    title: 'Saskia Photographie',
+    description: 'Website für eine traditionelle Fotografin mit Online-Bestellmöglichkeit',
     detailedDescription: 'Entwicklung einer modernen, benutzerfreundlichen Website für eine traditionelle Bäckerei mit der Möglichkeit, Produkte online zu bestellen.',
     challenge: 'Die Herausforderung bestand darin, das traditionelle Handwerk mit modernem E-Commerce zu verbinden und dabei ein authentisches Markenerlebnis zu schaffen.',
     solution: 'Wir haben eine responsive Website mit integriertem Bestellsystem und Bildergalerien entwickelt, die das handwerkliche Können und die Qualität der Produkte hervorhebt.',
@@ -34,7 +34,7 @@ export const portfolioItems: PortfolioItem[] = [
   },
   {
     id: 'schmidt-rechtsanwalt',
-    title: 'Schmidt Rechtsanwälte',
+    title: 'Kira Marie',
     description: 'Professionelle Website für eine renommierte Anwaltskanzlei',
     detailedDescription: 'Gestaltung und Entwicklung einer seriösen und vertrauenswürdigen Online-Präsenz für eine etablierte Anwaltskanzlei.',
     challenge: 'Die Kanzlei benötigte eine Website, die Professionalität und Expertise ausstrahlt und gleichzeitig potenzielle Mandanten zugänglich und verständlich über Rechtsthemen informiert.',
@@ -52,7 +52,7 @@ export const portfolioItems: PortfolioItem[] = [
   },
   {
     id: 'green-garden',
-    title: 'Green Garden',
+    title: 'Famfordogs',
     description: 'E-Commerce Shop für nachhaltige Gartenprodukte',
     detailedDescription: 'Entwicklung eines umfassenden Online-Shops für umweltfreundliche Gartenprodukte mit Fokus auf Nachhaltigkeit.',
     challenge: 'Der Kunde wollte einen Online-Shop, der nicht nur funktional ist, sondern auch die umweltbewussten Werte des Unternehmens widerspiegelt und dabei eine reibungslose Benutzerführung bietet.',
@@ -70,7 +70,7 @@ export const portfolioItems: PortfolioItem[] = [
   },
   {
     id: 'munich-yoga',
-    title: 'Munich Yoga Studio',
+    title: 'Frebo Media',
     description: 'Website mit Kursbuchungssystem für ein modernes Yoga-Studio',
     detailedDescription: 'Gestaltung und Implementierung einer Website mit integriertem Buchungssystem für ein Yoga-Studio in München.',
     challenge: 'Das Studio benötigte eine benutzerfreundliche Plattform zur Kursbuchung und Mitgliederverwaltung, die sowohl auf Mobilgeräten als auch am Desktop optimal funktioniert.',
@@ -88,7 +88,7 @@ export const portfolioItems: PortfolioItem[] = [
   },
   {
     id: 'eco-cosmetics',
-    title: 'Eco Cosmetics',
+    title: 'Fleyver',
     description: 'Elegante Landing Page für eine neue Naturkosmetik-Linie',
     detailedDescription: 'Entwicklung einer überzeugenden Landing Page für den Launch einer neuen Naturkosmetik-Produktlinie.',
     challenge: 'Die Marke benötigte eine ansprechende Landing Page, die das Alleinstellungsmerkmal der neuen Produktlinie kommuniziert und Besucher zum Kauf motiviert.',
@@ -105,7 +105,7 @@ export const portfolioItems: PortfolioItem[] = [
   },
   {
     id: 'tech-blog',
-    title: 'Future Tech Blog',
+    title: 'Interaktie Systeme',
     description: 'Moderner Tech-Blog mit personalisierten Inhaltsempfehlungen',
     detailedDescription: 'Gestaltung und Entwicklung eines zeitgemäßen Tech-Blogs mit Fokus auf Leserengagement und Content-Discovery.',
     challenge: 'Der Kunde wünschte sich einen technisch fortschrittlichen Blog, der sich von der Masse abhebt und Leser länger auf der Seite hält.',

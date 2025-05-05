@@ -1,4 +1,4 @@
-import { FaPalette, FaCode, FaServer, FaSearch, FaChartLine, FaShieldAlt, FaBlog, FaStore, FaImage, FaCog } from 'react-icons/fa';
+import { FaPalette, FaCode, FaServer, FaSearch, FaChartLine, FaShieldAlt, FaBlog, FaStore, FaImage, FaCog, FaTools } from 'react-icons/fa';
 import { IconType } from 'react-icons';
 
 export interface ServiceCategory {
@@ -81,9 +81,15 @@ export const serviceCategories: ServiceCategory[] = [
   },
   {
     id: 'maintenance',
-    title: 'Wartungspakete',
+    title: 'Wartung',
     description: 'Regelmäßige Updates und Support für Ihre Website nach dem Launch.',
     icon: FaCog
+  },
+  {
+    id: 'wartung-plus',
+    title: 'Wartung Plus',
+    description: 'Regelmäßige Updates und Support für Ihre Website nach dem Launch.',
+    icon: FaTools
   }
 ];
 
@@ -91,7 +97,7 @@ export const servicePackages: ServicePackage[] = [
   {
     id: 'starter',
     name: 'Starter-Paket',
-    price: '€999',
+    price: '€1.099',
     description: 'Ideal für kleine Unternehmen, die eine professionelle Online-Präsenz benötigen.',
     features: [
       'Responsive Website mit bis zu 5 Seiten',
@@ -105,7 +111,7 @@ export const servicePackages: ServicePackage[] = [
   {
     id: 'business',
     name: 'Business-Paket',
-    price: '€1.499',
+    price: '€1.799',
     description: 'Für wachsende Unternehmen mit erweiterten Anforderungen.',
     features: [
       'Responsive Website mit bis zu 10 Seiten',
@@ -123,7 +129,7 @@ export const servicePackages: ServicePackage[] = [
   {
     id: 'premium',
     name: 'Premium-Paket',
-    price: '€2.499',
+    price: '€3.999',
     description: 'Die Komplettlösung für anspruchsvolle Unternehmen und E-Commerce.',
     features: [
       'Responsive Website mit unbegrenzten Seiten',
@@ -150,7 +156,7 @@ export const additionalServices: AdditionalService[] = [
   },
   {
     id: 'photo',
-    name: 'Fotoshooting',
+    name: 'Brand ID',
     price: 'ab €499',
     description: 'Professionelle Fotos Ihres Unternehmens, Ihrer Produkte oder Dienstleistungen für Ihre Website.'
   },
@@ -169,6 +175,18 @@ export const additionalServices: AdditionalService[] = [
   {
     id: 'seo-package',
     name: 'SEO-Paket',
+    price: 'ab €499',
+    description: 'Umfassende Optimierung Ihrer Website für Suchmaschinen mit monatlichen Reports.'
+  },
+  {
+    id: 'seo-ongoing',
+    name: 'SEO-Betreuung',
+    price: 'ab €499',
+    description: 'Umfassende Optimierung Ihrer Website für Suchmaschinen mit monatlichen Reports.'
+  },
+  {
+    id: 'wartung-plus',
+    name: 'Wartung Plus',
     price: 'ab €499',
     description: 'Umfassende Optimierung Ihrer Website für Suchmaschinen mit monatlichen Reports.'
   }

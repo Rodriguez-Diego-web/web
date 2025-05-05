@@ -129,8 +129,8 @@ const Footer = () => {
               >
                 <FaMapMarkerAlt className="mr-3 text-primary mt-1" />
                 <span>
-                  Musterstraße 123<br />
-                  12345 Musterstadt<br />
+                  Delftstraße 8 <br />
+                  27474 Cuxhaven<br />
                   Deutschland
                 </span>
               </motion.p>
