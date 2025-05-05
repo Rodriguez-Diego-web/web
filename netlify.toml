@@ -4,6 +4,7 @@
 
 [build.environment]
   NETLIFY_NEXT_PLUGIN_SKIP = "true"
+  NEXT_FORCE_EDGE_IMAGES = "true"
 
 [[plugins]]
   package = "@netlify/plugin-nextjs"
@@ -13,6 +14,12 @@
   to = "/index.html"
   status = 200
   force = false
+
+[[redirects]]
+  from = "/_next/image*"
+  to = "/_next/image/:splat"
+  status = 200
+  force = true
 
 # Optimize cache management for static assets
 [[headers]]
