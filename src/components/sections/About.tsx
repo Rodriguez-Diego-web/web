@@ -120,8 +120,8 @@ const About = () => {
               transition={{ duration: 0.3 }}
             >
               <Image
-                src="/images/about/team.jpg"
-                alt="Das Rodriguez-Web Team"
+                src="/images/diego/396578739_818558143300968_920426191022673660_n-2.jpg"
+                alt="Diego Rodriguez - Web Design & Development"
                 fill
                 sizes="(max-width: 768px) 100vw, 50vw"
                 className="object-cover"
