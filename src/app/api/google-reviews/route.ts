@@ -1,33 +1,46 @@
 import { NextResponse } from 'next/server';
 import axios from 'axios';
 
-// Umgebungsvariable für den API-Schlüssel
-const GOOGLE_API_KEY = process.env.GOOGLE_MAPS_API_KEY;
+// Umgebungsvariable für die API-Schlüssel
+const MAPS_API_KEY = process.env.GOOGLE_MAPS_API_KEY;
+const PLACES_API_KEY = process.env.GOOGLE_PLACES_API_KEY; // Neuer Schlüssel ohne Einschränkungen
 
 // Deine Google Place ID
 const PLACE_ID = process.env.GOOGLE_PLACE_ID || 'DEINE_GOOGLE_PLACE_ID';
 
 export async function GET() {
   try {
-    // Live API-Aufruf ausführen
-    if (GOOGLE_API_KEY && PLACE_ID && PLACE_ID !== 'DEINE_GOOGLE_PLACE_ID') {
+    // Live API-Aufruf ausführen mit dem Places API-Schlüssel
+    if (PLACES_API_KEY && PLACE_ID && PLACE_ID !== 'DEINE_GOOGLE_PLACE_ID') {
       try {
         // Abrufen der Platzdaten inkl. Bewertungen von der Google Places API
         const response = await axios.get(
-          `https://maps.googleapis.com/maps/api/place/details/json?place_id=${PLACE_ID}&fields=name,rating,reviews&key=${GOOGLE_API_KEY}`
+          `https://maps.googleapis.com/maps/api/place/details/json?place_id=${PLACE_ID}&fields=name,rating,reviews&key=${PLACES_API_KEY}`
         );
 
         // Extrahieren der relevanten Daten wenn verfügbar
         if (response.data && response.data.result) {
           const { name, rating, reviews } = response.data.result;
           if (reviews && reviews.length > 0) {
+            // Debug-Log zum Testen
+            console.log('Echte Bewertungen gefunden:', reviews.length);
             return NextResponse.json({ name, rating, reviews });
           }
+        }
+        
+        // Falls keine Bewertungen, aber Status OK
+        if (response.data && response.data.status === 'OK') {
+          console.log('API-Antwort OK, aber keine Bewertungen gefunden');
+        } else {
+          // Status-Fehler loggen
+          console.log('API-Status nicht OK:', response.data?.status);
         }
       } catch (apiError) {
         console.error('Fehler beim API-Aufruf:', apiError);
         // Bei API-Fehler zum Fallback übergehen
       }
+    } else {
+      console.log('API-Schlüssel oder Place ID nicht konfiguriert');
     }
 
     // Fallback-Daten nur wenn API keine Ergebnisse liefert
