@@ -15,8 +15,8 @@ type FormData = {
 };
 
 // EmailJS Konfiguration
-const SERVICE_ID = 'service_16rc5b6';
-const TEMPLATE_ID = 'template_contact';
+const SERVICE_ID = 'service_scn2e0i';
+const TEMPLATE_ID = 'template_kzdp3yx';
 const PUBLIC_KEY = 'pP3zdZNCq5Q7RU4ZO'; // Öffentlicher Schlüssel, sicher im Frontend verwendbar
 
 const ContactForm = () => {
