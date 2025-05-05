@@ -23,9 +23,9 @@ const montserrat = Montserrat({
 });
 
 export const metadata: Metadata = {
-  title: 'Rodriguez-Web | Professionelle Webseiten von Diego Rodriguez aus Cuxhaven',
-  description: 'Diego Rodriguez aus Cuxhaven bietet professionelle Webseiten für kleine Unternehmen in nur 7 Tagen. Steigern Sie Ihre Online-Sichtbarkeit ohne Technik-Stress mit maßgeschneiderten Lösungen aus Norddeutschland.',
-  keywords: 'Diego Rodriguez, Webdesigner Cuxhaven, Webentwicklung Cuxhaven, Webseiten Norddeutschland, SEO Optimierung, Rodriguez-Web, responsive Webdesign, Cuxhaven, Webdesigner Norddeutschland',
+  title: 'Rodriguez-Web | Professionelles Webdesign & Entwicklung in Cuxhaven',
+  description: 'Diego Rodriguez aus Cuxhaven bietet professionelle Webseiten für kleine Unternehmen in nur 7 Tagen. Steigern Sie Ihre Online-Sichtbarkeit an der Nordseeküste mit maßgeschneiderten Lösungen und lokaler SEO-Expertise.',
+  keywords: 'Diego Rodriguez, Webdesigner Cuxhaven, Webentwicklung Cuxhaven, Webseiten Nordseeküste, SEO Optimierung Cuxhaven, WordPress Cuxhaven, Responsive Design, Web Agentur Norddeutschland, Landkreis Cuxhaven',
   authors: [{ name: 'Diego Rodriguez', url: 'https://rodriguez-web.de' }],
   creator: 'Diego Rodriguez',
   publisher: 'Rodriguez-Web',
@@ -108,7 +108,7 @@ export default function RootLayout({
               "url": "https://www.rodriguez-web.de",
               "telephone": "+49 176 57606956",
               "email": "diego@rodriguez-web.de",
-              "description": "Professionelles Webdesign und Webentwicklung in Cuxhaven und Umgebung. Maßgeschneiderte Websites für lokale Unternehmen in Norddeutschland.",
+              "description": "Professionelles Webdesign und Webentwicklung in Cuxhaven und Umgebung. Maßgeschneiderte responsive Websites für lokale Unternehmen an der Nordseeküste mit SEO-Optimierung und WordPress-Expertise.",
               "address": {
                 "@type": "PostalAddress",
                 "streetAddress": "Delftstraße 8",
@@ -132,7 +132,7 @@ export default function RootLayout({
                   "Friday"
                 ],
                 "opens": "09:00",
-                "closes": "17:00"
+                "closes": "18:00"
               },
               "sameAs": [
                 "https://www.facebook.com/profile.php?id=61556959635307",
@@ -140,7 +140,25 @@ export default function RootLayout({
                 "https://www.linkedin.com/in/diego-rodriguez-padinro"
               ],
               "priceRange": "€€",
-              "servesCuisine": "Webdesign, Webentwicklung, SEO",
+              "areaServed": ["Cuxhaven", "Otterndorf", "Dorum", "Nordholz", "Landkreis Cuxhaven", "Nordseeküste"],
+              "knowsAbout": ["Webdesign", "Responsive Design", "WordPress", "SEO Optimierung", "Webentwicklung", "Lokale Suchmaschinenoptimierung"],
+              "makesOffer": [
+                {
+                  "@type": "Offer",
+                  "name": "Responsive Website Erstellung",
+                  "description": "Moderne, mobiloptimierte Webseiten für Unternehmen in Cuxhaven"
+                },
+                {
+                  "@type": "Offer",
+                  "name": "WordPress Entwicklung",
+                  "description": "Professionelle WordPress-Websites mit individuellen Themes für Cuxhavener Geschäfte"
+                },
+                {
+                  "@type": "Offer",
+                  "name": "Lokale SEO Optimierung",
+                  "description": "Suchmaschinenoptimierung speziell für Unternehmen an der Nordseeküste"
+                }
+              ],
               "founder": "Diego Rodriguez"
             })
           }}
