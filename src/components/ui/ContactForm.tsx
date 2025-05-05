@@ -49,12 +49,22 @@ const ContactForm = () => {
         site: "rodriguez-web.de"
       };
       
+      // Ausführliche Debug-Informationen
+      console.log('EmailJS Konfiguration:', {
+        SERVICE_ID,
+        TEMPLATE_ID,
+        PUBLIC_KEY: PUBLIC_KEY.substring(0, 5) + '...' // Nur Anfang zeigen aus Sicherheitsgründen
+      });
+      console.log('Template-Parameter:', templateParams);
+      
+      // EmailJS initialisieren
+      emailjs.init(PUBLIC_KEY);
+      
       // EmailJS API aufrufen
       const response = await emailjs.send(
         SERVICE_ID,
         TEMPLATE_ID, 
-        templateParams,
-        PUBLIC_KEY
+        templateParams
       );
       
       console.log('E-Mail erfolgreich gesendet!', response.status, response.text);
@@ -71,7 +81,7 @@ const ContactForm = () => {
       }, 5000);
     } catch (err) {
       console.error('Fehler beim Senden der E-Mail:', err);
-      setError('Ein Fehler ist aufgetreten. Bitte versuchen Sie es später erneut.');
+      setError(`Ein Fehler ist aufgetreten: ${err instanceof Error ? err.message : 'Unbekannter Fehler'}`);
     } finally {
       setIsSubmitting(false);
     }
