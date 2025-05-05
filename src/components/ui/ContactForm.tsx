@@ -30,22 +30,37 @@ const ContactForm = () => {
     setError('');
     
     try {
+      console.log('Formular wird abgesendet mit Daten:', data);
+      // Vorbereiten der Formulardaten
       const formData = new FormData();
+      
+      // Besonders wichtig: form-name muss gesetzt sein
       formData.append('form-name', 'kontakt');
+      
+      // Hinzufügen aller Formularfelder
       Object.entries(data).forEach(([key, value]) => {
-        formData.append(key, value);
+        formData.append(key, value as string);
+        console.log(`Feld: ${key}, Wert: ${value}`);
       });
       
+      // Sendet die Daten über fetch
+      console.log('Sende Anfrage an Netlify...');
       const response = await fetch('/', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        // Diese Header sind wichtig für Netlify
+        headers: { 
+          'Content-Type': 'application/x-www-form-urlencoded' 
+        },
         body: new URLSearchParams(formData as any).toString(),
       });
+      
+      console.log('Antwort erhalten:', response.status, response.statusText);
       
       if (!response.ok) {
         throw new Error(`Formular konnte nicht gesendet werden. Status: ${response.status}`);
       }
       
+      console.log('Formular erfolgreich abgesendet!');
       trackFormSubmission('contact');
       
       // Reset the form and show success state
@@ -95,6 +110,7 @@ const ContactForm = () => {
           method="POST"
           data-netlify="true"
           netlify-honeypot="bot-field"
+          action="/"
         >
           <input type="hidden" name="form-name" value="kontakt" />
           <div className="hidden">
