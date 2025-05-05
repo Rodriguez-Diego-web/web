@@ -1,13 +1,33 @@
 'use client';
 
-import React from 'react';
+import React, { useRef } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { motion } from 'framer-motion';
-import { useInView } from 'framer-motion';
+import { motion, useInView } from 'framer-motion';
+import { trackCuxhavenContent, trackLocationSearch } from '@/lib/analytics';
+
+// Metadata für SEO
+export const metadata = {
+  title: 'Webdesign Cuxhaven | Lokale Webseiten von Diego Rodriguez',
+  description: 'Professionelles Webdesign in Cuxhaven von Diego Rodriguez. Maßgeschneiderte Websites für lokale Unternehmen aus Cuxhaven, Otterndorf, Dorum und der gesamten Region Norddeutschland.',
+  keywords: 'Webdesign Cuxhaven, Webentwicklung Cuxhaven, Websites Norddeutschland, SEO Cuxhaven, Diego Rodriguez Webdesigner',
+  alternates: {
+    canonical: '/webdesign-cuxhaven',
+  },
+};
 
 // SEO-optimierte Seite für Webdesign in Cuxhaven
 const WebdesignCuxhaven = () => {
+  const servicesRef = useRef(null);
+  const isServicesInView = useInView(servicesRef, { once: true });
+  
+  // Tracke den Besuch der Cuxhaven-Seite für Analytics
+  React.useEffect(() => {
+    if (typeof window !== 'undefined') {
+      trackCuxhavenContent();
+    }
+  }, []);
+
   return (
     <main className="bg-dark text-white overflow-hidden">
       {/* Hero Section mit lokalem Bezug zu Cuxhaven */}
@@ -35,10 +55,10 @@ const WebdesignCuxhaven = () => {
               Professionelle Webseiten für lokale Unternehmen aus Cuxhaven und Umgebung
             </h2>
             <p className="text-lg md:text-xl text-gray-300 mb-8 max-w-3xl">
-              Als erfahrener Webdesigner aus Cuxhaven biete ich maßgeschneiderte Webseiten, 
+              Als <strong>erfahrener Webdesigner aus Cuxhaven</strong> biete ich maßgeschneiderte Webseiten, 
               die perfekt auf die Bedürfnisse lokaler Unternehmen zugeschnitten sind. 
-              Mit lokalem Know-how und technischer Expertise verhilft Diego Rodriguez 
-              Ihrem Unternehmen zu einer starken Online-Präsenz in Cuxhaven und der gesamten norddeutschen Region.
+              Mit lokalem Know-how und technischer Expertise verhilft <strong>Diego Rodriguez</strong> 
+              Ihrem Unternehmen zu einer starken Online-Präsenz in <strong>Cuxhaven, Otterndorf, Dorum</strong> und der gesamten norddeutschen Region.
             </p>
             <div className="flex flex-col sm:flex-row gap-4">
               <Link href="/contact" className="btn-primary">
@@ -98,7 +118,7 @@ const WebdesignCuxhaven = () => {
       </section>
 
       {/* Dienstleistungen für Cuxhaven */}
-      <section id="services" className="py-20">
+      <section id="services" className="py-20" ref={servicesRef}>
         <div className="container mx-auto px-4">
           <motion.div
             initial={{ opacity: 0 }}

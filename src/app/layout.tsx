@@ -4,6 +4,7 @@ import { Inter, Montserrat } from 'next/font/google';
 import Header from '@/components/layout/Header';
 import Footer from '@/components/layout/Footer';
 import Analytics from '@/components/shared/Analytics';
+import TagManager from '@/components/shared/TagManager';
 import Script from 'next/script';
 import CookieConsent from '@/components/ui/CookieConsent'; // Fixed import path
 
@@ -75,6 +76,8 @@ export const metadata: Metadata = {
   },
   verification: {
     google: 'google-site-verification-code', 
+    yandex: 'yandex-verification-code',
+    other: { 'msvalidate.01': 'XXXXXXXXXXXXXXXX' },
   },
 };
 
@@ -99,22 +102,25 @@ export default function RootLayout({
           dangerouslySetInnerHTML={{
             __html: JSON.stringify({
               "@context": "https://schema.org",
-              "@type": "ProfessionalService",
-              "name": "Rodriguez-Web",
+              "@type": "LocalBusiness",
+              "name": "Rodriguez-Web | Webdesign & Entwicklung Cuxhaven",
               "image": "https://www.rodriguez-web.de/images/logo.png",
               "url": "https://www.rodriguez-web.de",
-              "telephone": "+49 123 456789",
+              "telephone": "+49 176 57606956",
+              "email": "diego@rodriguez-web.de",
+              "description": "Professionelles Webdesign und Webentwicklung in Cuxhaven und Umgebung. Maßgeschneiderte Websites für lokale Unternehmen in Norddeutschland.",
               "address": {
                 "@type": "PostalAddress",
-                "streetAddress": "Musterstraße 123",
+                "streetAddress": "Delftstraße 8",
                 "addressLocality": "Cuxhaven",
-                "postalCode": "27472",
+                "addressRegion": "Niedersachsen",
+                "postalCode": "27474",
                 "addressCountry": "DE"
               },
               "geo": {
                 "@type": "GeoCoordinates",
-                "latitude": 53.8667,
-                "longitude": 8.7000
+                "latitude": 53.85046614,
+                "longitude": 8.743138377
               },
               "openingHoursSpecification": {
                 "@type": "OpeningHoursSpecification",
@@ -129,9 +135,9 @@ export default function RootLayout({
                 "closes": "17:00"
               },
               "sameAs": [
-                "https://www.facebook.com/rodriguezcuxhaven",
-                "https://www.instagram.com/diegorodriguez_web/",
-                "https://www.linkedin.com/in/diego-rodriguez-web/"
+                "https://www.facebook.com/profile.php?id=61556959635307",
+                "https://www.instagram.com/diego_rodriguez_webdesign/",
+                "https://www.linkedin.com/in/diego-rodriguez-padinro"
               ],
               "priceRange": "€€",
               "servesCuisine": "Webdesign, Webentwicklung, SEO",
@@ -140,11 +146,14 @@ export default function RootLayout({
           }}
         />
       </head>
-      <body>
-        <Header />
-        <main>{children}</main>
-        <Footer />
+      <body className={`${inter.className} bg-dark text-light flex flex-col min-h-screen`}>
         <Analytics />
+        <TagManager />
+        <Header />
+        <main className="flex-grow">
+          {children}
+        </main>
+        <Footer />
         <CookieConsent />
       </body>
     </html>
