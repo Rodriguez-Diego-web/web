@@ -5,6 +5,7 @@ import Image from 'next/image';
 import { motion, useScroll, useTransform, useInView } from 'framer-motion';
 import { FaUserTie, FaRegLightbulb, FaRegClock, FaRegStar, FaArrowRight, 
          FaCheck, FaQuoteLeft, FaShieldAlt, FaGlobe, FaUsers } from 'react-icons/fa';
+import GoogleReviews from '@/components/GoogleReviews';
 
 // Metadata is now in a separate file: metadata.ts
 
@@ -57,20 +58,8 @@ export default function AboutPage() {
     {
       name: 'Diego Rodriguez',
       position: 'Gründer & Webentwickler',
-      bio: 'Mit über 8 Jahren Erfahrung in der Webentwicklung leitet Diego das technische Team und sorgt für optimale Performance und Funktionalität.',
+      bio: 'Mit über 8 Jahren Erfahrung in der Webentwicklung sorge ich für optimale Performance, funktionales Design und erfolgreiche digitale Lösungen für meine Kunden.',
       image: '/images/about/team-member-1.jpg',
-    },
-    {
-      name: 'Julia Wagner',
-      position: 'UI/UX Designerin',
-      bio: 'Julia kreiert benutzerfreundliche und ästhetisch ansprechende Designs, die die Marke unserer Kunden perfekt repräsentieren.',
-      image: '/images/about/team-member-2.jpg',
-    },
-    {
-      name: 'Markus Schmidt',
-      position: 'SEO & Marketing Experte',
-      bio: 'Markus sorgt dafür, dass unsere Websites in den Suchmaschinen optimal platziert werden und maximale Sichtbarkeit erreichen.',
-      image: '/images/about/team-member-3.jpg',
     },
   ];
 
@@ -79,47 +68,25 @@ export default function AboutPage() {
     {
       icon: <FaUserTie className="w-10 h-10 text-primary" />,
       title: 'Professionalität',
-      description: 'Wir arbeiten auf höchstem Niveau und liefern stets qualitativ hochwertige Ergebnisse.',
+      description: 'Ich arbeite auf höchstem Niveau und liefere stets qualitativ hochwertige Ergebnisse.',
     },
     {
       icon: <FaRegLightbulb className="w-10 h-10 text-primary" />,
       title: 'Innovation',
-      description: 'Wir bleiben am Puls der Zeit und setzen moderne Technologien und Trends ein.',
+      description: 'Ich bleibe am Puls der Zeit und setze moderne Technologien und Trends ein.',
     },
     {
       icon: <FaRegClock className="w-10 h-10 text-primary" />,
       title: 'Zuverlässigkeit',
-      description: 'Auf uns ist Verlass – wir halten Fristen ein und stehen zu unseren Zusagen.',
+      description: 'Auf mich ist Verlass – ich halte Fristen ein und stehe zu meinen Zusagen.',
     },
     {
       icon: <FaRegStar className="w-10 h-10 text-primary" />,
       title: 'Kundenzufriedenheit',
-      description: 'Zufriedene Kunden sind unser oberstes Ziel. Wir gehen auf Ihre Wünsche ein.',
+      description: 'Zufriedene Kunden sind mein oberstes Ziel. Ich gehe auf Ihre Wünsche ein.',
     },
   ];
   
-  // Testimonials data
-  const testimonials = [
-    {
-      name: 'Stefan Müller',
-      company: 'Müller Handwerk GmbH',
-      text: 'Rodriguez-Web hat uns eine Website erstellt, die unsere Erwartungen übertroffen hat. Die Zusammenarbeit war professionell und angenehm.',
-      image: '/images/testimonials/testimonial-1.jpg',
-    },
-    {
-      name: 'Laura Weber',
-      company: 'Weber & Partner',
-      text: 'Dank Rodriguez-Web haben wir jetzt eine moderne Website, die unsere Marke perfekt repräsentiert. Wir sind sehr zufrieden mit dem Ergebnis.',
-      image: '/images/testimonials/testimonial-2.jpg',
-    },
-    {
-      name: 'Michael Bauer',
-      company: 'Bauer Consulting',
-      text: 'Die Expertise und der Service von Rodriguez-Web sind ausgezeichnet. Unsere neue Website hat uns bereits viele neue Kunden gebracht.',
-      image: '/images/testimonials/testimonial-3.jpg',
-    },
-  ];
-
   return (
     <div className="relative min-h-screen bg-dark overflow-hidden">
       {/* Background decorative elements */}
@@ -178,8 +145,8 @@ export default function AboutPage() {
               animate={{ opacity: 1 }}
               transition={{ delay: 0.3, duration: 0.8 }}
             >
-              Wir sind ein spezialisiertes Team von Webexperten mit einer Leidenschaft 
-              für Design und Technologie. Seit 2018 helfen wir Unternehmen, 
+              Als spezialisierter Webentwickler mit einer Leidenschaft 
+              für Design und Technologie helfe ich seit 2018 Unternehmen, 
               ihre Online-Präsenz zu verbessern und ihre Ziele zu erreichen.
             </motion.p>
             
@@ -190,7 +157,7 @@ export default function AboutPage() {
               transition={{ delay: 0.6, duration: 0.5 }}
             >
               <motion.a 
-                href="#team" 
+                href="#story" 
                 className="bg-primary hover:bg-primary/90 text-white px-8 py-3 rounded-md flex items-center justify-center transition-all duration-300 relative overflow-hidden group"
                 whileHover={{ 
                   scale: 1.05,
@@ -209,8 +176,8 @@ export default function AboutPage() {
                     ease: "easeInOut",
                   }}
                 />
-                <span className="relative z-10 mr-2">Team kennenlernen</span>
-                <FaUsers className="relative z-10" />
+                <span className="relative z-10 mr-2">Über mich</span>
+                <FaUserTie className="relative z-10" />
               </motion.a>
               
               <motion.a 
@@ -261,7 +228,7 @@ export default function AboutPage() {
                 animate={isStoryInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
                 transition={{ duration: 0.5, delay: 0.3 }}
               >
-                Rodriguez-Web wurde 2018 von Diego Rodriguez gegründet, mit der Vision, 
+                Rodriguez-Web wurde 2018 von mir, Diego Rodriguez, gegründet, mit der Vision, 
                 professionelle Webdesign- und Entwicklungsdienstleistungen anzubieten, 
                 die für kleine und mittelständische Unternehmen zugänglich sind.
               </motion.p>
@@ -272,9 +239,9 @@ export default function AboutPage() {
                 animate={isStoryInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
                 transition={{ duration: 0.5, delay: 0.5 }}
               >
-                Was als Ein-Mann-Unternehmen begann, hat sich zu einem dynamischen Team von 
-                Experten entwickelt, die alle ihre eigenen Stärken und Fachkenntnisse einbringen. 
-                Heute sind wir stolz darauf, über 100 erfolgreiche Projekte abgeschlossen zu haben.
+                Als Einzelunternehmer habe ich mich auf die Schaffung maßgeschneiderter Weblösungen spezialisiert. 
+                In den letzten Jahren durfte ich über 100 erfolgreiche Projekte abschließen und wertvolle 
+                Erfahrungen in verschiedenen Branchen sammeln.
               </motion.p>
               
               <motion.p 
@@ -283,9 +250,9 @@ export default function AboutPage() {
                 animate={isStoryInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
                 transition={{ duration: 0.5, delay: 0.7 }}
               >
-                Unser Fokus liegt auf der Kombination von ansprechendem Design, technischer Exzellenz 
+                Mein Fokus liegt auf der Kombination von ansprechendem Design, technischer Exzellenz 
                 und Business-Strategie, um Websites zu erstellen, die nicht nur gut aussehen, 
-                sondern auch messbare Ergebnisse für unsere Kunden liefern.
+                sondern auch messbare Ergebnisse für meine Kunden liefern.
               </motion.p>
               
               {/* Achievement Stats */}
@@ -435,12 +402,12 @@ export default function AboutPage() {
               Unsere <span className="text-primary">Werte</span>
             </h2>
             <p className="text-lg text-gray-300">
-              Diese Grundsätze leiten unser Handeln und unsere Zusammenarbeit mit Kunden.
+              Diese Grundsätze leiten mein Handeln und meine Zusammenarbeit mit Kunden.
             </p>
           </motion.div>
           
           <motion.div 
-            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8"
+            className="grid grid-cols-1 md:grid-cols-4 gap-8"
             initial="hidden"
             animate={isValuesInView ? "visible" : "hidden"}
             variants={containerVariants}
@@ -466,7 +433,7 @@ export default function AboutPage() {
                   transition={{ duration: 8, repeat: Infinity, delay: index * 0.5 }}
                 />
                 
-                {/* Animated icon - removing animations */}
+                {/* Animated icon */}
                 <div className="mb-6 text-primary">
                   {value.icon}
                 </div>
@@ -486,41 +453,29 @@ export default function AboutPage() {
         </div>
       </section>
       
-      {/* Team Section with Interactive Cards */}
-      <section id="team" ref={teamRef} className="py-24 bg-dark/95 relative">
-        <div className="absolute inset-0 overflow-hidden opacity-30">
-          <motion.div 
-            className="absolute -right-40 -bottom-40 w-96 h-96 bg-primary/20 rounded-full blur-3xl"
-            animate={{ 
-              scale: [1, 1.2, 1],
-              opacity: [0.1, 0.2, 0.1]
-            }}
-            transition={{ duration: 8, repeat: Infinity }}
-          />
-        </div>
-        
+      {/* Team Section */}
+      <section id="team" ref={teamRef} className="py-24 relative bg-dark/50">
         <div className="container mx-auto px-4 relative z-10">
-          <motion.div 
-            className="text-center max-w-3xl mx-auto mb-16"
+          <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={isTeamInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
-            transition={{ duration: 0.7 }}
+            transition={{ duration: 0.8 }}
+            className="text-center mb-16"
           >
             <motion.div 
               initial={{ width: 0 }}
-              animate={isTeamInView ? { width: "80px" } : { width: 0 }}
-              transition={{ duration: 0.8 }}
-              className="h-1 bg-primary mx-auto mb-6"
+              animate={isTeamInView ? { width: "100px" } : { width: 0 }}
+              transition={{ duration: 0.8, delay: 0.2 }}
+              className="h-1 bg-primary mb-6 mx-auto"
             />
-            
             <h2 className="text-3xl md:text-4xl font-bold mb-6 text-light">
-              Unser <span className="text-primary">Team</span>
+              Über <span className="text-primary">Mich</span>
             </h2>
-            <p className="text-lg text-gray-300">
-              Lernen Sie die Experten kennen, die Ihre Website zum Leben erwecken.
+            <p className="text-lg text-gray-300 max-w-2xl mx-auto">
+              Lernen Sie mich kennen. Mit meiner Expertise im Webdesign und in der Entwicklung 
+              bin ich Ihr Partner für erfolgreiche Digitalprojekte.
             </p>
           </motion.div>
-          
           <motion.div 
             className="grid grid-cols-1 md:grid-cols-3 gap-8"
             initial="hidden"
@@ -529,14 +484,10 @@ export default function AboutPage() {
           >
             {teamMembers.map((member, index) => (
               <motion.div 
-                key={index}
-                className="bg-dark/40 border border-gray-800 rounded-xl overflow-hidden group"
+                key={member.name}
                 variants={itemVariants}
-                whileHover={{ 
-                  scale: 1.03,
-                  boxShadow: "0 0 30px rgba(255, 156, 40, 0.15)",
-                  borderColor: "rgba(255, 156, 40, 0.3)"
-                }}
+                className={`relative group rounded-xl overflow-hidden shadow-xl hover:shadow-2xl transition-all duration-300 ${index === 0 ? 'md:col-start-2' : ''}`}
+                whileHover={{ y: -10 }}
               >
                 <div className="relative h-80 overflow-hidden">
                   <motion.div
@@ -684,7 +635,7 @@ export default function AboutPage() {
                     </div>
                     <div>
                       <h4 className="text-lg font-semibold text-light">100% Zufriedenheitsgarantie</h4>
-                      <p className="text-gray-300">Wir arbeiten solange, bis Sie zufrieden sind</p>
+                      <p className="text-gray-300">Ich arbeite solange, bis Sie zufrieden sind</p>
                     </div>
                   </motion.div>
                   
@@ -777,58 +728,12 @@ export default function AboutPage() {
               Was unsere <span className="text-primary">Kunden</span> sagen
             </h2>
             <p className="text-lg text-gray-300">
-              Erfahren Sie, wie wir bereits anderen Unternehmen geholfen haben.
+              Authentische Google-Bewertungen von zufriedenen Kunden.
             </p>
           </motion.div>
           
-          <motion.div 
-            className="grid grid-cols-1 md:grid-cols-3 gap-8"
-            initial="hidden"
-            animate={isTestimonialsInView ? "visible" : "hidden"}
-            variants={containerVariants}
-          >
-            {testimonials.map((testimonial, index) => (
-              <motion.div 
-                key={index}
-                className="bg-dark/40 border border-primary/20 p-8 rounded-xl relative overflow-hidden"
-                variants={itemVariants}
-                whileHover={{ 
-                  scale: 1.02, 
-                  boxShadow: "0 0 30px rgba(255, 156, 40, 0.1)",
-                  borderColor: "rgba(255, 156, 40, 0.4)"
-                }}
-              >
-                <FaQuoteLeft className="text-4xl text-primary/20 mb-4" />
-                
-                <p className="text-gray-300 mb-6 relative z-10">"{testimonial.text}"</p>
-                
-                <div className="flex items-center">
-                  <div className="w-12 h-12 rounded-full overflow-hidden bg-primary/20 mr-4 relative">
-                    <Image
-                      src={testimonial.image}
-                      alt={testimonial.name}
-                      fill
-                      sizes="48px"
-                      className="object-cover"
-                    />
-                  </div>
-                  <div>
-                    <h4 className="font-bold text-light">{testimonial.name}</h4>
-                    <p className="text-primary text-sm">{testimonial.company}</p>
-                  </div>
-                </div>
-                
-                <motion.div 
-                  className="absolute top-0 right-0 w-40 h-40 bg-primary/5 rounded-full -mt-20 -mr-20"
-                  animate={{
-                    scale: [1, 1.2, 1],
-                    opacity: [0.1, 0.2, 0.1],
-                  }}
-                  transition={{ duration: 8, repeat: Infinity, delay: index * 2 }}
-                />
-              </motion.div>
-            ))}
-          </motion.div>
+          {/* Google Reviews Integration */}
+          <GoogleReviews />
         </div>
       </section>
       
@@ -881,7 +786,7 @@ export default function AboutPage() {
               animate={isCtaInView ? { opacity: 1 } : { opacity: 0 }}
               transition={{ duration: 0.8, delay: 0.3 }}
             >
-              Lassen Sie uns gemeinsam Ihre Vision verwirklichen. Kontaktieren Sie uns noch heute für ein unverbindliches Beratungsgespräch.
+              Lassen Sie uns gemeinsam Ihre Vision verwirklichen. Kontaktieren Sie mich noch heute für ein unverbindliches Beratungsgespräch.
             </motion.p>
             
             <motion.div
