@@ -98,15 +98,16 @@ export const servicePackages: ServicePackage[] = [
     id: 'starter',
     name: 'Starter-Paket',
     price: '€1.099',
-    description: 'Ideal für kleine Unternehmen, die eine professionelle Online-Präsenz benötigen.',
+    description: 'Komplettlösung für kleine Unternehmen',
     features: [
       'Responsive Website mit bis zu 5 Seiten',
       'Individuelles Design',
       'Kontaktformular & Google Maps',
       'Basis-SEO-Optimierung',
       'Hosting für 1 Jahr inklusive',
-      'SSL-Zertifikat'
-    ]
+      'Kostenlose Domain für 1 Jahr'
+    ],
+    isPopular: true
   },
   {
     id: 'business',
@@ -121,8 +122,7 @@ export const servicePackages: ServicePackage[] = [
       'Umfassende SEO-Optimierung',
       'Google Analytics Integration',
       'Hosting für 1 Jahr inklusive',
-      'SSL-Zertifikat',
-      '3 Stunden Schulung'
+      'SSL-Zertifikat'
     ],
     isPopular: true
   },
@@ -141,7 +141,6 @@ export const servicePackages: ServicePackage[] = [
       'Analytics-Dashboard',
       'Hosting für 2 Jahre inklusive',
       'Premium SSL-Zertifikat',
-      '5 Stunden Schulung',
       'Monatliches Performance-Reporting'
     ]
   }

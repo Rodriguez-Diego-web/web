@@ -329,7 +329,6 @@ export default function AboutPage() {
                 transition={{ duration: 0.3 }}
                 style={{ y: useTransform(scrollYProgress, [0, 1], [0, -50]) }}
               >
-                {/* Reguläres img-Tag statt Next.js Image für bessere Kompatibilität mit Netlify */}
                 <img
                   src="/images/logo-new.png"
                   alt="Rodriguez-Web Büro"

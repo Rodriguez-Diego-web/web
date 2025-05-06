@@ -426,7 +426,7 @@ const Services = () => {
               }}
               viewport={{ once: true }}
             >
-              ab €999
+              €1.099
             </motion.div>
           </div>
           
