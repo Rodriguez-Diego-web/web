@@ -1,7 +1,6 @@
 'use client';
 
 import React, { useRef } from 'react';
-import Image from 'next/image';
 import Button from '@/components/ui/Button';
 import { motion, useScroll, useTransform } from 'framer-motion';
 
@@ -118,13 +117,13 @@ const About = () => {
               className="aspect-square relative rounded-xl overflow-hidden shadow-xl border border-gray-800"
               whileHover={{ scale: 1.02 }}
               transition={{ duration: 0.3 }}
+              style={{ y }}
             >
-              <Image
+              {/* Statt Next.js Image verwenden wir ein reguläres img-Tag für bessere Kompatibilität mit Netlify */}
+              <img
                 src="/images/diego/diego.jpg"
                 alt="Diego Rodriguez - Web Design & Development"
-                fill
-                sizes="(max-width: 768px) 100vw, 50vw"
-                className="object-cover"
+                className="object-cover w-full h-full"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-dark to-transparent opacity-60"></div>
             </motion.div>

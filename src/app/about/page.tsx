@@ -1,7 +1,6 @@
 'use client';
 
 import React, { useRef } from 'react';
-import Image from 'next/image';
 import { motion, useScroll, useTransform, useInView } from 'framer-motion';
 import { FaUserTie, FaRegLightbulb, FaRegClock, FaRegStar, FaArrowRight, 
          FaCheck, FaQuoteLeft, FaShieldAlt, FaGlobe, FaUsers } from 'react-icons/fa';
@@ -328,13 +327,13 @@ export default function AboutPage() {
                 className="absolute top-0 left-0 w-full h-full rounded-xl overflow-hidden border border-gray-800"
                 whileHover={{ scale: 1.02 }}
                 transition={{ duration: 0.3 }}
+                style={{ y: useTransform(scrollYProgress, [0, 1], [0, -50]) }}
               >
-                <Image
-                  src="/images/about/office.jpg"
+                {/* Reguläres img-Tag statt Next.js Image für bessere Kompatibilität mit Netlify */}
+                <img
+                  src="/images/logo-new.png"
                   alt="Rodriguez-Web Büro"
-                  fill
-                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                  className="object-cover"
+                  className="object-cover w-full h-full"
                   style={{ objectPosition: "center" }}
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-dark to-transparent opacity-60"></div>
@@ -494,12 +493,10 @@ export default function AboutPage() {
                     whileHover={{ scale: 1.1 }}
                     transition={{ duration: 0.5 }}
                   >
-                    <Image
+                    <img
                       src={member.image}
                       alt={member.name}
-                      fill
-                      sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                      className="object-cover"
+                      className="object-cover w-full h-full"
                     />
                   </motion.div>
                   <div className="absolute inset-0 bg-gradient-to-t from-dark to-transparent opacity-80"></div>
@@ -685,6 +682,7 @@ export default function AboutPage() {
                       transition={{
                         duration: 3,
                         repeat: Infinity,
+                        repeatType: "loop",
                         ease: "easeInOut",
                       }}
                     />
