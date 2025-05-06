@@ -53,7 +53,7 @@ export const portfolioItems: PortfolioItem[] = [
   {
     id: 'famfordogs',
     title: 'Famfordogs',
-    description: 'Soziales Projekt des 6. Semesters',
+    description: 'Soziales Projekt des 6. Semesters an der Hochschule',
     detailedDescription: 'Entwicklung eines umfassenden Online-Shops für umweltfreundliche Gartenprodukte mit Fokus auf Nachhaltigkeit.',
     challenge: 'Der Kunde wollte einen Online-Shop, der nicht nur funktional ist, sondern auch die umweltbewussten Werte des Unternehmens widerspiegelt und dabei eine reibungslose Benutzerführung bietet.',
     solution: 'Wir haben einen modernen E-Commerce-Shop mit natürlichem Design, umfangreicher Produktfilterung und einem Nachhaltigkeits-Blog entwickelt.',
