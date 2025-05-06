@@ -35,7 +35,7 @@ export const portfolioItems: PortfolioItem[] = [
   {
     id: 'kira-marie',
     title: 'Kira Marie',
-    description: 'Professionelle Website für eine renommierte Autoin und Dozentinq',
+    description: 'Professionelle Website für eine Autoin und Dozentin',
     detailedDescription: 'Gestaltung und Entwicklung einer seriösen und vertrauenswürdigen Online-Präsenz für eine etablierte Autoin und Dozentinq.',
     challenge: 'Die Kanzlei benötigte eine Website, die Professionalität und Expertise ausstrahlt und gleichzeitig potenzielle Mandanten zugänglich und verständlich über Rechtsthemen informiert.',
     solution: 'Wir haben eine elegante, übersichtliche Website entwickelt mit Fokus auf klare Informationsarchitektur und einem benutzerfreundlichen Terminbuchungssystem.',
