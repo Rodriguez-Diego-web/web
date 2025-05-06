@@ -115,7 +115,7 @@ const Footer = () => {
                 className="flex items-center"
                 whileHover={{ x: 5, color: '#FF6B00' }}
               >
-                <FaPhone className="mr-3 text-primary" /> +49 123 456789
+                <FaPhone className="mr-3 text-primary" /> +49 152 193 77 166
               </motion.p>
               <motion.p 
                 className="flex items-center"

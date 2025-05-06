@@ -15,7 +15,7 @@ export interface PortfolioItem {
 
 export const portfolioItems: PortfolioItem[] = [
   {
-    id: 'berlin-bakery',
+    id: 'saskia-photographie',
     title: 'Saskia Photographie',
     description: 'Website für eine traditionelle Fotografin mit Online-Bestellmöglichkeit',
     detailedDescription: 'Entwicklung einer modernen, benutzerfreundlichen Website für eine traditionelle Bäckerei mit der Möglichkeit, Produkte online zu bestellen.',
@@ -29,14 +29,14 @@ export const portfolioItems: PortfolioItem[] = [
       '/images/portfolio/bakery-3.jpg',
     ],
     tags: ['Website', 'E-Commerce', 'Food'],
-    link: 'https://example.com/berlin-bakery',
+    link: 'https://saskia-photographie.netlify.app/',
     category: 'e-commerce',
   },
   {
-    id: 'schmidt-rechtsanwalt',
+    id: 'kira-marie',
     title: 'Kira Marie',
-    description: 'Professionelle Website für eine renommierte Anwaltskanzlei',
-    detailedDescription: 'Gestaltung und Entwicklung einer seriösen und vertrauenswürdigen Online-Präsenz für eine etablierte Anwaltskanzlei.',
+    description: 'Professionelle Website für eine renommierte Autoin und Dozentinq',
+    detailedDescription: 'Gestaltung und Entwicklung einer seriösen und vertrauenswürdigen Online-Präsenz für eine etablierte Autoin und Dozentinq.',
     challenge: 'Die Kanzlei benötigte eine Website, die Professionalität und Expertise ausstrahlt und gleichzeitig potenzielle Mandanten zugänglich und verständlich über Rechtsthemen informiert.',
     solution: 'Wir haben eine elegante, übersichtliche Website entwickelt mit Fokus auf klare Informationsarchitektur und einem benutzerfreundlichen Terminbuchungssystem.',
     results: 'Die Anzahl der Anfragen hat sich verdoppelt, und die durchschnittliche Zeit bis zur Kontaktaufnahme nach dem ersten Besuch hat sich um 40% verkürzt.',
@@ -51,9 +51,9 @@ export const portfolioItems: PortfolioItem[] = [
     category: 'website',
   },
   {
-    id: 'green-garden',
+    id: 'famfordogs',
     title: 'Famfordogs',
-    description: 'E-Commerce Shop für nachhaltige Gartenprodukte',
+    description: 'Soziales Projekt des 6. Semesters',
     detailedDescription: 'Entwicklung eines umfassenden Online-Shops für umweltfreundliche Gartenprodukte mit Fokus auf Nachhaltigkeit.',
     challenge: 'Der Kunde wollte einen Online-Shop, der nicht nur funktional ist, sondern auch die umweltbewussten Werte des Unternehmens widerspiegelt und dabei eine reibungslose Benutzerführung bietet.',
     solution: 'Wir haben einen modernen E-Commerce-Shop mit natürlichem Design, umfangreicher Produktfilterung und einem Nachhaltigkeits-Blog entwickelt.',
@@ -69,7 +69,7 @@ export const portfolioItems: PortfolioItem[] = [
     category: 'e-commerce',
   },
   {
-    id: 'munich-yoga',
+    id: 'frebo-media',
     title: 'Frebo Media',
     description: 'Website mit Kursbuchungssystem für ein modernes Yoga-Studio',
     detailedDescription: 'Gestaltung und Implementierung einer Website mit integriertem Buchungssystem für ein Yoga-Studio in München.',
@@ -86,7 +86,7 @@ export const portfolioItems: PortfolioItem[] = [
     category: 'website',
   },
   {
-    id: 'eco-cosmetics',
+    id: 'fleyver',
     title: 'Fleyver',
     description: 'Elegante Landing Page für eine neue Naturkosmetik-Linie',
     detailedDescription: 'Entwicklung einer überzeugenden Landing Page für den Launch einer neuen Naturkosmetik-Produktlinie.',
@@ -103,7 +103,7 @@ export const portfolioItems: PortfolioItem[] = [
     category: 'landing-page',
   },
   {
-    id: 'tech-blog',
+    id: 'interaktive-systeme',
     title: 'Interaktive Systeme',
     description: 'Moderner Tech-Blog mit personalisierten Inhaltsempfehlungen',
     detailedDescription: 'Gestaltung und Entwicklung eines zeitgemäßen Tech-Blogs mit Fokus auf Leserengagement und Content-Discovery.',
@@ -121,7 +121,7 @@ export const portfolioItems: PortfolioItem[] = [
     category: 'blog',
   },
   {
-    id: 'city-share',
+    id: 'cityshare',
     title: 'CityShare',
     description: 'Innovative Plattform für urbane Gemeinschaftsbildung',
     detailedDescription: 'Entwicklung einer digitalen Plattform, die Menschen in städtischen Umgebungen verbindet und den Austausch von Ressourcen und Dienstleistungen fördert.',
@@ -139,7 +139,7 @@ export const portfolioItems: PortfolioItem[] = [
     category: 'website',
   },
   {
-    id: 'safe-sports',
+    id: 'safesports',
     title: 'SafeSports',
     description: 'Plattform für sichere Sportveranstaltungen und Trainingsplanung',
     detailedDescription: 'Entwicklung einer umfassenden Plattform zur Organisation sicherer Sportveranstaltungen mit integriertem Trainingsmanagement.',
