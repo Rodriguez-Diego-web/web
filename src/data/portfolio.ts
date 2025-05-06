@@ -28,7 +28,7 @@ export const portfolioItems: PortfolioItem[] = [
       '/images/portfolio/bakery-2.jpg',
       '/images/portfolio/bakery-3.jpg',
     ],
-    tags: ['Website', 'Booking System', 'Photography'],
+    tags: ['Website', 'Booking System', 'Photography' , 'SEO', 'Marketing'],
     link: 'https://saskia-photographie.de/',
     category: 'e-commerce',
   },
