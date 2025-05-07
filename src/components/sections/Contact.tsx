@@ -60,8 +60,8 @@ const Contact = () => {
     {
       icon: <FaEnvelope className="text-primary text-2xl" />,
       title: 'E-Mail',
-      content: 'info@rodriguez-web.de',
-      link: 'mailto:info@rodriguez-web.de'
+      content: 'diego@rodriguez-web.de',
+      link: 'mailto:diego@rodriguez-web.de'
     },
     {
       icon: <FaPhone className="text-primary text-2xl" />,

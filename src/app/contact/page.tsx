@@ -316,8 +316,8 @@ export default function ContactPage() {
                   <div>
                     <h3 className="font-bold text-lg mb-2 text-light">Telefon</h3>
                     <p className="text-gray-400">Mo-Fr: 9:00 - 18:00 Uhr</p>
-                    <a href="tel:+4917657606956" className="text-primary hover:text-primary/80 transition-colors duration-300 inline-flex items-center mt-1">
-                      +49 176 57606956
+                    <a href="tel:+4915219377166" className="text-primary hover:text-primary/80 transition-colors duration-300 inline-flex items-center mt-1">
+                      +49 152 193 77 166
                       <FaArrowRight className="ml-2 w-3 h-3" />
                     </a>
                   </div>
