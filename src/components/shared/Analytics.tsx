@@ -1,75 +1,59 @@
 'use client';
 
 import React, { useEffect } from 'react';
-import { initializeGA, trackPageView, updateConsentState, GA_MEASUREMENT_ID } from '@/lib/analytics';
+import { Router } from 'next/router'; 
+import { initializeGA, updateConsentState, trackPageView } from '@/lib/analytics';
 
-const Analytics = () => {
+const Analytics: React.FC = () => {
   useEffect(() => {
-    // Function to set default consent (denied for all) if gtag is available
-    // This should be called if no prior consent decision is found.
-    const setDefaultConsent = () => {
-      if (typeof window.gtag === 'function') {
-        console.log('Rodriguez-Web Analytics.tsx: Setting default consent to denied.');
-        window.gtag('consent', 'default', {
-          ad_storage: 'denied',
-          ad_user_data: 'denied',
-          ad_personalization: 'denied',
-          analytics_storage: 'denied',
-          wait_for_update: 500, // Optional: time in ms to wait for an update command
-        });
-      } else {
-        // If gtag is not ready, initializeGA will load it, and it will pick up defaults or wait for update.
-        console.log('Rodriguez-Web Analytics.tsx: window.gtag not defined when trying to set default consent. GA initialization will handle defaults.');
-      }
-    };
+    const GA_ID = process.env.NEXT_PUBLIC_GA_ID;
+    if (!GA_ID) {
+      console.warn('Rodriguez-Web Analytics.tsx: NEXT_PUBLIC_GA_ID not found, Analytics not initialized.');
+      return;
+    }
 
+    // Initialize GA; this will set default consent if gtag isn't already loaded.
+    initializeGA();
+
+    // Check localStorage for previously given consent
     const consentStatus = localStorage.getItem('cookie-consent') as 'granted' | 'denied' | null;
     console.log('Rodriguez-Web Analytics.tsx: useEffect triggered. Consent status from localStorage:', consentStatus);
 
-    if (consentStatus === 'granted') {
-      console.log('Rodriguez-Web Analytics.tsx: Consent previously granted. Updating consent state and ensuring GA is initialized.');
-      // Update consent state which will also run the config with cookie_update:true and send_page_view:true
-      updateConsentState('granted', 'Analytics.tsx - initial load, consent already granted');
-      // Ensure GA is loaded and configured (if not already by updateConsentState's config call)
-      initializeGA(); 
-    } else if (consentStatus === 'denied') {
-      console.log('Rodriguez-Web Analytics.tsx: Consent previously denied. Updating consent state and ensuring GA is initialized.');
-      updateConsentState('denied', 'Analytics.tsx - initial load, consent previously denied');
-      initializeGA(); // Initialize GA to respect the 'denied' state
+    if (consentStatus) {
+      // If consent was previously set (e.g., on page reload after banner interaction),
+      // update the consent state with gtag. This will also run the config with
+      // cookie_update:true and send_page_view:true if 'granted'.
+      updateConsentState(consentStatus, `Analytics.tsx - initial load, consent from localStorage: ${consentStatus}`);
     } else {
-      console.log('Rodriguez-Web Analytics.tsx: No consent status in localStorage. Setting default consent and initializing GA.');
-      setDefaultConsent(); // Set defaults before GA tries to send anything
-      initializeGA();    // Load GA; it will adhere to the defaults or wait for updateConsentState
+      // No consent information in localStorage implies default 'denied' state is active
+      // (set by initializeGA or by gtag's own default if our default command hasn't run yet).
+      // The CookieConsent component will handle user interaction and subsequent page reload,
+      // leading to the 'if (consentStatus)' block above on the next load.
+      console.log('Rodriguez-Web Analytics.tsx: No consent in localStorage. Default denied state is active.');
     }
 
-    // Track page views on subsequent route changes (SPA behavior)
+    // Handle page views on subsequent route changes
     const handleRouteChange = (url: string) => {
-      if (localStorage.getItem('cookie-consent') === 'granted' && GA_MEASUREMENT_ID) {
-        console.log(`Rodriguez-Web Analytics.tsx: Route changed to ${url}. Tracking pageview.`);
-        trackPageView(url); // Use the pageview utility from lib/analytics
+      // Only track pageview if consent is granted
+      const currentConsent = localStorage.getItem('cookie-consent') as 'granted' | 'denied' | null;
+      if (currentConsent === 'granted') {
+        console.log(`Rodriguez-Web Analytics.tsx: Route change to ${url}, consent granted, tracking pageview.`);
+        trackPageView(url);
       } else {
-        console.log(`Rodriguez-Web Analytics.tsx: Route changed to ${url}. Consent not granted or GA_ID missing, not tracking pageview.`);
+        console.log(`Rodriguez-Web Analytics.tsx: Route change to ${url}, consent not granted, not tracking pageview.`);
       }
     };
 
-    // Monkey patch pushState and popstate for SPA navigation tracking
-    const originalPushState = window.history.pushState;
-    window.history.pushState = function(...args) {
-      originalPushState.apply(this, args);
-      handleRouteChange(window.location.pathname + window.location.search + window.location.hash);
-    };
+    Router.events.on('routeChangeComplete', handleRouteChange);
 
-    const handlePopState = () => {
-      handleRouteChange(window.location.pathname + window.location.search + window.location.hash);
-    };
-
-    window.addEventListener('popstate', handlePopState);
+    // Initial page view for the first load is handled by the 'config' command
+    // in 'updateConsentState' if consent is 'granted' from localStorage, or by the initial
+    // 'config' in 'initializeGA' if default consent allowed it (which it doesn't by our setup).
 
     return () => {
-      window.removeEventListener('popstate', handlePopState);
-      window.history.pushState = originalPushState; // Restore original pushState on unmount
+      Router.events.off('routeChangeComplete', handleRouteChange);
     };
-  }, []); // Empty dependency array means this runs once on mount
+  }, []); // Empty dependency array ensures this runs once on mount
 
   return null; // This component does not render anything
 };

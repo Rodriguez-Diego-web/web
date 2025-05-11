@@ -2,14 +2,21 @@
 // Production implementation for proper tracking
 
 // Google Analytics Measurement ID - Replace with your actual GA4 ID when in production
-export const GA_MEASUREMENT_ID = process.env.NEXT_PUBLIC_GA_ID || '';
+export const GA_MEASUREMENT_ID = process.env.NEXT_PUBLIC_GA_ID;
+
+// Define the Consent Mode V2 parameters
+const consentParametersV2 = {
+  'ad_storage': 'denied',
+  'analytics_storage': 'denied',
+  'ad_user_data': 'denied',
+  'ad_personalization': 'denied'
+};
 
 // Log GA_MEASUREMENT_ID at the module level to see its value when the module is loaded
 console.log('Rodriguez-Web lib/analytics: GA_MEASUREMENT_ID (module level):', GA_MEASUREMENT_ID);
 
 // Initialize Google Analytics
 export const initializeGA = () => {
-  // Log the ID at the beginning of the function call
   console.log('Rodriguez-Web lib/analytics: initializeGA called. GA_MEASUREMENT_ID:', GA_MEASUREMENT_ID);
 
   if (!GA_MEASUREMENT_ID) {
@@ -18,58 +25,105 @@ export const initializeGA = () => {
   }
 
   if (typeof window !== 'undefined') {
-    console.log('Rodriguez-Web lib/analytics: window is defined');
     if (!window.gtag) {
-      console.log('Rodriguez-Web lib/analytics: window.gtag is NOT defined, creating gtag function and loading script...');
+      console.log('Rodriguez-Web lib/analytics: window.gtag NOT defined. Initializing...');
 
-      // Define dataLayer and gtag function first
+      // 1. Define dataLayer and gtag function stub
       window.dataLayer = window.dataLayer || [];
       window.gtag = function() {
         // @ts-ignore
         window.dataLayer.push(arguments);
       };
-      console.log('Rodriguez-Web lib/analytics: gtag function defined and dataLayer initialized.');
+      console.log('Rodriguez-Web lib/analytics: gtag function stub defined.');
 
-      // Send initial 'js' event.
-      // Default consent should be set by Analytics.tsx before this or by gtag itself if not set.
+      // 2. Set default consent state VERY EARLY (using the stub)
+      window.gtag('consent', 'default', { ...consentParametersV2 });
+      console.log('Rodriguez-Web lib/analytics: gtag consent default set:', consentParametersV2);
+
+      // 3. Send initial 'js' event (using the stub)
       window.gtag('js', new Date().toISOString());
-      console.log('Rodriguez-Web lib/analytics: Initial gtag(\'js\', new Date()) sent.');
+      console.log('Rodriguez-Web lib/analytics: gtag js event sent.');
 
-      // Then load the gtag.js script
+      // 4. Load the actual gtag.js script
       const script = document.createElement('script');
       script.async = true;
       script.src = `https://www.googletagmanager.com/gtag/js?id=${GA_MEASUREMENT_ID}`;
+      
       script.onload = () => {
-        console.log(`Rodriguez-Web lib/analytics: gtag.js script loaded for ${GA_MEASUREMENT_ID}`);
-        // The config command with cookie_update and send_page_view will be called
-        // by updateConsentState when consent is 'granted'.
+        console.log('Rodriguez-Web lib/analytics: Gtag script loaded.');
+        // Initial config is now handled by updateConsentState after consent is known
       };
       script.onerror = () => {
         console.error(`Rodriguez-Web lib/analytics: Failed to load gtag.js script for ${GA_MEASUREMENT_ID}`);
       };
       document.head.appendChild(script);
-      
       console.log(`Rodriguez-Web lib/analytics: gtag.js script appended to head.`);
 
     } else {
-      console.log('Rodriguez-Web lib/analytics: gtag is ALREADY DEFINED. Relying on updateConsentState for re-config if necessary.');
-      // If gtag is already defined, we assume it's loaded and primary configuration
-      // post-consent will be handled by updateConsentState.
-      // A config call here might be redundant or even problematic if not timed well with consent updates.
+      console.log('Rodriguez-Web lib/analytics: window.gtag IS ALREADY DEFINED.');
+      // If gtag is already defined, its initial load (including default consent and initial config)
+      // has already happened. Subsequent updates are handled by updateConsentState.
     }
   } else {
     console.log('Rodriguez-Web lib/analytics: window is undefined (not in browser).');
   }
 };
 
-// Track page views
-export const trackPageView = (url?: string) => {
+// Update consent state
+export const updateConsentState = (consent: 'granted' | 'denied', source: string) => {
+  console.log(`Rodriguez-Web lib/analytics: updateConsentState called from "${source}". Consent: ${consent}`);
+  if (!GA_MEASUREMENT_ID) {
+    console.warn('Rodriguez-Web lib/analytics: GA_MEASUREMENT_ID not available for updateConsentState.');
+    return;
+  }
   if (typeof window !== 'undefined' && window.gtag) {
-    window.gtag('config', GA_MEASUREMENT_ID, {
-      page_path: url || window.location.pathname,
-      page_location: window.location.href,
-      page_title: document.title
-    });
+    const newConsentState = {
+      'ad_storage': consent,
+      'analytics_storage': consent,
+      'ad_user_data': consent,
+      'ad_personalization': consent
+    };
+    window.gtag('consent', 'update', newConsentState);
+    console.log(`Rodriguez-Web lib/analytics: Consent updated to: ${consent} from source: ${source}`);
+
+    // Configure GA or send page view based on the new consent state
+    // This will be the first 'config' call if initializeGA didn't make one, or an update if it did.
+    if (consent === 'granted') {
+      window.gtag('config', GA_MEASUREMENT_ID, { send_page_view: true });
+      console.log('Rodriguez-Web lib/analytics: GA configured with send_page_view: true due to granted consent.');
+    } else {
+      // If consent is denied, still configure GA to respect the denial.
+      // This ensures the tag is known but inactive regarding data collection disallowed by consent.
+      window.gtag('config', GA_MEASUREMENT_ID);
+      console.log('Rodriguez-Web lib/analytics: GA configured (respecting denied consent).');
+    }
+  } else {
+    console.warn('Rodriguez-Web lib/analytics: window.gtag not found for updateConsentState.');
+  }
+};
+
+// Track page views for subsequent navigations in SPA
+export const trackPageView = (url: string) => {
+  if (!GA_MEASUREMENT_ID) {
+    console.warn('Rodriguez-Web lib/analytics: GA_MEASUREMENT_ID not available for trackPageView.');
+    return;
+  }
+  
+  const consentStatus = typeof window !== 'undefined' ? localStorage.getItem('cookie-consent') : null;
+  console.log(`Rodriguez-Web lib/analytics: trackPageView called for URL: ${url}. Consent status from localStorage: ${consentStatus}`);
+
+  if (consentStatus === 'accepted') {
+    if (typeof window !== 'undefined' && window.gtag) {
+      window.gtag('event', 'page_view', {
+        page_path: url,
+        send_to: GA_MEASUREMENT_ID
+      });
+      console.log(`Rodriguez-Web lib/analytics: Page view event sent for ${url}`);
+    } else {
+      console.warn('Rodriguez-Web lib/analytics: window.gtag not found for trackPageView.');
+    }
+  } else {
+    console.log(`Rodriguez-Web lib/analytics: Page view not sent for ${url} due to consent status: ${consentStatus}`);
   }
 };
 
@@ -81,39 +135,6 @@ export const trackEvent = (action: string, category: string, label?: string, val
       event_label: label,
       value: value
     });
-  }
-};
-
-// Update Consent State
-export const updateConsentState = (consent: 'granted' | 'denied', source: string) => {
-  if (!GA_MEASUREMENT_ID) {
-    console.warn('Rodriguez-Web lib/analytics: GA_MEASUREMENT_ID is not defined. Consent not updated.');
-    return;
-  }
-  console.log(`Rodriguez-Web lib/analytics: updateConsentState called from "${source}". Consent: ${consent}`);
-  if (typeof window.gtag === 'function') {
-    window.gtag('consent', 'update', {
-      ad_storage: consent === 'granted' ? 'granted' : 'denied',
-      ad_user_data: consent === 'granted' ? 'granted' : 'denied',
-      ad_personalization: consent === 'granted' ? 'granted' : 'denied',
-      analytics_storage: consent === 'granted' ? 'granted' : 'denied',
-    });
-    console.log(`Rodriguez-Web lib/analytics: gtag consent updated to ${consent} for ${GA_MEASUREMENT_ID}.`);
-
-    // Wenn der Consent auf 'granted' gesetzt wird, müssen wir die GA-Konfiguration erneut ausführen
-    // damit Cookies gesetzt werden können und Pageviews (falls gewünscht) gesendet werden.
-    if (consent === 'granted') {
-      console.log(`Rodriguez-Web lib/analytics: Consent granted, re-running config for ${GA_MEASUREMENT_ID} with cookie_update and send_page_view.`);
-      window.gtag('config', GA_MEASUREMENT_ID, {
-        cookie_update: true,
-        send_page_view: true, // Hier jetzt true, da consent erteilt
-      });
-      // Optional: Sende ein explizites page_view Event, falls die obige Konfiguration es nicht automatisch macht
-      // oder wenn du einen spezifischen Pfad senden möchtest.
-      // pageview(window.location.pathname);
-    }
-  } else {
-    console.warn('Rodriguez-Web lib/analytics: gtag is not a function. Consent update failed. Source:', source);
   }
 };
 
