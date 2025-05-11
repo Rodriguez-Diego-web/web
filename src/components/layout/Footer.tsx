@@ -58,7 +58,7 @@ const Footer = () => {
             </p>
             <div className="flex space-x-4">
               <motion.a 
-                href="https://linkedin.com/" 
+                href="https://www.linkedin.com/in/kadir-diego-padin-rodriguez" 
                 target="_blank" 
                 rel="noreferrer" 
                 aria-label="LinkedIn"
@@ -67,7 +67,7 @@ const Footer = () => {
                 <FaLinkedin className="w-6 h-6 transition-all" />
               </motion.a>
               <motion.a 
-                href="https://instagram.com/" 
+                href="https://www.instagram.com/diego_rodriguez_digital" 
                 target="_blank" 
                 rel="noreferrer" 
                 aria-label="Instagram"
@@ -76,7 +76,7 @@ const Footer = () => {
                 <FaInstagram className="w-6 h-6 transition-all" />
               </motion.a>
               <motion.a 
-                href="mailto:info@rodriguez-web.de" 
+                href="mailto:diego@rodriguez-web.de" 
                 aria-label="Email"
                 whileHover={{ scale: 1.2, color: '#FF6B00' }}
               >

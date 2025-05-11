@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useRef } from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 import { motion, useScroll, useTransform, useInView } from 'framer-motion';
 import { 
   FaHeart, FaUsers, FaShieldAlt, FaCheck, FaRegClock, 
@@ -26,6 +26,12 @@ export default function AboutPage() {
   const isWhyUsInView = useInView(whyUsRef, { once: true, amount: 0.2 });
   const isTestimonialsInView = useInView(testimonialsRef, { once: true, amount: 0.1 });
   const isCtaInView = useInView(ctaRef, { once: true, amount: 0.5 });
+  
+  // Add isMounted state for client-side only rendering of particles
+  const [isMounted, setIsMounted] = useState(false);
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
   
   // Scroll-based animations
   const { scrollYProgress } = useScroll();
@@ -80,8 +86,8 @@ export default function AboutPage() {
         <div className="absolute bottom-40 left-20 w-64 h-64 bg-primary/5 rounded-full blur-2xl" />
         <div className="absolute top-1/3 left-1/4 w-48 h-48 bg-primary/20 rounded-full blur-xl animate-pulse-slow" />
         
-        {/* Animated particles */}
-        {Array.from({ length: 20 }).map((_, i) => (
+        {/* Animated particles - Render only on client-side */}
+        {isMounted && Array.from({ length: 20 }).map((_, i) => (
           <motion.div
             key={`particle-${i}`}
             className="absolute w-2 h-2 bg-primary/30 rounded-full"

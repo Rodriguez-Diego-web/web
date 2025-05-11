@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useRef, useState } from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 import { motion, useScroll, useTransform, useInView } from 'framer-motion';
 import { serviceCategories, servicePackages, additionalServices } from '@/data/services';
 import { FaArrowRight, FaCheck, FaArrowDown, FaStar, FaTrophy, FaLightbulb } from 'react-icons/fa';
@@ -13,6 +13,12 @@ export default function ServicesPage() {
   
   // State für aktiven Tab
   const [activeCategory, setActiveCategory] = useState('all');
+
+  // Add isMounted state for client-side only rendering of particles
+  const [isMounted, setIsMounted] = useState(false);
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
   
   // Refs für Scroll-basierte Animationen
   const heroRef = useRef(null);
@@ -111,6 +117,29 @@ export default function ServicesPage() {
         <div className="absolute top-20 right-20 w-72 h-72 bg-primary/10 rounded-full blur-3xl" />
         <div className="absolute bottom-40 left-20 w-64 h-64 bg-primary/5 rounded-full blur-2xl" />
         <div className="absolute top-1/3 left-1/4 w-48 h-48 bg-primary/20 rounded-full blur-xl animate-pulse-slow" />
+        
+        {/* Animated particles - Render only on client-side */}
+        {isMounted && Array.from({ length: 20 }).map((_, i) => (
+          <motion.div
+            key={`particle-services-${i}`}
+            className="absolute w-2 h-2 bg-primary/30 rounded-full"
+            style={{
+              top: `${Math.random() * 100}%`,
+              left: `${Math.random() * 100}%`,
+            }}
+            animate={{
+              x: [0, Math.random() * 100 - 50],
+              y: [0, Math.random() * 100 - 50],
+              opacity: [0, 0.8, 0],
+            }}
+            transition={{
+              duration: 10 + Math.random() * 20,
+              repeat: Infinity,
+              repeatType: "reverse",
+              delay: Math.random() * 5,
+            }}
+          />
+        ))}
       </div>
       
       {/* Hero-Sektion mit glassmorphism */}
