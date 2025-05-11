@@ -402,9 +402,14 @@ const WebdesignCuxhaven = () => {
             Lassen Sie uns gemeinsam Ihre digitale Präsenz in Cuxhaven auf das nächste Level heben. 
             Kontaktieren Sie mich für ein unverbindliches Beratungsgespräch.
           </p>
-          <Link href="/contact" className="btn-primary inline-block">
-            Kontakt aufnehmen
-          </Link>
+          <div className="flex flex-col sm:flex-row justify-center items-center gap-6">
+            <Link href="/contact" className="btn-primary text-lg px-8 py-4">
+              Jetzt Kontakt aufnehmen
+            </Link>
+            <div className="text-lg">
+              Oder rufen Sie direkt an: <a href="tel:+4915219377166" className="font-semibold text-orange-400 hover:text-orange-300">+49 152 193 77 166</a>
+            </div>
+          </div>
         </div>
       </section>
     </main>

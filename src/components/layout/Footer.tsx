@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import Image from 'next/image';
-import { FaLinkedin, FaInstagram, FaEnvelope, FaPhone, FaMapMarkerAlt } from 'react-icons/fa';
+import { FaLinkedin, FaInstagram, FaEnvelope, FaPhone, FaMapMarkerAlt, FaWhatsapp } from 'react-icons/fa';
 import { motion } from 'framer-motion';
 
 const Footer = () => {
@@ -116,6 +116,13 @@ const Footer = () => {
                 whileHover={{ x: 5, color: '#FF6B00' }}
               >
                 <FaPhone className="mr-3 text-primary" /> +49 152 193 77 166
+              </motion.p>
+              <motion.p 
+                className="flex items-center"
+                whileHover={{ x: 5, color: '#FF6B00' }}
+              >
+                <FaWhatsapp className="mr-3 text-primary" /> 
+                <a href="https://wa.me/4917641673111" target="_blank" rel="noopener noreferrer">+49 176 416 73 111</a>
               </motion.p>
               <motion.p 
                 className="flex items-center"

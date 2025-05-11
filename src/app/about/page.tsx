@@ -569,7 +569,7 @@ export default function AboutPage() {
                   whileTap={{ scale: 0.95 }}
                 >
                   <a 
-                    href="/kontakt" 
+                    href="/contact" 
                     className="bg-primary text-dark font-medium py-3 px-6 rounded-lg inline-flex items-center relative overflow-hidden"
                   >
                     <motion.div 
@@ -719,7 +719,7 @@ export default function AboutPage() {
               className="flex flex-wrap justify-center gap-4"
             >
               <motion.a 
-                href="/kontakt" 
+                href="/contact" 
                 className="bg-primary hover:bg-primary/90 text-dark px-10 py-4 text-lg rounded-md flex items-center justify-center transition-all duration-300 relative overflow-hidden font-bold"
                 whileHover={{ 
                   scale: 1.05,
@@ -743,7 +743,7 @@ export default function AboutPage() {
               </motion.a>
               
               <motion.a 
-                href="tel:+4917657606956" 
+                href="tel:+4915219377166" 
                 className="border border-primary/40 hover:border-primary text-light px-10 py-4 text-lg rounded-md flex items-center justify-center transition-all duration-300 relative overflow-hidden"
                 whileHover={{ 
                   scale: 1.05,
@@ -751,7 +751,7 @@ export default function AboutPage() {
                 }}
                 whileTap={{ scale: 0.95 }}
               >
-                <span className="mr-2">+49 176 57606956</span>
+                <span className="mr-2">+49 152 193 77 166</span>
                 <FaArrowRight className="transform group-hover:translate-x-1 transition-transform" />
               </motion.a>
             </motion.div>

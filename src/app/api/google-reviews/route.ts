@@ -15,7 +15,7 @@ export async function GET() {
       try {
         // Abrufen der Platzdaten inkl. Bewertungen von der Google Places API
         const response = await axios.get(
-          `https://maps.googleapis.com/maps/api/place/details/json?place_id=${PLACE_ID}&fields=name,rating,reviews&key=${PLACES_API_KEY}`
+          `https://maps.googleapis.com/maps/api/place/details/json?place_id=${PLACE_ID}&fields=name,rating,reviews&language=de&key=${PLACES_API_KEY}`
         );
 
         // Extrahieren der relevanten Daten wenn verfügbar
