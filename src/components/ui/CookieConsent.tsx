@@ -3,6 +3,7 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { FaCookieBite, FaCheck, FaTimes } from 'react-icons/fa';
+import { updateConsentState } from '@/lib/analytics';
 
 const CookieConsent = () => {
   const [showConsent, setShowConsent] = useState(false);
@@ -11,11 +12,12 @@ const CookieConsent = () => {
   useEffect(() => {
     // Check if user has already consented
     const consent = localStorage.getItem('cookie-consent');
-    if (consent === 'accepted' || consent === 'rejected') {
+    if (consent === 'granted' || consent === 'denied') {
       setHasConsented(true);
-      // Only initialize analytics if consent was accepted
-      if (consent === 'accepted') {
-        // We could initialize analytics here if needed
+      // If consent was 'granted', ensure GA is initialized and consent state is updated
+      if (consent === 'granted') {
+        // updateConsentState('granted', 'CookieConsent.useEffect - consent already granted');
+        // initializeGA(); // Consider if initializeGA needs to be called here or if Analytics.tsx handles it
       }
     } else {
       // Show banner after a short delay
@@ -27,17 +29,23 @@ const CookieConsent = () => {
   }, []);
 
   const acceptCookies = () => {
-    localStorage.setItem('cookie-consent', 'accepted');
+    console.log('CookieConsent: acceptCookies called'); // Debugging
+    updateConsentState('granted', 'CookieConsent.acceptCookies');
+    localStorage.setItem('cookie-consent', 'granted');
     setShowConsent(false);
     setHasConsented(true);
-    // Reload page to initialize analytics after acceptance
+    // Reload page to initialize analytics after acceptance and consent update
     window.location.reload();
   };
 
   const rejectCookies = () => {
-    localStorage.setItem('cookie-consent', 'rejected');
+    console.log('CookieConsent: rejectCookies called'); // Debugging
+    updateConsentState('denied', 'CookieConsent.rejectCookies');
+    localStorage.setItem('cookie-consent', 'denied');
     setShowConsent(false);
     setHasConsented(true);
+    // Optional: Reload, falls Standardwerte (denied) nicht ausreichen und UI-Änderungen nötig sind
+    // window.location.reload(); 
   };
 
   if (hasConsented) {

@@ -4,7 +4,6 @@ import { Inter, Montserrat } from 'next/font/google';
 import Header from '@/components/layout/Header';
 import Footer from '@/components/layout/Footer';
 import Analytics from '@/components/shared/Analytics';
-import TagManager from '@/components/shared/TagManager';
 import Script from 'next/script';
 import CookieConsent from '@/components/ui/CookieConsent'; // Fixed import path
 
@@ -89,6 +88,23 @@ export default function RootLayout({
   return (
     <html lang="de" className={`${inter.variable} ${montserrat.variable}`}>
       <head>
+        <Script
+          id="google-consent-default"
+          strategy="beforeInteractive"
+          dangerouslySetInnerHTML={{
+            __html: `
+              window.dataLayer = window.dataLayer || [];
+              function gtag(){dataLayer.push(arguments);}
+              gtag('consent', 'default', {
+                'analytics_storage': 'denied',
+                'ad_storage': 'denied',
+                'ad_user_data': 'denied',
+                'ad_personalization': 'denied',
+                'wait_for_update': 500
+              });
+            `,
+          }}
+        />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <link
@@ -166,7 +182,6 @@ export default function RootLayout({
       </head>
       <body className={`${inter.className} bg-dark text-light flex flex-col min-h-screen`}>
         <Analytics />
-        <TagManager />
         <Header />
         <main className="flex-grow">
           {children}
