@@ -3,8 +3,6 @@
   publish = ".next"
 
 [build.environment]
-  NETLIFY_NEXT_PLUGIN_SKIP = "true"
-  NEXT_FORCE_EDGE_IMAGES = "true"
   NEXT_PUBLIC_ASSET_PREFIX = "/"
 
 [[plugins]]
@@ -22,12 +20,6 @@
   to = "/_next/static/:splat"
   status = 200
   force = false
-
-[[redirects]]
-  from = "/_next/image*"
-  to = "/_next/image/:splat"
-  status = 200
-  force = true
 
 # Optimize cache management for static assets
 [[headers]]
