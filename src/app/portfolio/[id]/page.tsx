@@ -248,7 +248,7 @@ export default function PortfolioDetailPage({ params }: { params: { id: string }
                     </div>
                     <div>
                       <h4 className="text-sm text-gray-400">Fertigstellung</h4>
-                      <p className="text-white">2024</p>
+                      <p className="text-white">{project.completionYear || 'N/A'}</p>
                     </div>
                   </div>
                 </motion.div>

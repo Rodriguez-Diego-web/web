@@ -11,28 +11,31 @@ export interface PortfolioItem {
   tags: string[];
   link?: string;
   category: 'website' | 'e-commerce' | 'landing-page' | 'blog';
+  completionYear?: number;
+  projectType?: 'Kundenprojekt' | 'Showcase-Projekt';
 }
 
 export const portfolioItems: PortfolioItem[] = [
   {
     id: 'rireli',
     title: 'Rireli E-Commerce',
-    description: 'Vollständiger E-Commerce Shop mit modernem Design',
-    detailedDescription: 'Konzeption und Entwicklung einer kompletten E-Commerce-Plattform in nur zwei Tagen, inklusive Design, Mockups und vollständiger Funktionalität.',
+    description: 'Showcase: Vollständiger E-Commerce Shop mit modernem Design',
+    detailedDescription: 'Konzeption und Entwicklung einer kompletten E-Commerce-Plattform in nur zwei Tagen, inklusive Design, Mockups und vollständiger Funktionalität. Dieses Projekt dient als Demonstration der Fähigkeiten im Bereich E-Commerce Entwicklung.',
     challenge: 'Die Herausforderung bestand darin, in extrem kurzer Zeit (nur zwei Tage) einen voll funktionsfähigen E-Commerce-Shop zu entwickeln, der sowohl ästhetisch ansprechend als auch benutzerfreundlich ist.',
     solution: 'Durch effiziente Arbeitsprozesse, vorausschauende Planung und Einsatz moderner Web-Technologien wurde die Website in Rekordzeit realisiert. Das Design und die Mockups wurden speziell für dieses Projekt entwickelt.',
     results: 'Eine hochmoderne E-Commerce-Plattform mit schnellen Ladezeiten, optimiertem Checkout-Prozess und einem reibungslosen Benutzererlebnis auf allen Geräten.',
     imageSrc: '/images/portfolio/rireli/1.png',
     images: [
       '/images/portfolio/rireli/2.png',
-      '/images/portfolio/rireli/3.png',
       '/images/portfolio/rireli/4.png',
       '/images/portfolio/rireli/5.png',
       '/images/portfolio/rireli/6.png',
     ],
-    tags: ['E-Commerce', 'Schnelle Entwicklung', 'Web-Design', 'Online-Shop', 'Frontend', 'Backend'],
+    tags: ['E-Commerce', 'Showcase', 'Schnelle Entwicklung', 'Web-Design', 'Online-Shop', 'Frontend', 'Backend'],
     link: 'https://rireli.netlify.app/',
     category: 'e-commerce',
+    completionYear: 2025,
+    projectType: 'Showcase-Projekt',
   },
   {
     id: 'famfordogs',
