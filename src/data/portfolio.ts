@@ -52,7 +52,8 @@ export const portfolioItems: PortfolioItem[] = [
       '/images/portfolio/dudess/2.png',
       '/images/portfolio/dudess/3.png',
       '/images/portfolio/dudess/4.png',
-      '/images/portfolio/dudess/5.png',
+      '/images/portfolio/dudess/5.png', // Hochformat-Bild
+      '/images/portfolio/dudess/6.png', // Hochformat-Bild
     ],
     tags: ['Interaktive Web-App', 'KI-Integration', 'Quiz', 'Freundschaft', 'Personalisierung', 'Frontend', 'Benutzererlebnis', 'Mobile-First'],
     link: 'https://dudesperfect.netlify.app/',
