@@ -296,7 +296,7 @@ export default function PortfolioDetailPage({ params }: { params: { id: string }
                   return (
                     <motion.div 
                       key={index}
-                      className={`relative ${orientation === 'portrait' ? 'aspect-[9/16] md:col-span-1' : 'aspect-video'} overflow-hidden rounded-lg glass-card`}
+                      className={`relative ${orientation === 'portrait' ? 'aspect-[3/5] mx-auto max-w-[250px]' : 'aspect-video'} overflow-hidden rounded-lg glass-card`}
                       initial={{ opacity: 0, y: 30 }}
                       whileInView={{ opacity: 1, y: 0 }}
                       transition={{ duration: 0.6, delay: index * 0.1 }}
