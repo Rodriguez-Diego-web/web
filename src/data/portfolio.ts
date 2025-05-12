@@ -8,6 +8,7 @@ export interface PortfolioItem {
   results?: string;
   imageSrc: string;
   images?: string[];
+  imageOrientations?: ('landscape' | 'portrait')[];
   tags: string[];
   link?: string;
   category: 'website' | 'e-commerce' | 'landing-page' | 'blog';
@@ -54,6 +55,14 @@ export const portfolioItems: PortfolioItem[] = [
       '/images/portfolio/dudess/4.png',
       '/images/portfolio/dudess/5.png', // Hochformat-Bild
       '/images/portfolio/dudess/6.png', // Hochformat-Bild
+    ],
+    imageOrientations: [
+      'landscape',
+      'landscape',
+      'landscape',
+      'landscape',
+      'portrait',
+      'portrait',
     ],
     tags: ['Interaktive Web-App', 'KI-Integration', 'Quiz', 'Freundschaft', 'Personalisierung', 'Frontend', 'Benutzererlebnis', 'Mobile-First'],
     link: 'https://dudesperfect.netlify.app/',

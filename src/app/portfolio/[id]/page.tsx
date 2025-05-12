@@ -289,27 +289,32 @@ export default function PortfolioDetailPage({ params }: { params: { id: string }
               </motion.h2>
               
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                {project.images.map((image, index) => (
-                  <motion.div 
-                    key={index}
-                    className="relative aspect-video overflow-hidden rounded-lg glass-card"
-                    initial={{ opacity: 0, y: 30 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.6, delay: index * 0.1 }}
-                    viewport={{ once: true }}
-                    whileHover={{ 
-                      scale: 1.03,
-                      boxShadow: '0 0 20px rgba(255, 107, 0, 0.3)'
-                    }}
-                  >
-                    <Image 
-                      src={image} 
-                      alt={`${project.title} - Bild ${index + 1}`}
-                      fill
-                      className="object-cover"
-                    />
-                  </motion.div>
-                ))}
+                {project.images.map((image, index) => {
+                  // Bestimme die Bildorientierung - Standard ist landscape, wenn nicht angegeben
+                  const orientation = project.imageOrientations?.[index] || 'landscape';
+                  
+                  return (
+                    <motion.div 
+                      key={index}
+                      className={`relative ${orientation === 'portrait' ? 'aspect-[9/16] md:col-span-1' : 'aspect-video'} overflow-hidden rounded-lg glass-card`}
+                      initial={{ opacity: 0, y: 30 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      transition={{ duration: 0.6, delay: index * 0.1 }}
+                      viewport={{ once: true }}
+                      whileHover={{ 
+                        scale: 1.03,
+                        boxShadow: '0 0 20px rgba(255, 107, 0, 0.3)'
+                      }}
+                    >
+                      <Image 
+                        src={image} 
+                        alt={`${project.title} - Bild ${index + 1}`}
+                        fill
+                        className="object-cover"
+                      />
+                    </motion.div>
+                  );
+                })}
               </div>
             </div>
           </section>
