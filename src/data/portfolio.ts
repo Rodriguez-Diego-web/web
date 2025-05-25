@@ -18,6 +18,24 @@ export interface PortfolioItem {
 
 export const portfolioItems: PortfolioItem[] = [
   {
+    id: 'cuxsnack-gewinnspiel',
+    title: 'Cuxsnack Gewinnspiel Webseite',
+    description: 'Marketing-Kampagne: Kostenlose Gewinnspiel-Seite für einen Cuxsnack Shop mit Firebase Backend.',
+    detailedDescription: 'Diese Webseite dient als Marketing-Kampagne für einen Cuxsnack Shop. Nutzer können an einem kostenlosen Gewinnspiel teilnehmen. Die Seite ist mit einem Firebase Backend für die Nutzerauthentifizierung und Gewinnspiel-Logik ausgestattet.',
+    imageSrc: '/images/portfolio/Cuxsnack/1.png',
+    images: [
+      '/images/portfolio/Cuxsnack/1.png',
+      '/images/portfolio/Cuxsnack/2.png',
+      '/images/portfolio/Cuxsnack/3.png',
+    ],
+    imageOrientations: ['portrait', 'portrait', 'portrait'], 
+    tags: ['Marketing', 'Gewinnspiel', 'Firebase', 'Frontend', 'Backend', 'Web App', 'Cuxhaven'],
+    link: 'https://cuxsnack.netlify.app/',
+    category: 'website', 
+    completionYear: 2025, 
+    projectType: 'Showcase-Projekt', 
+  },
+  {
     id: 'abschlepper-showcase',
     title: 'Abschlepper Webseite (Showcase)',
     description: 'Konzept und Design einer modernen Webseite für einen fiktiven Abschleppdienst.',
