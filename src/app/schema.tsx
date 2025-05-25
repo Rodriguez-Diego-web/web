@@ -84,6 +84,39 @@ export default function SchemaMarkup() {
                 "closes": "18:00"
               }
             ],
+            "aggregateRating": {
+              "@type": "AggregateRating",
+              "ratingValue": "5",
+              "reviewCount": "2"
+            },
+            "review": [
+              {
+                "@type": "Review",
+                "reviewRating": {
+                  "@type": "Rating",
+                  "ratingValue": "5",
+                  "bestRating": "5"
+                },
+                "author": {
+                  "@type": "Person",
+                  "name": "Maren Schmidt"
+                },
+                "reviewBody": "Diego hat unsere Geschäftswebsite komplett neu gestaltet. Das Design ist modern, benutzerfreundlich und sieht auf allen Geräten fantastisch aus!"
+              },
+              {
+                "@type": "Review",
+                "reviewRating": {
+                  "@type": "Rating",
+                  "ratingValue": "5",
+                  "bestRating": "5"
+                },
+                "author": {
+                  "@type": "Person",
+                  "name": "Thomas Weber"
+                },
+                "reviewBody": "Unsere neue Website von Rodriguez-Web hat unsere Kundenanfragen verdoppelt! Die lokale SEO-Optimierung für Cuxhaven war genau das, was wir brauchten."
+              }
+            ],
             "serviceArea": {
               "@type": "GeoCircle",
               "geoMidpoint": {
@@ -122,35 +155,7 @@ export default function SchemaMarkup() {
                   }
                 }
               ]
-            },
-            "review": [
-              {
-                "@type": "Review",
-                "reviewRating": {
-                  "@type": "Rating",
-                  "ratingValue": "5",
-                  "bestRating": "5"
-                },
-                "author": {
-                  "@type": "Person",
-                  "name": "Maren Schmidt"
-                },
-                "reviewBody": "Diego hat unsere Geschäftswebsite komplett neu gestaltet. Das Design ist modern, benutzerfreundlich und sieht auf allen Geräten fantastisch aus!"
-              },
-              {
-                "@type": "Review",
-                "reviewRating": {
-                  "@type": "Rating",
-                  "ratingValue": "5",
-                  "bestRating": "5"
-                },
-                "author": {
-                  "@type": "Person",
-                  "name": "Thomas Weber"
-                },
-                "reviewBody": "Unsere neue Website von Rodriguez-Web hat unsere Kundenanfragen verdoppelt! Die lokale SEO-Optimierung für Cuxhaven war genau das, was wir brauchten."
-              }
-            ]
+            }
           })
         }}
       />
