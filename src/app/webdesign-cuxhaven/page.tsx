@@ -5,6 +5,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { motion, useInView } from 'framer-motion';
 import { trackCuxhavenContent, trackLocationSearch } from '@/lib/analytics';
+import LocalSeoEnhancer from '@/components/shared/LocalSeoEnhancer';
 
 // SEO-optimierte Seite für Webdesign in Cuxhaven
 const WebdesignCuxhaven = () => {
@@ -20,6 +21,12 @@ const WebdesignCuxhaven = () => {
 
   return (
     <main className="bg-dark text-white overflow-hidden">
+      <LocalSeoEnhancer 
+        city="Cuxhaven" 
+        services={["Webdesign", "Webentwicklung", "Responsive Design", "SEO Optimierung"]} 
+        keywords={["Webdesign", "Website erstellen", "Homepage", "Webseite"]} 
+        nearbyLocations={["Otterndorf", "Dorum", "Nordholz", "Wremen", "Duhnen", "Döse", "Altenbruch"]} 
+      />
       {/* Hero Section mit lokalem Bezug zu Cuxhaven */}
       <section className="relative min-h-screen flex items-center">
         <div className="absolute inset-0 z-0 opacity-20">

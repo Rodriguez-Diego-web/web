@@ -4,6 +4,9 @@ Allow: /
 # Allow all search engines to crawl all content
 Sitemap: https://www.rodriguez-web.de/sitemap.xml
 
+# Die dynamische Sitemap wird automatisch von Next.js generiert unter:
+# https://www.rodriguez-web.de/sitemap.xml
+
 # Make sure these key pages are crawled with priority
 Allow: /about
 Allow: /services

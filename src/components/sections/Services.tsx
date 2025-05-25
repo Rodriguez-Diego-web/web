@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useRef, useState } from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 import { FaPalette, FaCode, FaServer, FaSearch, FaChartLine, FaShieldAlt, FaArrowRight, FaClock, FaCheck } from 'react-icons/fa';
 import Button from '@/components/ui/Button';
 import { motion, useScroll, useTransform, AnimatePresence } from 'framer-motion';
@@ -14,6 +14,12 @@ interface Service {
 const Services = () => {
   const [hoveredCard, setHoveredCard] = useState<number | null>(null);
   const [showLimitedOffer, setShowLimitedOffer] = useState(true);
+  const [isClient, setIsClient] = useState(false);
+  
+  // This ensures hydration mismatch is avoided
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
   
   const services: Service[] = [
     {
@@ -130,18 +136,19 @@ const Services = () => {
     }
   };
 
-  // Calculate a random expiry time (social engineering - creates urgency)
+  // Use fixed values to prevent hydration errors
   const today = new Date();
   const tomorrow = new Date(today);
   tomorrow.setDate(today.getDate() + 1);
-  const hours = Math.floor(Math.random() * 12) + 6; // Between 6-18 hours
-  const minutes = Math.floor(Math.random() * 60);
+  // Fixed values instead of random to avoid hydration errors
+  const hours = 8; 
+  const minutes = 30;
   
   return (
     <motion.section 
       ref={sectionRef}
       className="py-20 bg-gradient-to-b from-dark to-black relative overflow-hidden"
-      style={{ opacity }}
+      style={{ opacity: isClient ? opacity : 1 }}
       id="services"
     >
       {/* Animated background elements */}
@@ -173,23 +180,25 @@ const Services = () => {
       
       {/* Floating particles */}
       {[...Array(6)].map((_, i) => (
-        <motion.div
-          key={`particle-${i}`}
-          className="absolute w-2 h-2 rounded-full bg-primary/30"
-          style={{
-            top: `${Math.random() * 100}%`,
-            left: `${Math.random() * 100}%`,
-          }}
-          animate={{
-            y: [0, -100, 0],
-            opacity: [0, 0.8, 0],
-          }}
-          transition={{
-            duration: 10 + Math.random() * 10,
-            repeat: Infinity,
-            delay: Math.random() * 5,
-          }}
-        />
+        isClient && (
+          <motion.div
+            key={`particle-${i}`}
+            className="absolute w-3 h-3 bg-primary rounded-full opacity-70"
+            style={{
+              top: '13.388648113100455%',
+              left: '6.804216459357004%',
+            }}
+            animate={{
+              y: [-10, 10, -5, 15, -10],
+              x: [10, -5, 15, -10, 10],
+              transition: {
+                duration: 20,
+                repeat: Infinity,
+                repeatType: "reverse"
+              }
+            }}
+          ></motion.div>
+        )
       ))}
       
       <div className="relative z-10 container mx-auto px-4">
@@ -330,7 +339,19 @@ const Services = () => {
                   </motion.div>
                   <div>
                     <h4 className="font-bold text-white">Zeitlich begrenztes Angebot</h4>
-                    <p className="text-sm text-gray-300">Endet am {tomorrow.toLocaleDateString()} um {hours}:{minutes < 10 ? '0' : ''}{minutes} Uhr</p>
+                    <p className="text-sm text-gray-300">
+                      {isClient ? (
+                        <>
+                          <FaClock className="inline mr-1" />
+                          Angebot gültig bis: {tomorrow.toLocaleDateString('de-DE')} - Nur noch {hours}h {minutes}m!
+                        </>
+                      ) : (
+                        // Render a placeholder or nothing on the server and during initial client render
+                        // This ensures no mismatch occurs for the date/time string.
+                        // An empty span or a non-breaking space can be used if layout needs to be preserved.
+                        <span>&nbsp;</span> 
+                      )}
+                    </p>
                   </div>
                 </div>
                 <motion.div
@@ -349,42 +370,32 @@ const Services = () => {
         {/* Enhanced pricing section */}
         <motion.div 
           ref={pricingRef}
-          className="bg-gradient-to-r from-dark/80 to-black/80 glass-card p-8 md:p-10 text-center relative overflow-hidden"
+          className="bg-dark-card border border-gray-800 rounded-xl p-8 relative overflow-hidden shadow-2xl"
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.3, duration: 0.7 }}
           viewport={{ once: true }}
           animate={boxShadowPulse.animate}
           style={{ 
-            scale: pricingScale,
-            rotate: pricingRotate
+            scale: isClient ? pricingScale : 1,
+            rotate: isClient ? pricingRotate : 0
           }}
         >
-          {/* Decorative background */}
-          <motion.div 
-            className="absolute -top-40 -right-40 w-80 h-80 bg-primary opacity-5 rounded-full"
-            animate={{
-              scale: [1, 1.2, 1],
-              opacity: [0.05, 0.1, 0.05],
-            }}
-            transition={{
-              duration: 8,
-              repeat: Infinity,
-              repeatType: "reverse"
-            }}
-          ></motion.div>
-          <motion.div 
-            className="absolute -bottom-40 -left-40 w-80 h-80 bg-primary opacity-5 rounded-full"
-            animate={{
-              scale: [1, 1.3, 1],
-              opacity: [0.05, 0.15, 0.05],
-            }}
-            transition={{
-              duration: 10,
-              repeat: Infinity,
-              repeatType: "reverse"
-            }}
-          ></motion.div>
+          {/* Decorative element */}
+          {isClient && (
+            <motion.div 
+              className="absolute -top-40 -right-40 w-80 h-80 bg-primary opacity-5 rounded-full"
+              animate={{
+                scale: [1, 1.2, 1],
+                opacity: [0.05, 0.1, 0.05],
+              }}
+              transition={{
+                duration: 8,
+                repeat: Infinity,
+                repeatType: "reverse"
+              }}
+            ></motion.div>
+          )}
           
           {/* Most popular badge */}
           <motion.div 

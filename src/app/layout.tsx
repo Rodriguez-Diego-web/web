@@ -6,6 +6,7 @@ import Footer from '@/components/layout/Footer';
 import Analytics from '@/components/shared/Analytics';
 import Script from 'next/script';
 import CookieConsent from '@/components/ui/CookieConsent'; // Fixed import path
+import SchemaMarkup from './schema';
 
 // Configure the fonts
 const inter = Inter({
@@ -74,9 +75,7 @@ export const metadata: Metadata = {
     },
   },
   verification: {
-    google: 'google-site-verification-code', 
-    yandex: 'yandex-verification-code',
-    other: { 'msvalidate.01': 'XXXXXXXXXXXXXXXX' },
+    google: 'Q9xkuTbdDFXKoujFfjVmB9l7gpKWuioxasFalzS3vfw', 
   },
 };
 
@@ -112,6 +111,7 @@ export default function RootLayout({
           rel="stylesheet"
         />
         {/* Local Business Structured Data for SEO */}
+        {/* Local Business Schema */}
         <Script
           id="local-business-schema"
           type="application/ld+json"
@@ -182,6 +182,7 @@ export default function RootLayout({
       </head>
       <body className={`${inter.className} bg-dark text-light flex flex-col min-h-screen`}>
         <Analytics />
+        <SchemaMarkup />
         <Header />
         <main className="flex-grow">
           {children}
