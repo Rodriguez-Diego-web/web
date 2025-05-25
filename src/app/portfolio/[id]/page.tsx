@@ -296,7 +296,7 @@ export default function PortfolioDetailPage({ params }: { params: { id: string }
                   return (
                     <motion.div 
                       key={index}
-                      className={`relative ${orientation === 'portrait' ? 'aspect-[3/5] mx-auto max-w-[250px]' : 'aspect-video'} overflow-hidden rounded-lg glass-card`}
+                      className={`relative ${orientation === 'portrait' ? 'aspect-[3/5]' : 'aspect-video'} overflow-hidden rounded-lg glass-card`}
                       initial={{ opacity: 0, y: 30 }}
                       whileInView={{ opacity: 1, y: 0 }}
                       transition={{ duration: 0.6, delay: index * 0.1 }}
@@ -310,6 +310,7 @@ export default function PortfolioDetailPage({ params }: { params: { id: string }
                         src={image} 
                         alt={`${project.title} - Bild ${index + 1}`}
                         fill
+                        sizes="(max-width: 767px) 100vw, (max-width: 1023px) 50vw, 33vw"
                         className="object-cover"
                       />
                     </motion.div>
