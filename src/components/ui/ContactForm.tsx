@@ -46,7 +46,8 @@ const ContactForm = () => {
         phone: data.phone || "Nicht angegeben",
         projectType: data.projectType,
         description: data.description,
-        site: "rodriguez-web.de"
+        site: "rodriguez-web.de",
+        date: new Date().toLocaleDateString('de-DE', { day: '2-digit', month: '2-digit', year: 'numeric', hour: '2-digit', minute: '2-digit' })
       };
       
       // Ausführliche Debug-Informationen
@@ -116,7 +117,7 @@ const ContactForm = () => {
           onSubmit={handleSubmit(onSubmit)} 
           className="space-y-6" 
         >
-          <h3 className="text-2xl font-bold mb-6 text-light">Kontaktieren Sie uns</h3>
+          <h3 className="text-2xl font-bold mb-6 text-light">Kontaktiere mich</h3>
           
           {error && (
             <div className="bg-red-900/30 text-red-400 p-4 rounded-lg mb-6 border border-red-800">

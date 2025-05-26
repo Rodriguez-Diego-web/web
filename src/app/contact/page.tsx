@@ -1,13 +1,15 @@
 'use client';
 
-import React, { useRef, useState } from 'react';
+import React, { useRef, useState, Fragment } from 'react';
 import ContactForm from '@/components/ui/ContactForm';
 import { FaEnvelope, FaPhone, FaMapMarkerAlt, FaCalendarAlt, 
-         FaLinkedin, FaInstagram, FaFacebook, FaArrowRight } from 'react-icons/fa';
+         FaLinkedin, FaInstagram, FaFacebook, FaArrowRight, FaClipboardList } from 'react-icons/fa';
 import { motion, useInView, useScroll, useTransform } from 'framer-motion';
 import Image from 'next/image';
 import emailjs from '@emailjs/browser';
 import { trackFormSubmission } from '@/lib/analytics';
+import { Listbox, Transition } from '@headlessui/react';
+import { CheckIcon, ChevronUpDownIcon } from '@heroicons/react/20/solid';
 
 // EmailJS Konfiguration
 const SERVICE_ID = 'service_scn2e0i';
@@ -16,13 +18,23 @@ const PUBLIC_KEY = 'CmONZH4pJJtAeVn3H';
 
 // Metadata is now in a separate file: metadata.ts
 
+// Definition der Optionen für die Listbox
+const projectTypeOptions = [
+  { id: '', name: '-- Projekttyp wählen --' },
+  { id: 'website', name: 'Neue Website' },
+  { id: 'redesign', name: 'Redesign bestehender Website' },
+  { id: 'webshop', name: 'Webshop / E-Commerce' },
+  { id: 'seo', name: 'SEO-Optimierung' },
+  { id: 'other', name: 'Sonstiges' },
+];
+
 export default function ContactPage() {
   // Form state
   const [formData, setFormData] = useState({
     name: '',
     email: '',
     phone: '',
-    subject: '',
+    projectType: '',
     message: ''
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -66,11 +78,19 @@ export default function ContactPage() {
   };
 
   // Handle form input changes
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
     setFormData(prev => ({
       ...prev,
       [name]: value
+    }));
+  };
+
+  // Neuer Handler für Listbox-Änderungen
+  const handleProjectTypeChange = (newProjectTypeId: string) => {
+    setFormData(prev => ({
+      ...prev,
+      projectType: newProjectTypeId
     }));
   };
 
@@ -88,11 +108,14 @@ export default function ContactPage() {
         name: formData.name,
         email: formData.email,
         phone: formData.phone || "Nicht angegeben",
-        subject: formData.subject || "Kontaktformular Anfrage",
-        message: formData.message,
-        site: "rodriguez-web.de (Kontaktseite)"
+        projectType: formData.projectType,
+        description: formData.message,
+        site: "rodriguez-web.de (Kontaktseite)",
+        date: new Date().toLocaleDateString('de-DE', { day: '2-digit', month: '2-digit', year: 'numeric', hour: '2-digit', minute: '2-digit' })
       };
       
+      console.log('Template-Parameter (contact/page.tsx):', templateParams);
+
       // EmailJS initialisieren
       emailjs.init(PUBLIC_KEY);
       
@@ -113,7 +136,7 @@ export default function ContactPage() {
         name: '',
         email: '',
         phone: '',
-        subject: '',
+        projectType: '',
         message: ''
       });
       
@@ -235,14 +258,54 @@ export default function ContactPage() {
                       placeholder="Ihre Telefonnummer" 
                       className="w-full px-4 py-3 rounded bg-dark/80 border border-gray-700 text-light focus:outline-none focus:border-primary"
                     />
-                    <input 
-                      type="text" 
-                      name="subject"
-                      value={formData.subject}
-                      onChange={handleInputChange}
-                      placeholder="Betreff" 
-                      className="w-full px-4 py-3 rounded bg-dark/80 border border-gray-700 text-light focus:outline-none focus:border-primary"
-                    />
+                    <div className="relative z-0 w-full mb-5 group">
+                      <FaClipboardList className="absolute top-1/2 -translate-y-1/2 left-3 text-gray-400 z-[5]" />
+                      <Listbox value={formData.projectType} onChange={handleProjectTypeChange}>
+                        <div className="relative">
+                          <Listbox.Button className="relative w-full cursor-default rounded bg-dark/80 py-3 pl-10 pr-10 text-left border border-gray-700 text-light focus:outline-none focus-visible:border-primary focus-visible:ring-2 focus-visible:ring-white/75 focus-visible:ring-offset-2 focus-visible:ring-offset-orange-300">
+                            <span className="block truncate">
+                              {projectTypeOptions.find(opt => opt.id === formData.projectType)?.name || projectTypeOptions[0].name}
+                            </span>
+                            <span className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3">
+                              <ChevronUpDownIcon className="h-5 w-5 text-gray-400" aria-hidden="true" />
+                            </span>
+                          </Listbox.Button>
+                          <Transition
+                            as={Fragment}
+                            leave="transition ease-in duration-100"
+                            leaveFrom="opacity-100"
+                            leaveTo="opacity-0"
+                          >
+                            <Listbox.Options className="absolute mt-1 max-h-60 w-full overflow-auto rounded-md bg-dark/95 py-1 text-base shadow-lg ring-1 ring-black/5 focus:outline-none sm:text-sm z-[50]">
+                              {projectTypeOptions.map((option, optionIdx) => (
+                                <Listbox.Option
+                                  key={optionIdx}
+                                  className={({ active }) =>
+                                    `relative cursor-default select-none py-2 pl-10 pr-4 ${ // Tailwind Klassen für Optionen
+                                      active ? 'bg-primary/70 text-white' : 'text-gray-200'
+                                    }`
+                                  }
+                                  value={option.id}
+                                >
+                                  {({ selected }) => (
+                                    <>
+                                      <span className={`block truncate ${selected ? 'font-semibold' : 'font-normal'}`}>
+                                        {option.name}
+                                      </span>
+                                      {selected ? (
+                                        <span className="absolute inset-y-0 left-0 flex items-center pl-3 text-amber-400">
+                                          <CheckIcon className="h-5 w-5" aria-hidden="true" />
+                                        </span>
+                                      ) : null}
+                                    </>
+                                  )}
+                                </Listbox.Option>
+                              ))}
+                            </Listbox.Options>
+                          </Transition>
+                        </div>
+                      </Listbox>
+                    </div>
                     <textarea 
                       name="message"
                       value={formData.message}

@@ -121,7 +121,7 @@ const CallToAction = () => {
               className="text-xl text-gray-300 mb-8 max-w-2xl mx-auto"
               variants={itemVariant}
             >
-              In nur 7 Tagen zu Ihrer professionellen Online-Präsenz. Kontaktieren Sie uns jetzt für ein unverbindliches Angebot.
+              In nur 7 Tagen zu Ihrer professionellen Online-Präsenz. Kontaktiere mich jetzt für ein unverbindliches Angebot.
             </motion.p>
             
             <motion.div 

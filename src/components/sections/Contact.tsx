@@ -97,7 +97,7 @@ const Contact = () => {
           </h2>
           <p className="text-lg text-gray-300">
             Bereit, Ihre Online-Präsenz auf das nächste Level zu bringen? 
-            Kontaktieren Sie uns für eine unverbindliche Beratung.
+            Kontaktiere mich für eine unverbindliche Beratung.
           </p>
         </motion.div>
 

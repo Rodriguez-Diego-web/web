@@ -45,24 +45,24 @@ const About = () => {
             viewport={{ once: true, amount: 0.3 }}
           >
             <h2 className="text-3xl font-bold mb-6">
-              <span className="text-gradient">Über</span> Rodriguez-Web
+              <span className="text-gradient">Über</span> Mich
             </h2>
             <p className="text-lg text-gray-300 mb-6">
-              Wir sind ein Team von erfahrenen Webdesignern und -entwicklern, 
-              die sich auf die Erstellung maßgeschneiderter Websites für kleine 
-              und mittelständische Unternehmen spezialisiert haben.
+              Ich bin ein erfahrener Webdesigner und -entwickler aus Cuxhaven, 
+              der sich auf die Erstellung maßgeschneiderter Websites für kleine 
+              und mittelständische Unternehmen spezialisiert hat.
             </p>
             
             <p className="text-lg text-gray-300 mb-6">
-              Mit mehr als 5 Jahren Erfahrung in der Branche verstehen wir die 
-              Bedürfnisse unserer Kunden und liefern Lösungen, die nicht nur gut 
+              Mit mehr als 5 Jahren Erfahrung in der Branche verstehe ich die 
+              Bedürfnisse meiner Kunden und liefere Lösungen, die nicht nur gut 
               aussehen, sondern auch Ergebnisse bringen.
             </p>
             
             <p className="text-lg text-gray-300">
-              Unser Fokus liegt auf der Kombination von ansprechendem Design, technischer Exzellenz 
+              Mein Fokus liegt auf der Kombination von ansprechendem Design, technischer Exzellenz 
               und Business-Strategie, um Websites zu erstellen, die nicht nur gut aussehen, 
-              sondern auch messbare Ergebnisse für unsere Kunden liefern.
+              sondern auch messbare Ergebnisse für meine Kunden liefern.
             </p>
             
             <motion.div 
@@ -83,15 +83,15 @@ const About = () => {
                 className="glass-card px-4 py-3 border border-primary/20"
                 whileHover={{ scale: 1.05, borderColor: 'rgba(255, 107, 0, 0.5)' }}
               >
-                <p className="text-2xl font-bold text-primary">100%</p>
-                <p className="text-gray-300">Kundenzufriedenheit</p>
+                <p className="text-2xl font-bold text-primary">5+</p>
+                <p className="text-gray-300">Jahre Erfahrung</p>
               </motion.div>
               <motion.div 
                 className="glass-card px-4 py-3 border border-primary/20"
                 whileHover={{ scale: 1.05, borderColor: 'rgba(255, 107, 0, 0.5)' }}
               >
-                <p className="text-2xl font-bold text-primary">7</p>
-                <p className="text-gray-300">Tage Lieferzeit</p>
+                <p className="text-2xl font-bold text-primary">100%</p>
+                <p className="text-gray-300">Kundenzufriedenheit</p>
               </motion.div>
             </motion.div>
             
@@ -101,7 +101,7 @@ const About = () => {
               transition={{ delay: 0.6, duration: 0.5 }}
               viewport={{ once: true }}
             >
-              <Button href="/about" className="glow">Mehr über uns</Button>
+              <Button href="/about" className="glow">Mehr über mich</Button>
             </motion.div>
           </motion.div>
           

@@ -441,17 +441,6 @@ const Services = () => {
             </motion.div>
           </div>
           
-          {/* Social proof */}
-          <motion.div 
-            className="mb-6 text-sm text-gray-400"
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            transition={{ delay: 0.5 }}
-            viewport={{ once: true }}
-          >
-            <span className="text-yellow-500">★★★★★</span> Über 50 zufriedene Kunden in den letzten 3 Monaten
-          </motion.div>
-          
           <ul className="text-left max-w-md mx-auto mb-8 relative z-10">
             {[
               "Responsive Website mit bis zu 5 Seiten",

@@ -154,7 +154,7 @@ export default function AboutPage() {
           >
             <div className="glass-card bg-dark/30 backdrop-blur-lg border border-white/10 p-8 rounded-2xl max-w-4xl mx-auto shadow-2xl">
               <h2 className="text-2xl font-bold text-light mb-6">Warum Rodriguez-Web wählen?</h2>
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div className="flex flex-col items-center text-center">
                   <div className="bg-primary/10 p-3 rounded-full mb-4">
                     <FaRegStar className="w-6 h-6 text-primary" />
@@ -168,13 +168,6 @@ export default function AboutPage() {
                   </div>
                   <h3 className="text-lg font-semibold text-light mb-2">Individuelle Lösungen</h3>
                   <p className="text-gray-300">Maßgeschneiderte Webseiten für Ihren speziellen Bedarf</p>
-                </div>
-                <div className="flex flex-col items-center text-center">
-                  <div className="bg-primary/10 p-3 rounded-full mb-4">
-                    <FaRegClock className="w-6 h-6 text-primary" />
-                  </div>
-                  <h3 className="text-lg font-semibold text-light mb-2">Schnelle Umsetzung</h3>
-                  <p className="text-gray-300">Ihre Website in nur 7-14 Tagen fertig</p>
                 </div>
               </div>
             </div>
@@ -243,7 +236,7 @@ export default function AboutPage() {
                   transition={{ duration: 0.5, delay: 0.5 }}
                 >
                   Als Einzelunternehmer habe ich mich auf die Schaffung maßgeschneiderter Weblösungen spezialisiert. 
-                  In den letzten Jahren durfte ich über 100 erfolgreiche Projekte abschließen und wertvolle 
+                  In den letzten Jahren durfte ich über 50 erfolgreiche Projekte abschließen und wertvolle 
                   Erfahrungen in verschiedenen Branchen sammeln.
                 </motion.p>
                 
@@ -278,7 +271,7 @@ export default function AboutPage() {
                       animate={{ scale: [1, 1.1, 1] }}
                       transition={{ duration: 3, repeat: Infinity }}
                     >
-                      <h3 className="text-3xl font-bold text-primary">100+</h3>
+                      <h3 className="text-3xl font-bold text-primary">50+</h3>
                     </motion.div>
                     <p className="text-gray-300">Projekte</p>
                   </motion.div>
@@ -314,7 +307,7 @@ export default function AboutPage() {
                       animate={{ scale: [1, 1.1, 1] }}
                       transition={{ duration: 3, repeat: Infinity, delay: 1 }}
                     >
-                      <h3 className="text-3xl font-bold text-primary">98%</h3>
+                      <h3 className="text-3xl font-bold text-primary">100%</h3>
                     </motion.div>
                     <p className="text-gray-300">Zufriedene Kunden</p>
                   </motion.div>
@@ -479,7 +472,6 @@ export default function AboutPage() {
                 variants={containerVariants}
               >
                 {[
-                  { title: "Schnelle Umsetzung", description: "Ihre Website in nur 7 Tagen" },
                   { title: "Transparente Preise", description: "Keine versteckten Kosten" },
                   { title: "Persönliche Betreuung", description: "Direkter Ansprechpartner für Sie" },
                   { title: "Modernes Design", description: "Responsive und benutzerfreundlich" },
@@ -546,20 +538,6 @@ export default function AboutPage() {
                     transition={{ type: "spring", stiffness: 400, damping: 10 }}
                   >
                     <div className="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center mr-4">
-                      <FaRegClock className="text-xl text-primary" />
-                    </div>
-                    <div>
-                      <h4 className="text-lg font-semibold text-light">7-14 Tage Lieferzeit</h4>
-                      <p className="text-gray-300">Schnelle Umsetzung Ihres Projekts</p>
-                    </div>
-                  </motion.div>
-                  
-                  <motion.div 
-                    className="flex items-center"
-                    whileHover={{ x: 5 }}
-                    transition={{ type: "spring", stiffness: 400, damping: 10 }}
-                  >
-                    <div className="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center mr-4">
                       <FaRegLightbulb className="text-xl text-primary" />
                     </div>
                     <div>
@@ -567,6 +545,8 @@ export default function AboutPage() {
                       <p className="text-gray-300">Unverbindliches Erstgespräch</p>
                     </div>
                   </motion.div>
+                  
+                  {/* Removed '7-14 Tage Lieferzeit' block */}
                 </div>
                 
                 <motion.div 
@@ -741,6 +721,7 @@ export default function AboutPage() {
                   transition={{
                     duration: 3,
                     repeat: Infinity,
+                    repeatType: "loop",
                     ease: "easeInOut",
                   }}
                 />
