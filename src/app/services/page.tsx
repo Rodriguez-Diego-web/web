@@ -28,12 +28,19 @@ export default function ServicesPage() {
   const faqRef = useRef(null);
   const ctaRef = useRef(null);
   
-  // Scroll-Funktion für Hash-Links
+  // Verbesserte Scroll-Funktion für Hash-Links, optimiert für mobile Geräte
   const scrollToSection = (elementId: string) => {
     const element = document.getElementById(elementId);
     if (element) {
+      // Berechne den richtigen Offset basierend auf der Bildschirmgröße
+      const isMobile = window.innerWidth < 768;
+      const offset = isMobile ? 60 : 80; // Kleinerer Offset für mobile Geräte
+      
+      const elementPosition = element.getBoundingClientRect().top;
+      const offsetPosition = elementPosition + window.pageYOffset - offset;
+      
       window.scrollTo({
-        top: element.offsetTop - 80, // Offset für den Header
+        top: offsetPosition,
         behavior: 'smooth'
       });
     }
@@ -209,13 +216,109 @@ export default function ServicesPage() {
           </motion.div>
         </div>
         
-        <div className="absolute bottom-0 left-0 w-full flex justify-center">
+        <div className="absolute bottom-5 left-0 w-full flex justify-center">
           <motion.div 
             animate={{ y: [0, 10, 0] }} 
             transition={{ duration: 1.5, repeat: Infinity }}
-            className="text-gray-400"
+            className="text-gray-400 cursor-pointer"
+            onClick={() => scrollToSection('packages')}
+            whileHover={{ scale: 1.2 }}
           >
-            <FaArrowDown className="w-6 h-6" />
+            <FaArrowDown className="w-8 h-8" />
+          </motion.div>
+        </div>
+      </section>
+      
+      {/* Pakete Sektion */}
+      <section id="packages" ref={packagesRef} className="py-24 bg-gradient-to-b from-dark/60 to-dark/80 relative">
+        <div className="container mx-auto px-4">
+          <motion.div 
+            initial={{ opacity: 0 }}
+            animate={isPackagesInView ? { opacity: 1 } : { opacity: 0 }}
+            transition={{ duration: 0.8 }}
+            className="text-center mb-16"
+          >
+            <div className="h-1 bg-primary w-16 mx-auto mb-6"></div>
+            <h2 className="text-4xl font-bold mb-6 text-light">
+              Meine <span className="text-primary">Pakete</span>
+            </h2>
+            <p className="text-lg text-gray-300 max-w-3xl mx-auto">
+              Transparente Preise für maßgeschneiderte Lösungen. Alle Pakete können individuell an Ihre Bedürfnisse angepasst werden.
+            </p>
+          </motion.div>
+          
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-10 max-w-6xl mx-auto">
+            {servicePackages.map((pkg, index) => (
+              <motion.div
+                key={pkg.id}
+                initial={{ opacity: 0, y: 30 }}
+                animate={isPackagesInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
+                transition={{ duration: 0.6, delay: index * 0.2 }}
+                whileHover={{ y: -10, transition: { duration: 0.3 } }}
+                className={`relative overflow-hidden rounded-2xl shadow-2xl backdrop-blur-md
+                  ${pkg.isPopular 
+                    ? 'bg-gradient-to-br from-primary/30 via-dark/50 to-dark/70 border-2 border-primary/60 transform scale-105 z-10' 
+                    : 'bg-gradient-to-br from-dark/40 via-dark/60 to-dark/90 border border-gray-700 hover:border-primary/40'}`}
+              >
+                {/* Paket-Header */}
+                <div className={`px-8 py-6 border-b ${pkg.isPopular ? 'border-primary/30' : 'border-gray-800'}`}>
+                  {pkg.isPopular && (
+                    <div className="absolute -right-12 top-7 bg-primary text-dark px-14 py-1.5 rotate-45 font-semibold text-sm transform scale-110 shadow-lg">
+                      Beliebt
+                    </div>
+                  )}
+                  
+                  <h3 className={`text-2xl font-bold mb-2 ${pkg.isPopular ? 'text-primary' : 'text-light'}`}>{pkg.name}</h3>
+                  <p className="text-gray-300 font-light h-12">{pkg.description}</p>
+                </div>
+                
+                {/* Preis */}
+                <div className="px-8 py-6 border-b border-gray-800/50 flex items-end gap-2">
+                  <span className="text-5xl font-bold text-primary">{pkg.price}</span>
+                  <span className="text-gray-400 mb-1.5 opacity-80 text-sm">einmalig</span>
+                </div>
+                
+                {/* Features */}
+                <div className="px-8 py-6">
+                  <ul className="space-y-4 mb-8">
+                    {pkg.features.map((feature, i) => (
+                      <motion.li 
+                        key={i}
+                        initial={{ opacity: 0, x: -20 }}
+                        animate={isPackagesInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -20 }}
+                        transition={{ duration: 0.3, delay: 0.5 + (i * 0.1) }}
+                        className="flex items-start gap-3 text-gray-200"
+                      >
+                        <div className={`p-1 rounded-full mt-0.5 flex-shrink-0 ${pkg.isPopular ? 'bg-primary/20' : 'bg-primary/10'}`}>
+                          <FaCheck className="text-primary w-3 h-3" />
+                        </div>
+                        <span>{feature}</span>
+                      </motion.li>
+                    ))}
+                  </ul>
+                  
+                  <Button 
+                    onClick={() => router.push('/contact?package=' + pkg.id)}
+                    className={`w-full py-3.5 font-semibold shadow-lg text-base transition-all duration-300 ${pkg.isPopular 
+                      ? 'bg-primary text-dark hover:bg-primary-light' 
+                      : 'bg-dark/60 border border-primary/50 text-light hover:bg-primary/10'}`}
+                  >
+                    {pkg.isPopular ? 'Jetzt Anfragen' : 'Paket auswählen'}
+                  </Button>
+                </div>
+              </motion.div>
+            ))}
+          </div>
+          <motion.div
+            initial={{ opacity: 0, y: 50 }}
+            animate={isPackagesInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }}
+            transition={{ duration: 0.6, delay: 0.8 }}
+            className="mt-16 text-center"
+          >
+            <p className="text-gray-400 mb-4">Benötigen Sie ein individuelles Angebot?</p>
+            <Button onClick={() => router.push('/contact')} className="mx-auto">
+              Individuelles Angebot anfragen
+            </Button>
           </motion.div>
         </div>
       </section>
@@ -242,7 +345,7 @@ export default function ServicesPage() {
           <motion.div 
             initial={{ opacity: 0, y: 20 }}
             animate={isServicesInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-            transition={{ duration: 0.5, delay: 0.2 }}
+            transition={{ duration: 0.5 }}
             className="flex flex-wrap justify-center gap-2 mb-12"
           >
             <button 
@@ -299,89 +402,6 @@ export default function ServicesPage() {
                   </button>
                 </motion.div>
               ))}
-          </motion.div>
-        </div>
-      </section>
-      
-      {/* Pakete Sektion */}
-      <section id="packages" ref={packagesRef} className="py-20 bg-gradient-to-b from-dark/60 to-dark/90 relative">
-        <div className="container mx-auto px-4">
-          <motion.div 
-            initial={{ opacity: 0 }}
-            animate={isPackagesInView ? { opacity: 1 } : { opacity: 0 }}
-            transition={{ duration: 0.8 }}
-            className="text-center mb-16"
-          >
-            <div className="h-1 bg-primary w-16 mx-auto mb-6"></div>
-            <h2 className="text-4xl font-bold mb-6 text-light">
-              Meine <span className="text-primary">Pakete</span>
-            </h2>
-            <p className="text-lg text-gray-300 max-w-3xl mx-auto">
-              Transparente Preise für maßgeschneiderte Lösungen. Alle Pakete können individuell an Ihre Bedürfnisse angepasst werden.
-            </p>
-          </motion.div>
-          
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
-            {servicePackages.map((pkg, index) => (
-              <motion.div
-                key={pkg.id}
-                initial={{ opacity: 0, y: 30 }}
-                animate={isPackagesInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
-                transition={{ duration: 0.6, delay: index * 0.2 }}
-                className={`relative overflow-hidden rounded-2xl shadow-xl p-8 
-                  ${pkg.isPopular ? 'bg-gradient-to-b from-primary/20 to-dark/50 border-2 border-primary/60 transform scale-105 z-10' : 'bg-dark/30 backdrop-blur-md border border-gray-800'}`}
-              >
-                {pkg.isPopular && (
-                  <div className="absolute -right-10 top-8 bg-primary text-dark px-10 py-1 rotate-45 font-semibold">
-                    Beliebt
-                  </div>
-                )}
-                
-                <h3 className="text-2xl font-bold text-light mb-2">{pkg.name}</h3>
-                <div className="flex items-end gap-1 mb-4">
-                  <span className="text-3xl font-bold text-primary">{pkg.price}</span>
-                  <span className="text-gray-400 mb-1">einmalig</span>
-                </div>
-                <p className="text-gray-300 mb-6 h-12">{pkg.description}</p>
-                
-                <ul className="space-y-3 mb-8">
-                  {pkg.features.map((feature, i) => (
-                    <motion.li 
-                      key={i}
-                      initial={{ opacity: 0, x: -20 }}
-                      animate={isPackagesInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -20 }}
-                      transition={{ duration: 0.3, delay: 0.6 + (i * 0.1) }}
-                      className="flex items-start gap-3"
-                    >
-                      <FaCheck className="text-primary flex-shrink-0 mt-1" />
-                      <span className="text-gray-300">{feature}</span>
-                    </motion.li>
-                  ))}
-                </ul>
-                
-                <motion.button
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.98 }}
-                  className={`w-full py-3 px-6 rounded-lg transition-colors flex items-center justify-center gap-2
-                    ${pkg.isPopular ? 'bg-primary text-dark hover:bg-primary/90' : 'border border-primary/60 text-primary hover:bg-primary/10'}`}
-                >
-                  <span>Jetzt anfragen</span>
-                  <FaArrowRight />
-                </motion.button>
-              </motion.div>
-            ))}
-          </div>
-          
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={isPackagesInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
-            transition={{ duration: 0.6, delay: 0.8 }}
-            className="mt-16 text-center"
-          >
-            <p className="text-gray-400 mb-4">Benötigen Sie ein individuelles Angebot?</p>
-            <Button onClick={() => router.push('/contact')} className="mx-auto">
-              Individuelles Angebot anfragen
-            </Button>
           </motion.div>
         </div>
       </section>
