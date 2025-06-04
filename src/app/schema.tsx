@@ -189,6 +189,51 @@ export default function SchemaMarkup() {
           })
         }}
       />
+
+      {/* FAQ Schema für häufige Fragen zu Webdesign Cuxhaven */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "FAQPage",
+            "mainEntity": [
+              {
+                "@type": "Question",
+                "name": "Was kostet Webdesign in Cuxhaven?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Professionelle Websites beginnen ab 899€. Der Preis variiert je nach Umfang, Funktionen und individuellen Anforderungen. Kontaktieren Sie uns für ein kostenloses Angebot."
+                }
+              },
+              {
+                "@type": "Question", 
+                "name": "Wie lange dauert die Erstellung einer Website?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "In der Regel erstellen wir Ihre Website innerhalb von 7 Tagen. Bei komplexeren Projekten kann es 2-3 Wochen dauern. Sie erhalten regelmäßige Updates zum Fortschritt."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "Bieten Sie auch SEO für Cuxhaven an?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Ja, wir sind spezialisiert auf lokale SEO für Unternehmen in Cuxhaven und Umgebung. Unsere SEO-Pakete beginnen ab 299€/Monat und helfen dabei, bei Google besser gefunden zu werden."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "Sind die Websites mobilfreundlich?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Alle unsere Websites sind vollständig responsive und funktionieren perfekt auf Smartphones, Tablets und Desktop-Computern. Dies ist Standard bei allen unseren Projekten."
+                }
+              }
+            ]
+          })
+        }}
+      />
     </>
   );
 }

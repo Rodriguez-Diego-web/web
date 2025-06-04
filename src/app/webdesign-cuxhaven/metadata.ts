@@ -2,7 +2,7 @@ import { Metadata } from 'next';
 
 export const metadata: Metadata = {
   title: 'Webdesign Cuxhaven | Professionelle Webseiten von Diego Rodriguez',
-  description: 'Webdesign in Cuxhaven von Diego Rodriguez - Ihr lokaler Webdesigner für moderne Websites, SEO & Webentwicklung. ✓ 7 Tage Lieferzeit ✓ Festpreise ✓ Made in Cuxhaven',
+  description: '🚀 Webdesign Cuxhaven: Moderne Websites ab 999€ | Lokaler Webdesigner mit 7 Tage Lieferzeit ✓ SEO-optimiert ✓ Responsive Design ✓ Kostenlose Beratung - Jetzt anfragen!',
   keywords: 'Webdesign Cuxhaven, Webdesigner Cuxhaven, Diego Rodriguez Webdesign, Webseiten Cuxhaven, Website erstellen Cuxhaven, Responsive Webdesign Nordseeküste, Lokaler Webdesigner Cuxhaven, SEO Optimierung Cuxhaven, WordPress Cuxhaven',
   alternates: {
     canonical: 'https://www.rodriguez-web.de/webdesign-cuxhaven',

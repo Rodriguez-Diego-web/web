@@ -2,7 +2,7 @@ import { Metadata } from 'next';
 
 export const metadata: Metadata = {
   title: 'SEO Optimierung Cuxhaven | Lokale Suchmaschinenoptimierung',
-  description: 'Professionelle SEO für Unternehmen in Cuxhaven und an der Nordseeküste. ✓ Lokale Suchmaschinenoptimierung ✓ Google Maps Optimierung ✓ Mehr lokale Kunden durch bessere Rankings.',
+  description: '📈 SEO Cuxhaven: Platz 1 bei Google ab 299€/Monat | Lokale SEO-Agentur mit nachweisbaren Erfolgen ✓ +200% mehr Kunden ✓ Kostenlose Analyse ✓ Jetzt Sichtbarkeit steigern!',
   keywords: 'SEO Cuxhaven, Suchmaschinenoptimierung Cuxhaven, Lokale SEO Nordseeküste, Google Optimierung Landkreis Cuxhaven, Local SEO, SEO Beratung Cuxhaven, SEO Agentur Nordseeküste, Webseiten Ranking verbessern',
   alternates: {
     canonical: 'https://www.rodriguez-web.de/seo-cuxhaven',

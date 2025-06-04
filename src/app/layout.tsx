@@ -23,8 +23,8 @@ const montserrat = Montserrat({
 });
 
 export const metadata: Metadata = {
-  title: 'Rodriguez-Web | Professionelles Webdesign & Entwicklung in Cuxhaven',
-  description: 'Diego Rodriguez aus Cuxhaven bietet professionelle Webseiten für kleine Unternehmen in nur 7 Tagen. Steigern Sie Ihre Online-Sichtbarkeit an der Nordseeküste mit maßgeschneiderten Lösungen und lokaler SEO-Expertise.',
+  title: 'Webdesigner Cuxhaven | Diego Rodriguez | Websites ab 999€',
+  description: '🎯 Webdesigner Cuxhaven: Diego Rodriguez erstellt moderne Websites ab 999€ | ✓ 7 Tage Lieferzeit ✓ Lokaler Service ✓ SEO-optimiert ✓ Kostenlose Beratung - Jetzt Website anfragen!',
   keywords: 'Diego Rodriguez, Webdesigner Cuxhaven, Webentwicklung Cuxhaven, Webseiten Nordseeküste, SEO Optimierung Cuxhaven, WordPress Cuxhaven, Responsive Design, Web Agentur Norddeutschland, Landkreis Cuxhaven',
   authors: [{ name: 'Diego Rodriguez', url: 'https://rodriguez-web.de' }],
   creator: 'Diego Rodriguez',
