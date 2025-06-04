@@ -8,6 +8,27 @@
 [[plugins]]
   package = "@netlify/plugin-nextjs"
 
+# Redirects für alte Portfolio-URLs
+[[redirects]]
+  from = "/portfolio/munich-yoga"
+  to = "/portfolio"
+  status = 301
+
+[[redirects]]
+  from = "/portfolio/green-garden"
+  to = "/portfolio"
+  status = 301
+
+[[redirects]]
+  from = "/portfolio/city-share"
+  to = "/portfolio/cityshare"
+  status = 301
+
+[[redirects]]
+  from = "/portfolio/eco-cosmetics"
+  to = "/portfolio"
+  status = 301
+
 # Wichtige Redirects für statische Assets
 [[redirects]]
   from = "/images/*"

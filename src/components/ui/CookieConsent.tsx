@@ -10,17 +10,14 @@ const CookieConsent = () => {
   const [hasConsented, setHasConsented] = useState(false);
 
   useEffect(() => {
-    // Check if user has already consented
     const consent = localStorage.getItem('cookie-consent');
     if (consent === 'granted' || consent === 'denied') {
       setHasConsented(true);
-      // If consent was 'granted', ensure GA is initialized and consent state is updated
       if (consent === 'granted') {
-        // updateConsentState('granted', 'CookieConsent.useEffect - consent already granted');
-        // initializeGA(); // Consider if initializeGA needs to be called here or if Analytics.tsx handles it
+    
       }
     } else {
-      // Show banner after a short delay
+
       const timer = setTimeout(() => {
         setShowConsent(true);
       }, 1500);
@@ -29,23 +26,23 @@ const CookieConsent = () => {
   }, []);
 
   const acceptCookies = () => {
-    console.log('CookieConsent: acceptCookies called'); // Debugging
+    console.log('CookieConsent: acceptCookies called'); 
     updateConsentState('granted', 'CookieConsent.acceptCookies');
     localStorage.setItem('cookie-consent', 'granted');
     setShowConsent(false);
     setHasConsented(true);
-    // Reload page to initialize analytics after acceptance and consent update
+   
     window.location.reload();
   };
 
   const rejectCookies = () => {
-    console.log('CookieConsent: rejectCookies called'); // Debugging
+    console.log('CookieConsent: rejectCookies called'); 
     updateConsentState('denied', 'CookieConsent.rejectCookies');
     localStorage.setItem('cookie-consent', 'denied');
     setShowConsent(false);
     setHasConsented(true);
-    // Optional: Reload, falls Standardwerte (denied) nicht ausreichen und UI-Änderungen nötig sind
-    // window.location.reload(); 
+    
+   
   };
 
   if (hasConsented) {
