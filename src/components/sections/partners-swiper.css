@@ -1,0 +1,29 @@
+.swiper-pagination {
+  position: static;
+  margin-top: 3rem;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  z-index: 10;
+}
+.swiper-pagination-bullet {
+  background: #FF6B00;
+  opacity: 0.3;
+  transition: opacity 0.2s, background 0.2s;
+}
+.swiper-pagination-bullet-active {
+  background: #FF6B00;
+  opacity: 1;
+}
+.swiper-button-next,
+.swiper-button-prev {
+  color: #FF6B00;
+  top: 50%;
+  width: 2.5rem;
+  height: 2.5rem;
+  margin-top: -1.25rem;
+}
+.swiper-button-next:after,
+.swiper-button-prev:after {
+  font-size: 2rem;
+} 

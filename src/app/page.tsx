@@ -3,6 +3,7 @@ import Hero from '@/components/sections/Hero';
 import Portfolio from '@/components/sections/Portfolio';
 import Services from '@/components/sections/Services';
 import About from '@/components/sections/About';
+import Partners from '@/components/sections/Partners';
 import GoogleReviews from '@/components/GoogleReviews';
 import ContactForm from '@/components/ui/ContactForm';
 import { portfolioItems } from '@/data/portfolio';
@@ -18,6 +19,8 @@ export default function Home() {
       <Portfolio items={featuredPortfolio} showViewAll={true} />
       
       <Services />
+      
+      <Partners />
       
       <About />
       
