@@ -2,11 +2,14 @@
 
 import Link from 'next/link';
 import Image from 'next/image';
-import { FaLinkedin, FaInstagram, FaEnvelope, FaPhone, FaMapMarkerAlt, FaWhatsapp } from 'react-icons/fa';
+import { FaLinkedin, FaInstagram, FaEnvelope, FaPhone, FaMapMarkerAlt, FaWhatsapp, FaCog } from 'react-icons/fa';
 import { motion } from 'framer-motion';
+import { useState } from 'react';
+import CookieSettings from '@/components/ui/CookieSettings';
 
 const Footer = () => {
   const year = new Date().getFullYear();
+  const [showCookieSettings, setShowCookieSettings] = useState(false);
 
   // Animation variants
   const childVariants = {
@@ -154,16 +157,30 @@ const Footer = () => {
         >
           <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-gray-700 to-transparent"></div>
           <p> {year} Rodriguez-Web. Alle Rechte vorbehalten.</p>
-          <div className="flex space-x-6 mt-4 md:mt-0">
+          <div className="flex flex-wrap gap-x-6 gap-y-2 mt-4 md:mt-0">
             <Link href="/datenschutz" className="hover:text-primary transition-colors">
               Datenschutz
             </Link>
             <Link href="/impressum" className="hover:text-primary transition-colors">
               Impressum
             </Link>
+            <button
+              onClick={() => setShowCookieSettings(true)}
+              className="hover:text-primary transition-colors flex items-center gap-2"
+              aria-label="Cookie-Einstellungen öffnen"
+            >
+              <FaCog size={12} />
+              Cookie-Einstellungen
+            </button>
           </div>
         </motion.div>
       </div>
+      
+      {/* Cookie Settings Modal */}
+      <CookieSettings 
+        isOpen={showCookieSettings} 
+        onClose={() => setShowCookieSettings(false)} 
+      />
     </footer>
   );
 };

@@ -70,12 +70,14 @@ export default function DatenschutzPage() {
             </p>
             <p>
               Diego Rodriguez<br />
-              Musterstraße 123<br />
-              27472 Cuxhaven<br />
+              Rodriguez-Web<br />
+              Delftstraße 8<br />
+              27474 Cuxhaven<br />
               Deutschland
             </p>
             <p>
-              Telefon: +49 123 456789<br />
+              Telefon: +49 152 193 77 166<br />
+              WhatsApp: +49 176 416 73 111<br />
               E-Mail: diego@rodriguez-web.de
             </p>
             
