@@ -84,7 +84,7 @@ export default function PortfolioDetailPage({ params }: { params: { id: string }
             src={project.imageSrc} 
             alt={project.title}
             fill
-            className="object-cover"
+            className="object-contain"
             priority
           />
           <div className="absolute inset-0 bg-gradient-to-t from-dark via-dark/60 to-transparent"></div>
@@ -311,7 +311,7 @@ export default function PortfolioDetailPage({ params }: { params: { id: string }
                         alt={`${project.title} - Bild ${index + 1}`}
                         fill
                         sizes="(max-width: 767px) 100vw, (max-width: 1023px) 50vw, 33vw"
-                        className="object-cover"
+                        className="object-contain bg-gray-900"
                       />
                     </motion.div>
                   );

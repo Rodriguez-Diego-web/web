@@ -311,7 +311,7 @@ export default function PortfolioPage() {
                               position: 'absolute',
                               height: '100%',
                               width: '100%',
-                              objectFit: 'cover',
+                              objectFit: 'contain',
                               top: 0,
                               left: 0,
                             }}
