@@ -1,0 +1,99 @@
+{
+  "name": "Rodriguez-Web | Webdesign Cuxhaven",
+  "short_name": "Rodriguez-Web",
+  "description": "Professionelle Websites für kleine Unternehmen in 7 Tagen. Webdesigner Diego Rodriguez aus Cuxhaven erstellt moderne, responsive Websites ab 999€.",
+  "lang": "de",
+  "start_url": "/",
+  "display": "standalone",
+  "theme_color": "#FF6B00",
+  "background_color": "#121212",
+  "orientation": "portrait-primary",
+  "scope": "/",
+  "categories": ["business", "productivity", "utilities"],
+  "icons": [
+    {
+      "src": "/images/favicon-16x16.png",
+      "sizes": "16x16",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/images/favicon-32x32.png",
+      "sizes": "32x32",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/images/apple-touch-icon.png",
+      "sizes": "180x180",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/images/android-chrome-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/images/android-chrome-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Portfolio",
+      "short_name": "Portfolio",
+      "description": "Unsere neuesten Projekte ansehen",
+      "url": "/portfolio",
+      "icons": [
+        {
+          "src": "/images/android-chrome-192x192.png",
+          "sizes": "192x192"
+        }
+      ]
+    },
+    {
+      "name": "Kontakt",
+      "short_name": "Kontakt",
+      "description": "Jetzt Kontakt aufnehmen",
+      "url": "/contact",
+      "icons": [
+        {
+          "src": "/images/android-chrome-192x192.png",
+          "sizes": "192x192"
+        }
+      ]
+    },
+    {
+      "name": "Leistungen",
+      "short_name": "Services",
+      "description": "Unsere Webdesign-Leistungen",
+      "url": "/services",
+      "icons": [
+        {
+          "src": "/images/android-chrome-192x192.png",
+          "sizes": "192x192"
+        }
+      ]
+    }
+  ],
+  "screenshots": [
+    {
+      "src": "/images/Rodriguez_web_logo.png",
+      "sizes": "800x600",
+      "type": "image/png",
+      "form_factor": "wide",
+      "label": "Rodriguez-Web Logo"
+    }
+  ],
+  "edge_side_panel": {
+    "preferred_width": 400
+  },
+  "handle_links": "preferred",
+  "launch_handler": {
+    "client_mode": "navigate-existing"
+  }
+} 
