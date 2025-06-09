@@ -424,7 +424,7 @@ export default function ContactPage() {
                   <h3 className="font-semibold text-lg mb-4 text-light">Folgen Sie mir</h3>
                   <div className="flex space-x-4">
                     <a 
-                      href="https://www.linkedin.com/in/diego-rodriguez-padinro" 
+                      href="https://www.linkedin.com/in/kadir-diego-padin-rodriguez/" 
                       target="_blank" 
                       rel="noopener noreferrer"
                       className="bg-primary/10 hover:bg-primary/20 p-3 rounded-full transition-colors duration-300"
@@ -432,20 +432,12 @@ export default function ContactPage() {
                       <FaLinkedin className="text-primary w-5 h-5" />
                     </a>
                     <a 
-                      href="https://www.instagram.com/diego_rodriguez_webdesign/" 
+                      href="https://www.instagram.com/diego_rodriguez_web/" 
                       target="_blank" 
                       rel="noopener noreferrer"
                       className="bg-primary/10 hover:bg-primary/20 p-3 rounded-full transition-colors duration-300"
                     >
                       <FaInstagram className="text-primary w-5 h-5" />
-                    </a>
-                    <a 
-                      href="https://www.facebook.com/profile.php?id=61556959635307" 
-                      target="_blank" 
-                      rel="noopener noreferrer"
-                      className="bg-primary/10 hover:bg-primary/20 p-3 rounded-full transition-colors duration-300"
-                    >
-                      <FaFacebook className="text-primary w-5 h-5" />
                     </a>
                   </div>
                 </motion.div>

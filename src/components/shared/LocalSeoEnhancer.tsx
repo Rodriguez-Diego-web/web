@@ -115,7 +115,7 @@ const LocalSeoEnhancer: React.FC<LocalSeoEnhancerProps> = ({
                 "name": `Was kostet eine Website in ${city}?`,
                 "acceptedAnswer": {
                   "@type": "Answer",
-                  "text": `Die Kosten für eine Website in ${city} variieren je nach Umfang und Anforderungen. Bei Rodriguez-Web beginnen die Preise für eine professionelle Website bei 1.099€. Kontaktiere mich für ein individuelles Angebot speziell für Ihr Unternehmen in ${city}.`
+                  "text": `Die Kosten für eine Website in ${city} variieren je nach Umfang und Anforderungen. Bei Rodriguez-Web beginnen die Preise für eine professionelle Website bei 899€. Kontaktiere mich für ein individuelles Angebot speziell für Ihr Unternehmen in ${city}.`
                 }
               },
               {

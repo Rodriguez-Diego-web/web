@@ -11,6 +11,18 @@
     @apply bg-dark text-light;
   }
   
+  /* PWA Statusbar Fix */
+  @media (display-mode: standalone) {
+    body {
+      padding-top: env(safe-area-inset-top, 0);
+      background-color: #121212;
+    }
+    
+    html {
+      background-color: #121212;
+    }
+  }
+  
   h1, h2, h3, h4, h5, h6 {
     @apply font-heading font-bold text-light;
   }

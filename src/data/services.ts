@@ -97,14 +97,13 @@ export const servicePackages: ServicePackage[] = [
   {
     id: 'starter',
     name: 'Starter-Paket',
-    price: '€1.099',
+    price: '€899',
     description: 'Komplettlösung für kleine Unternehmen',
     features: [
       'Responsive Website mit bis zu 5 Seiten',
       'Individuelles Design',
       'Kontaktformular & Google Maps',
-      'Basis-SEO-Optimierung',
-      'Hosting für 1 Jahr inklusive',
+      'Basis-SEO-Optimierung', 
       'Kostenlose Domain für 1 Jahr'
     ],
     isPopular: true
@@ -112,10 +111,11 @@ export const servicePackages: ServicePackage[] = [
   {
     id: 'business',
     name: 'Business-Paket',
-    price: '€1.799',
+    price: '€1.399',
     description: 'Für wachsende Unternehmen mit erweiterten Anforderungen.',
     features: [
-      'Responsive Website mit bis zu 10 Seiten',
+      'Alles aus dem Starter-Paket',
+      'Responsive Website mit bis zu 8 Seiten',
       'Premium Design mit animierten Elementen',
       'Erweiterte Kontaktformulare',
       'Blog-Integration',
@@ -129,19 +129,21 @@ export const servicePackages: ServicePackage[] = [
   {
     id: 'premium',
     name: 'Premium-Paket',
-    price: '€3.999',
+    price: '€2.800',
     description: 'Die Komplettlösung für anspruchsvolle Unternehmen und E-Commerce.',
     features: [
+      'Alles aus dem Business-Paket',
       'Responsive Website mit unbegrenzten Seiten',
       'Maßgeschneidertes Premium-Design',
       'E-Commerce-Integration (bis zu 50 Produkte)',
       'Newsletter-System',
       'Multi-Sprachen-Support',
       'Umfassende SEO-Optimierung',
-      'Analytics-Dashboard',
       'Hosting für 2 Jahre inklusive',
+      'CMS-System',
+      'Wartungspaket',
       'Premium SSL-Zertifikat',
-      'Monatliches Performance-Reporting'
+      '100% Zufriedenheitsgarantie'
     ]
   }
 ];

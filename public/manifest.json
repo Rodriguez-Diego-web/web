@@ -1,11 +1,11 @@
 {
   "name": "Rodriguez-Web | Webdesign Cuxhaven",
   "short_name": "Rodriguez-Web",
-  "description": "Professionelle Websites für kleine Unternehmen in 7 Tagen. Webdesigner Diego Rodriguez aus Cuxhaven erstellt moderne, responsive Websites ab 999€.",
+  "description": "Professionelle Websites für kleine Unternehmen in 7 Tagen. Webdesigner Diego Rodriguez aus Cuxhaven erstellt moderne, responsive Websites ab 899€.",
   "lang": "de",
   "start_url": "/",
   "display": "standalone",
-  "theme_color": "#FF6B00",
+  "theme_color": "#121212",
   "background_color": "#121212",
   "orientation": "portrait-primary",
   "scope": "/",

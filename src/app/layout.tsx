@@ -24,8 +24,8 @@ const montserrat = Montserrat({
 });
 
 export const metadata: Metadata = {
-  title: 'Webdesigner Cuxhaven | Diego Rodriguez | Websites ab 999€',
-  description: '🎯 Webdesigner Cuxhaven: Diego Rodriguez erstellt moderne Websites ab 999€ | ✓ 7 Tage Lieferzeit ✓ Lokaler Service ✓ SEO-optimiert ✓ Kostenlose Beratung - Jetzt Website anfragen!',
+  title: 'Webdesigner Cuxhaven | Diego Rodriguez | Websites ab 899€',
+  description: '🎯 Webdesigner Cuxhaven: Diego Rodriguez erstellt moderne Websites ab 899€ | ✓ 7 Tage Lieferzeit ✓ Lokaler Service ✓ SEO-optimiert ✓ Kostenlose Beratung - Jetzt Website anfragen!',
   keywords: 'Diego Rodriguez, Webdesigner Cuxhaven, Webentwicklung Cuxhaven, Webseiten Nordseeküste, SEO Optimierung Cuxhaven, WordPress Cuxhaven, Responsive Design, Web Agentur Norddeutschland, Landkreis Cuxhaven',
   authors: [{ name: 'Diego Rodriguez', url: 'https://rodriguez-web.de' }],
   creator: 'Diego Rodriguez',
@@ -81,7 +81,7 @@ export const metadata: Metadata = {
   manifest: '/manifest.json',
   other: {
     'apple-mobile-web-app-capable': 'yes',
-    'apple-mobile-web-app-status-bar-style': 'black-translucent',
+    'apple-mobile-web-app-status-bar-style': 'black',
     'apple-mobile-web-app-title': 'Rodriguez-Web',
   },
 };
@@ -148,12 +148,12 @@ export default function RootLayout({
         
         {/* PWA iOS meta tags */}
         <meta name="apple-mobile-web-app-capable" content="yes" />
-        <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+        <meta name="apple-mobile-web-app-status-bar-style" content="black" />
         <meta name="apple-mobile-web-app-title" content="Rodriguez-Web" />
         
         {/* PWA theme color */}
-        <meta name="theme-color" content="#FF6B00" />
-        <meta name="msapplication-TileColor" content="#FF6B00" />
+        <meta name="theme-color" content="#121212" />
+        <meta name="msapplication-TileColor" content="#121212" />
         
         {/* Local Business Structured Data for SEO */}
         {/* Local Business Schema */}

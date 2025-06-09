@@ -423,7 +423,7 @@ const Services = () => {
               transition={{ delay: 0.8 }}
               viewport={{ once: true }}
             >
-              €1299
+              €1199
             </motion.span>
             <motion.div 
               className="text-4xl font-bold text-primary inline-block"
@@ -437,7 +437,7 @@ const Services = () => {
               }}
               viewport={{ once: true }}
             >
-              €1.099
+              €899
             </motion.div>
           </div>
           
@@ -447,7 +447,6 @@ const Services = () => {
               "Individuelles Design",
               "Kontaktformular & Google Maps",
               "Basis-SEO-Optimierung",
-              "Hosting für 1 Jahr inklusive",
               "Kostenlose Domain für 1 Jahr"
             ].map((feature, index) => (
               <motion.li 
@@ -489,7 +488,7 @@ const Services = () => {
               transition={{ delay: 1.2 }}
               viewport={{ once: true }}
             >
-              100% Zufriedenheitsgarantie • Keine versteckten Kosten • Nur 50% Anzahlung
+              100% Zufriedenheitsgarantie • Keine versteckten Kosten • Nur 30% Anzahlung
             </motion.p>
           </div>
         </motion.div>

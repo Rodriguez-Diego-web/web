@@ -359,7 +359,7 @@ const WebdesignCuxhaven = () => {
               <p>
                 Die Kosten für eine professionelle Website in Cuxhaven variieren je nach Umfang und Funktionalität. 
                 Als lokaler Webdesigner biete ich transparente Festpreise ohne versteckte Kosten. 
-                Einfache Webseiten sind bereits ab 997€ erhältlich, während umfangreichere Projekte mit 
+                Einfache Webseiten sind bereits ab 899€ erhältlich, während umfangreichere Projekte mit 
                 speziellen Funktionen entsprechend höher kalkuliert werden. Kontaktieren Sie mich für ein 
                 individuelles Angebot speziell für Ihr Cuxhavener Unternehmen.
               </p>
